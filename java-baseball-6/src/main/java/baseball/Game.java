@@ -11,7 +11,7 @@ public class Game {
     public void run() {
         while (true) {
             var guess = Console.readLine();
-            var res = computer.judge(guess);
+            var res = computer.judge(guess).toString();
             System.out.println(res);
 
             if ("3스트라이크".equals(res)) {

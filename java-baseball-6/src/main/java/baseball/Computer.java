@@ -24,12 +24,13 @@ public class Computer {
         return answer;
     }
 
-    public String judge(String guess) {
+    public Result judge(String guess) {
         // 1. 주어진 문자열의 길이가 3인지 (String.length)
         if (guess.length() != 3) {
             throw new IllegalArgumentException();
         }
 
+        int nBall = 0, nStrike = 0;
         boolean[] seen = new boolean[10];
         // 2. 주어진 각 문자가 0이 아닌 [1, 9] 사이의 숫자인지 (Character.isDigit)
         // 3. 이전에 등장한 숫자인지 (boolean[])
@@ -47,17 +48,37 @@ public class Computer {
                 throw new IllegalArgumentException();
             }
             seen[digit] = true;
+
+            // 4. 스트라이크인지
+            if (digit == answer[i]) {
+                nStrike++;
+            }
+            // 5. 볼인지
+            else if (digit == answer[(i + 1) % 3] || digit == answer[(i + 2) % 3]) {
+                nBall++;
+            }
         }
 
-        if ("246".equals(guess)) {
-            return "낫싱";
-        } else if ("135".equals(guess)) {
-            return "3스트라이크";
-        } else if ("597".equals(guess)) {
-            return "1볼 1스트라이크";
-        } else if ("589".equals(guess)) {
-            return "3스트라이크";
+        return new Result(nBall, nStrike);
+    }
+
+    public record Result(int ball, int strike) {
+        @Override
+        public String toString() {
+            if (ball == 0 && strike == 0) {
+                return "낫싱";
+            }
+            StringBuilder sb = new StringBuilder();
+            if (ball > 0) {
+                sb.append(ball).append("볼");
+            }
+            if (ball > 0 && strike > 0) {
+                sb.append(" ");
+            }
+            if (strike > 0) {
+                sb.append(strike).append("스트라이크");
+            }
+            return sb.toString();
         }
-        return "";
     }
 }
