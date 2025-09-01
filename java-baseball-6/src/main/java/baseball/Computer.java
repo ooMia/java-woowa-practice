@@ -6,22 +6,10 @@ public class Computer {
     // 1. 랜덤 숫자 생성
     // 2. 추측 결과 반환
 
-    int[] answer;
+    private int[] answer = generateAnswer();
 
-    public Computer() {
+    public void reset() {
         this.answer = generateAnswer();
-    }
-
-    public void restart() {
-        this.answer = generateAnswer();
-    }
-
-    private int[] generateAnswer() {
-        int[] answer = new int[Constant.NUMBER_LENGTH];
-        for (int i = 0; i < Constant.NUMBER_LENGTH; ++i) {
-            answer[i] = Randoms.pickNumberInRange(Constant.MIN_NUMBER, Constant.MAX_NUMBER);
-        }
-        return answer;
     }
 
     public Result judge(String guess) {
@@ -64,6 +52,14 @@ public class Computer {
         }
 
         return new Result(nBall, nStrike);
+    }
+
+    private int[] generateAnswer() {
+        int[] answer = new int[Constant.NUMBER_LENGTH];
+        for (int i = 0; i < Constant.NUMBER_LENGTH; ++i) {
+            answer[i] = Randoms.pickNumberInRange(Constant.MIN_NUMBER, Constant.MAX_NUMBER);
+        }
+        return answer;
     }
 
     public record Result(int ball, int strike) {
