@@ -16,7 +16,8 @@ public class Game {
 
             if (res.strike() == Constant.NUMBER_LENGTH) {
                 // 재시작 처리
-                System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+                System.out.println(Constant.getGameOverMessage());
+                System.out.println(Constant.getRestartMessage());
                 var input = Console.readLine();
 
                 if (!isRestart(input)) {
@@ -31,8 +32,8 @@ public class Game {
 
     private boolean isRestart(String input) {
         return switch (input) {
-            case "1" -> true;
-            case "2" -> false;
+            case Constant.COMMAND_RESTART -> true;
+            case Constant.COMMAND_EXIT -> false;
             default -> throw new IllegalArgumentException();
         };
     }

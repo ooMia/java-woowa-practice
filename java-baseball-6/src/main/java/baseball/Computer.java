@@ -18,7 +18,7 @@ public class Computer {
 
     private int[] generateAnswer() {
         int[] answer = new int[Constant.NUMBER_LENGTH];
-        for (int i = 0; i < answer.length; ++i) {
+        for (int i = 0; i < Constant.NUMBER_LENGTH; ++i) {
             answer[i] = Randoms.pickNumberInRange(Constant.MIN_NUMBER, Constant.MAX_NUMBER);
         }
         return answer;
@@ -26,12 +26,12 @@ public class Computer {
 
     public Result judge(String guess) {
         // 1. 주어진 문자열의 길이가 3인지 (String.length)
-        if (guess.length() != 3) {
+        if (guess.length() != Constant.NUMBER_LENGTH) {
             throw new IllegalArgumentException();
         }
 
         int nBall = 0, nStrike = 0;
-        boolean[] seen = new boolean[10];
+        boolean[] seen = new boolean[Constant.MAX_NUMBER + 1];
         // 2. 주어진 각 문자가 0이 아닌 [1, 9] 사이의 숫자인지 (Character.isDigit)
         // 3. 이전에 등장한 숫자인지 (boolean[])
         for (int i = 0; i < Constant.NUMBER_LENGTH; ++i) {
@@ -70,17 +70,17 @@ public class Computer {
         @Override
         public String toString() {
             if (ball == 0 && strike == 0) {
-                return "낫싱";
+                return Constant.WORD_NOTHING;
             }
             StringBuilder sb = new StringBuilder();
             if (ball > 0) {
-                sb.append(ball).append("볼");
+                sb.append(ball).append(Constant.WORD_BALL);
             }
             if (ball > 0 && strike > 0) {
-                sb.append(" ");
+                sb.append(' ');
             }
             if (strike > 0) {
-                sb.append(strike).append("스트라이크");
+                sb.append(strike).append(Constant.WORD_STRIKE);
             }
             return sb.toString();
         }
