@@ -38,10 +38,14 @@ public class Computer {
     }
 
     private int[] generateAnswer() {
-        // TODO should generate 'unique' random numbers
         int[] answer = new int[Constant.NUMBER_LENGTH];
-        for (int i = 0; i < Constant.NUMBER_LENGTH; ++i) {
-            answer[i] = Randoms.pickNumberInRange(Constant.MIN_NUMBER, Constant.MAX_NUMBER);
+        boolean[] seen = new boolean[Constant.MAX_NUMBER + 1];
+        for (int i = 0, num; i < Constant.NUMBER_LENGTH; ++i) {
+            do {
+                num = Randoms.pickNumberInRange(Constant.MIN_NUMBER, Constant.MAX_NUMBER);
+            } while (seen[num]);
+            seen[num] = true;
+            answer[i] = num;
         }
         return answer;
     }
