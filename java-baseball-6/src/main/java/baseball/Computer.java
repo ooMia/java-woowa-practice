@@ -13,48 +13,32 @@ public class Computer {
     }
 
     public Result judge(String guess) {
-        // 1. 주어진 문자열의 길이가 3인지 (String.length)
+        // 1. 문자열 길이 검사
         if (guess.length() != Constant.NUMBER_LENGTH) {
             throw new IllegalArgumentException();
         }
 
         int nBall = 0, nStrike = 0;
         boolean[] seen = new boolean[Constant.MAX_NUMBER + 1];
-        // 2. 주어진 각 문자가 0이 아닌 [1, 9] 사이의 숫자인지 (Character.isDigit)
-        // 3. 이전에 등장한 숫자인지 (boolean[])
         for (int i = 0; i < Constant.NUMBER_LENGTH; ++i) {
-            char c = guess.charAt(i);
-            if (!Character.isDigit(c)) {
-                throw new IllegalArgumentException();
-            }
+            int digit = charToInt(guess.charAt(i));
 
-            int digit = c - '0';
-            if (digit < Constant.MIN_NUMBER || Constant.MAX_NUMBER < digit) {
+            // 2. 이전에 등장한 숫자인지 (boolean[])
+            if (seen[digit])
                 throw new IllegalArgumentException();
-            }
-            if (seen[digit]) {
-                throw new IllegalArgumentException();
-            }
             seen[digit] = true;
 
-            // 4. 스트라이크인지
-            if (digit == answer[i]) {
-                nStrike++;
-                continue;
-            }
-            // 5. 볼인지
-            for (int j = 0; j < Constant.NUMBER_LENGTH; ++j) {
-                if (digit == answer[j]) {
-                    nBall++;
-                    break;
-                }
-            }
+            // 3. 스트라이크/볼 판별
+            if (digit == answer[i])
+                ++nStrike;
+            else if (contains(answer, digit))
+                ++nBall;
         }
-
         return new Result(nBall, nStrike);
     }
 
     private int[] generateAnswer() {
+        // TODO should generate 'unique' random numbers
         int[] answer = new int[Constant.NUMBER_LENGTH];
         for (int i = 0; i < Constant.NUMBER_LENGTH; ++i) {
             answer[i] = Randoms.pickNumberInRange(Constant.MIN_NUMBER, Constant.MAX_NUMBER);
@@ -62,22 +46,35 @@ public class Computer {
         return answer;
     }
 
+    private int charToInt(char c) {
+        // 주어진 문자가 유효한 범위 내 숫자인 경우에만 변환
+        int digit = c - '0';
+        if (digit < Constant.MIN_NUMBER || Constant.MAX_NUMBER < digit)
+            throw new IllegalArgumentException();
+        return digit;
+    }
+
+    private boolean contains(int[] arr, int target) {
+        for (int num : arr) {
+            if (num == target)
+                return true;
+        }
+        return false;
+    }
+
     public record Result(int ball, int strike) {
         @Override
         public String toString() {
-            if (ball == 0 && strike == 0) {
+            if (ball == 0 && strike == 0)
                 return Constant.WORD_NOTHING;
-            }
+
             StringBuilder sb = new StringBuilder();
-            if (ball > 0) {
+            if (ball > 0)
                 sb.append(ball).append(Constant.WORD_BALL);
-            }
-            if (ball > 0 && strike > 0) {
+            if (ball > 0 && strike > 0)
                 sb.append(' ');
-            }
-            if (strike > 0) {
+            if (strike > 0)
                 sb.append(strike).append(Constant.WORD_STRIKE);
-            }
             return sb.toString();
         }
     }
