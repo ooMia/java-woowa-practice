@@ -11,10 +11,10 @@ public class Game {
     public void run() {
         while (true) {
             var guess = Console.readLine();
-            var res = computer.judge(guess).toString();
-            System.out.println(res);
+            var res = computer.judge(guess);
+            System.out.println(res.toString());
 
-            if ("3스트라이크".equals(res)) {
+            if (res.strike() == Constant.NUMBER_LENGTH) {
                 // 재시작 처리
                 System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
                 var input = Console.readLine();

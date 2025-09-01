@@ -17,9 +17,9 @@ public class Computer {
     }
 
     private int[] generateAnswer() {
-        int[] answer = new int[3];
+        int[] answer = new int[Constant.NUMBER_LENGTH];
         for (int i = 0; i < answer.length; ++i) {
-            answer[i] = Randoms.pickNumberInRange(0, 9);
+            answer[i] = Randoms.pickNumberInRange(Constant.MIN_NUMBER, Constant.MAX_NUMBER);
         }
         return answer;
     }
@@ -34,14 +34,14 @@ public class Computer {
         boolean[] seen = new boolean[10];
         // 2. 주어진 각 문자가 0이 아닌 [1, 9] 사이의 숫자인지 (Character.isDigit)
         // 3. 이전에 등장한 숫자인지 (boolean[])
-        for (int i = 0; i < 3; ++i) {
+        for (int i = 0; i < Constant.NUMBER_LENGTH; ++i) {
             char c = guess.charAt(i);
             if (!Character.isDigit(c)) {
                 throw new IllegalArgumentException();
             }
 
             int digit = c - '0';
-            if (digit < 1 || 9 < digit) {
+            if (digit < Constant.MIN_NUMBER || Constant.MAX_NUMBER < digit) {
                 throw new IllegalArgumentException();
             }
             if (seen[digit]) {
@@ -52,10 +52,14 @@ public class Computer {
             // 4. 스트라이크인지
             if (digit == answer[i]) {
                 nStrike++;
+                continue;
             }
             // 5. 볼인지
-            else if (digit == answer[(i + 1) % 3] || digit == answer[(i + 2) % 3]) {
-                nBall++;
+            for (int j = 0; j < Constant.NUMBER_LENGTH; ++j) {
+                if (digit == answer[j]) {
+                    nBall++;
+                    break;
+                }
             }
         }
 
