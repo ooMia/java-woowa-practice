@@ -1,6 +1,5 @@
 package baseball;
 
-import baseball.Computer.Result;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Game {
@@ -8,15 +7,19 @@ public class Game {
     // 2. 게임 흐름 제어
 
     private final Computer computer = new Computer();
-    public Status status = Status.IN_PROGRESS;
+    private Status status = Status.IN_PROGRESS;
+
+    public boolean isRunning() {
+        return status != Status.GAME_OVER;
+    }
 
     public Status run() {
         switch (status) {
             case IN_PROGRESS -> {
                 var guess = Console.readLine();
-                Result res = computer.judge(guess);
+                var res = computer.judge(guess);
                 System.out.println(res);
-                status = (res.strike() == Constant.NUMBER_LENGTH) ? Status.GOT_ANSWER : Status.IN_PROGRESS;
+                status = res.isAnswer() ? Status.GOT_ANSWER : Status.IN_PROGRESS;
             }
 
             case GOT_ANSWER -> {

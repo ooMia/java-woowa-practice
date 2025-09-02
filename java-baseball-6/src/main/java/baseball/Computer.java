@@ -81,5 +81,9 @@ public class Computer {
                 sb.append(strike).append(Constant.WORD_STRIKE);
             return sb.toString();
         }
+
+        public boolean isAnswer() {
+            return strike == Constant.NUMBER_LENGTH;
+        }
     }
 }
