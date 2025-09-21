@@ -10,54 +10,65 @@ import camp.nextstep.edu.missionutils.Randoms;
 public class View {
     private Reader reader = new Reader();
 
+    private static final String PURCHASE_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
+    private static final String WINNING_NUMBERS_MESSAGE = "당첨 번호를 입력해 주세요.";
+    private static final String BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요.";
+    private static final String STATISTICS_MESSAGE = "당첨 통계";
+    private static final String STATISTICS_DIVIDER = "---";
+
     public int step1() {
-        System.out.println("구입금액을 입력해 주세요.");
+        System.out.println(PURCHASE_AMOUNT_MESSAGE);
         int purchaseAmount = reader.readInt();
-        System.out.println("");
+        feedLine();
         return purchaseAmount;
     }
 
     public List<Lotto> step2(int purchaseAmount) {
         List<Lotto> lottos = new ArrayList<>();
-        System.out.println(String.format("%d개를 구매했습니다.", purchaseAmount / 1000));
-        for (int i = 0; i < purchaseAmount / 1000; i++) {
-            List<Integer> l = new ArrayList<>(Randoms.pickUniqueNumbersInRange(1, 45, 6));
-            l.sort(Integer::compareTo);
-            lottos.add(new Lotto(l));
+        System.out.println(String.format("%d개를 구매했습니다.", purchaseAmount / Constant.LOTTO_PRICE));
+        for (int i = 0; i < purchaseAmount / Constant.LOTTO_PRICE; ++i) {
+            var l = Randoms.pickUniqueNumbersInRange(Constant.LOTTO_MIN_NUMBER, Constant.LOTTO_MAX_NUMBER,
+                    Constant.LOTTO_NUMBER_COUNT);
             System.out.println(l);
+            lottos.add(new Lotto(l));
         }
-        System.out.println("");
+        feedLine();
         return lottos;
     }
 
     public List<Integer> step3() {
-        System.out.println("당첨 번호를 입력해 주세요.");
+        System.out.println(WINNING_NUMBERS_MESSAGE);
         List<Integer> winningNumbers = reader.readIntegers(",");
-        System.out.println("");
+        feedLine();
         return winningNumbers;
     }
 
     public int step4() {
-        System.out.println("보너스 번호를 입력해 주세요.");
+        System.out.println(BONUS_NUMBER_MESSAGE);
         int bonusNumber = reader.readInt();
-        System.out.println("");
+        feedLine();
         return bonusNumber;
     }
 
     public void step5(int purchaseAmount, List<Lotto> lottos, List<Integer> winningNumbers, int bonusNumber) {
-        System.out.println("당첨 통계");
-        System.out.println("---");
-        List<LottoResult> results = new ArrayList<>();
+        // TODO 도메인 로직의 비중이 높아보이니 별도의 클래스로 분리하여 구현
+        System.out.println(STATISTICS_MESSAGE);
+        System.out.println(STATISTICS_DIVIDER);
+        List<Prize> ranks = new ArrayList<>();
         for (var lotto : lottos) {
             int matchCount = countMatch(lotto, winningNumbers);
             boolean bonusMatched = lotto.contains(bonusNumber);
-            results.add(new LottoResult(matchCount, bonusMatched));
-
+            var rank = Prize.of(matchCount, bonusMatched);
+            if (rank != null)
+                ranks.add(rank);
         }
-        String result = generateResult(results);
-        System.out.println(result);
-        String yield = calculateYield(purchaseAmount, results);
-        System.out.println(yield);
+        System.out.println(buildPrizeSummary(ranks));
+        System.out.println(calculateYield(purchaseAmount, ranks));
+        feedLine();
+    }
+
+    private void feedLine() {
+        System.out.println();
     }
 
     private int countMatch(Lotto lotto, List<Integer> winningNumbers) {
@@ -70,49 +81,35 @@ public class View {
         return count;
     }
 
-    private record LottoResult(int matchCount, boolean bonusMatched) {
-    }
-
-    private String generateResult(List<LottoResult> matches) {
-        Map<String, Integer> rankCount = new HashMap<>();
-        rankCount.put("3", 0);
-        rankCount.put("4", 0);
-        rankCount.put("5", 0);
-        rankCount.put("5b", 0);
-        rankCount.put("6", 0);
+    private String buildPrizeSummary(List<Prize> matches) {
+        Map<Prize, Integer> rankCount = new HashMap<>(Map.of(
+                Prize.FOURTH, 0,
+                Prize.THIRD, 0,
+                Prize.SECOND, 0,
+                Prize.SECOND_BONUS, 0,
+                Prize.FIRST, 0
+        ));
 
         for (var match : matches) {
-            String key = switch (match.matchCount) {
-                case 3 -> "3";
-                case 4 -> "4";
-                case 5 -> match.bonusMatched ? "5b" : "5";
-                case 6 -> "6";
-                default -> null;
-            };
-            if (key != null) {
-                rankCount.put(key, rankCount.getOrDefault(key, 0) + 1);
-            }
+            rankCount.put(match, rankCount.getOrDefault(match, 0) + 1);
         }
 
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("3개 일치 (5,000원) - %d개\n", rankCount.get("3")));
-        sb.append(String.format("4개 일치 (50,000원) - %d개\n", rankCount.get("4")));
-        sb.append(String.format("5개 일치 (1,500,000원) - %d개\n", rankCount.get("5")));
-        sb.append(String.format("5개 일치, 보너스 볼 일치 (30,000,000원) - %d개\n", rankCount.get("5b")));
-        sb.append(String.format("6개 일치 (2,000,000,000원) - %d개", rankCount.get("6")));
+        for (var entry : rankCount.entrySet()) {
+            sb.append(formatPrizeSummaryLine(entry.getKey(), entry.getValue())).append("\n");
+        }
         return sb.toString();
     }
 
-    private String calculateYield(int purchaseAmount, List<LottoResult> results) {
+    private String formatPrizeSummaryLine(Prize rank, int count) {
+        return String.format("%d개 일치%s (%,d원) - %d개", rank.matchCount, rank.bonusMatched ? ", 보너스 볼 일치" : "", rank
+                .getPrize(), count);
+    }
+
+    private String calculateYield(int purchaseAmount, List<Prize> results) {
         long totalPrize = 0;
         for (var result : results) {
-            totalPrize += switch (result.matchCount) {
-                case 3 -> 5000;
-                case 4 -> 50000;
-                case 5 -> result.bonusMatched ? 30000000 : 1500000;
-                case 6 -> 2000000000;
-                default -> 0;
-            };
+            totalPrize += result.getPrize();
         }
         double yield = (double) totalPrize / purchaseAmount * 100;
         return String.format("총 수익률은 %,.1f%%입니다.", yield);

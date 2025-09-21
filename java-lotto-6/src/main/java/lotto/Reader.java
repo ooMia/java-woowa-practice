@@ -18,7 +18,7 @@ class Reader {
     }
 
     public List<Integer> readIntegers(String delimiter) {
-        while (true) {           
+        while (true) {
             try {
                 return _readIntegers(delimiter);
             } catch (Exception e) {
