@@ -1,12 +1,10 @@
 package lotto;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class Application {
@@ -17,9 +15,10 @@ public class Application {
         // 4. 보너스 번호 입력
         // 5. 당첨 통계 출력
 
+        Reader reader = new Reader();
+
         System.out.println("구입금액을 입력해 주세요.");
-        String input1 = Console.readLine();
-        int purchaseAmount = Integer.parseInt(input1);
+        int purchaseAmount = reader.readInt();
         System.out.println("");
 
         List<Lotto> lottos = new ArrayList<>();
@@ -33,17 +32,11 @@ public class Application {
         System.out.println("");
 
         System.out.println("당첨 번호를 입력해 주세요.");
-        String input2 = Console.readLine();
-        // split and map to int
-        int[] winningNumbers = Arrays.stream(input2.split(","))
-                .map(String::trim)
-                .mapToInt(Integer::parseInt)
-                .toArray();
+        List<Integer> winningNumbers = reader.readIntegers(",");
         System.out.println("");
 
         System.out.println("보너스 번호를 입력해 주세요.");
-        String input3 = Console.readLine();
-        int bonusNumber = Integer.parseInt(input3);
+        int bonusNumber = reader.readInt();
         System.out.println("");
 
         System.out.println("당첨 통계");
@@ -61,7 +54,7 @@ public class Application {
         System.out.println(yield);
     }
 
-    public static int countMatch(Lotto lotto, int[] winningNumbers) {
+    public static int countMatch(Lotto lotto, List<Integer> winningNumbers) {
         int count = 0;
         for (int number : winningNumbers) {
             if (lotto.contains(number)) {
@@ -116,6 +109,6 @@ public class Application {
             };
         }
         double yield = (double) totalPrize / purchaseAmount * 100;
-        return String.format("총 수익률은 %.1f%%입니다.", yield);
+        return String.format("총 수익률은 %,.1f%%입니다.", yield);
     }
 }
