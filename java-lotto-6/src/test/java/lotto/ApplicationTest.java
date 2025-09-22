@@ -48,6 +48,21 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @SuppressWarnings("unchecked")
+    @Test
+    void 예외_테스트_중복된_보너스_번호() {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    runException("1000", "1,2,3,4,5,6", "6");
+                    assertThat(output()).contains(
+                            "1개를 구매했습니다.",
+                            "[8, 21, 23, 41, 42, 43]", ERROR_MESSAGE
+                    );
+                },
+                List.of(8, 21, 23, 41, 42, 43)
+        );
+    }
+
     @Test
     void 예외_테스트() {
         assertSimpleTest(() -> {
