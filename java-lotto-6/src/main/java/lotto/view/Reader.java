@@ -7,52 +7,16 @@ import java.util.StringTokenizer;
 import camp.nextstep.edu.missionutils.Console;
 
 class Reader {
-    public int readInt() {
-        while (true) {
-            try {
-                return _readInt();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
-    public int readUniqueInt(List<Integer> existingNumbers) {
-        while (true) {
-            try {
-                int number = _readInt();
-                if (existingNumbers.contains(number)) {
-                    throw new IllegalArgumentException("[ERROR] 중복된 번호입니다.");
-                }
-                return number;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
-    public List<Integer> readIntegers(String delimiter) {
-        while (true) {
-            try {
-                return _readIntegers(delimiter);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
-    private int _readInt() {
+    int readInt() {
         try {
             String input = Console.readLine();
             return Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[ERROR] 정수가 아닌 값이 입력되었습니다.");
-        } catch (Exception e) {
-            return -1;
         }
     }
 
-    private List<Integer> _readIntegers(String delimiter) {
+    List<Integer> readIntegers(String delimiter) {
         try {
             String input = Console.readLine();
             StringTokenizer st = new StringTokenizer(input, delimiter);
@@ -63,8 +27,6 @@ class Reader {
             return numbers;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[ERROR] 정수가 아닌 값이 입력되었습니다.");
-        } catch (Exception e) {
-            return new ArrayList<>();
         }
     }
 }

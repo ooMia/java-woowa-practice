@@ -1,9 +1,8 @@
 package lotto.view;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import lotto.model.Lotto;
 import lotto.model.PrizeSummary;
 import lotto.util.Constant;
@@ -17,21 +16,22 @@ public class View {
     private static final String STATISTICS_MESSAGE = "당첨 통계";
     private static final String STATISTICS_DIVIDER = "---";
 
-    public int step1() {
+    public Integer step1() {
         System.out.println(PURCHASE_AMOUNT_MESSAGE);
-        int purchaseAmount = reader.readInt();
+        Integer purchaseAmount = tryUntilValid(() -> {
+            var res = reader.readInt();
+            Lotto.validatePrice(res);
+            return res;
+        });
         feedLine();
         return purchaseAmount;
     }
 
-    public List<Lotto> step2(int purchaseAmount) {
-        List<Lotto> lottos = new ArrayList<>();
-        System.out.println(String.format("%d개를 구매했습니다.", purchaseAmount / Constant.LOTTO_PRICE));
-        for (int i = 0; i < purchaseAmount / Constant.LOTTO_PRICE; ++i) {
-            var l = Randoms.pickUniqueNumbersInRange(Constant.LOTTO_MIN_NUMBER, Constant.LOTTO_MAX_NUMBER,
-                    Constant.LOTTO_NUMBER_COUNT);
-            System.out.println(l);
-            lottos.add(new Lotto(l));
+    public List<Lotto> step2(Integer money) {
+        var lottos = Lotto.purchase(money);
+        System.out.println(String.format("%d개를 구매했습니다.", money / Constant.LOTTO_PRICE));
+        for (var lotto : lottos) {
+            System.out.println(lotto);
         }
         feedLine();
         return lottos;
@@ -39,14 +39,22 @@ public class View {
 
     public List<Integer> step3() {
         System.out.println(WINNING_NUMBERS_MESSAGE);
-        List<Integer> winningNumbers = reader.readIntegers(",");
+        List<Integer> winningNumbers = tryUntilValid(() -> {
+            var res = reader.readIntegers(Constant.DELIMITER_WINNING_NUMBERS);
+            Lotto.validateWinningNumbers(res);
+            return res;
+        });
         feedLine();
         return winningNumbers;
     }
 
-    public int step4(List<Integer> winningNumbers) {
+    public Integer step4(List<Integer> winningNumbers) {
         System.out.println(BONUS_NUMBER_MESSAGE);
-        int bonusNumber = reader.readUniqueInt(winningNumbers);
+        Integer bonusNumber = tryUntilValid(() -> {
+            var res = reader.readInt();
+            Lotto.validateBonusNumber(res, winningNumbers);
+            return res;
+        });
         feedLine();
         return bonusNumber;
     }
@@ -64,4 +72,15 @@ public class View {
     private void feedLine() {
         System.out.println();
     }
+
+    private <T> T tryUntilValid(Supplier<T> func) {
+        while (true) {
+            try {
+                return func.get();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
 }

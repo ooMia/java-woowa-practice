@@ -4,11 +4,15 @@ import lotto.view.View;
 
 public class Application {
     public static void main(String[] args) {
-        View view = new View();
-        var purchaseAmount = view.step1();
-        var lottos = view.step2(purchaseAmount);
-        var winningNumbers = view.step3();
-        var bonusNumber = view.step4(winningNumbers);
-        view.step5(purchaseAmount, lottos, winningNumbers, bonusNumber);
+        try {
+            View view = new View();
+            var money = view.step1();
+            var lottos = view.step2(money);
+            var winningNumbers = view.step3();
+            var bonusNumber = view.step4(winningNumbers);
+            view.step5(money, lottos, winningNumbers, bonusNumber);
+        } catch (final Exception ignore) {
+            // unhandled exceptions
+        }
     }
 }
