@@ -1,13 +1,11 @@
 package lotto.view;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import lotto.model.Lotto;
-import lotto.model.Prize;
+import lotto.model.PrizeSummary;
 import lotto.util.Constant;
 
 public class View {
@@ -54,67 +52,16 @@ public class View {
     }
 
     public void step5(int purchaseAmount, List<Lotto> lottos, List<Integer> winningNumbers, int bonusNumber) {
-        // TODO 도메인 로직의 비중이 높아보이니 별도의 클래스로 분리하여 구현
         System.out.println(STATISTICS_MESSAGE);
         System.out.println(STATISTICS_DIVIDER);
-        List<Prize> ranks = new ArrayList<>();
-        for (var lotto : lottos) {
-            int matchCount = countMatch(lotto, winningNumbers);
-            boolean bonusMatched = lotto.contains(bonusNumber);
-            var rank = Prize.of(matchCount, bonusMatched);
-            if (rank != null)
-                ranks.add(rank);
-        }
-        System.out.println(buildPrizeSummary(ranks));
-        System.out.println(calculateYield(purchaseAmount, ranks));
+
+        var ps = new PrizeSummary(purchaseAmount, lottos, winningNumbers, bonusNumber);
+        System.out.println(ps.summary());
+        System.out.println(ps.stats());
         feedLine();
     }
 
     private void feedLine() {
         System.out.println();
-    }
-
-    private int countMatch(Lotto lotto, List<Integer> winningNumbers) {
-        int count = 0;
-        for (int number : winningNumbers) {
-            if (lotto.contains(number)) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    private String buildPrizeSummary(List<Prize> matches) {
-        Map<Prize, Integer> rankCount = new HashMap<>(Map.of(
-                Prize.FOURTH, 0,
-                Prize.THIRD, 0,
-                Prize.SECOND, 0,
-                Prize.SECOND_BONUS, 0,
-                Prize.FIRST, 0
-        ));
-
-        for (var match : matches) {
-            rankCount.put(match, rankCount.getOrDefault(match, 0) + 1);
-        }
-
-        StringBuilder sb = new StringBuilder();
-        for (var entry : rankCount.entrySet()) {
-            sb.append(formatPrizeSummaryLine(entry.getKey(), entry.getValue())).append("\n");
-        }
-        return sb.toString();
-    }
-
-    private String formatPrizeSummaryLine(Prize rank, int count) {
-        return String.format("%d개 일치%s (%,d원) - %d개", rank.matchCount, rank.bonusMatched ? ", 보너스 볼 일치" : "", rank
-                .getPrize(), count);
-    }
-
-    private String calculateYield(int purchaseAmount, List<Prize> results) {
-        long totalPrize = 0;
-        for (var result : results) {
-            totalPrize += result.getPrize();
-        }
-        double yield = (double) totalPrize / purchaseAmount * 100;
-        return String.format("총 수익률은 %,.1f%%입니다.", yield);
     }
 }

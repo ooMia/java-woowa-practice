@@ -8,13 +8,11 @@
     - [x] 상수들 enum으로 대체
         - [x] 등수와 상금 액수
 
+- [x] 로또 당첨 결과를 저장하는 Prize enum 구현
+- [x] `List<Lotto>` 및 필요 인수를 전달받아, 당첨 요약과 통계를 출력하는 `PrizeSummary` 클래스 구현
+- [ ] `Lotto`를 인수로 받는 메서드를 `Lotto`의 메서드로 이동
+
 - [ ] 구현할 기능 목록 정리
-
-- [ ] 로또 당첨 결과를 저장하는 LottoResult 클래스 구현
-- [ ] `List<LottoResult>`를 전달받아 당첨 통계를 계산하는 `Calculator` 클래스 구현
-- [ ] `List<Integer>` 대신 Lotto 사용하기
-    - [ ] `int[] winningNumbers`와 `int bonusNumber`를 받으면 LottoResult를 반환하는 메서드 만들기
-
 
 - 로또 번호의 숫자 범위는 1~45까지이다.
 - 1개의 로또를 발행할 때 중복되지 않는 6개의 숫자를 뽑는다.
