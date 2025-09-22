@@ -1,15 +1,15 @@
 package lotto.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class PrizeSummary {
 
     private final int purchaseAmount;
     private final List<Prize> prizes = new ArrayList<>();
-    private final Map<Prize, Integer> rankMap = new HashMap<>();
+    private final Map<Prize, Integer> rankMap = new TreeMap<>();
 
     public PrizeSummary(int purchaseAmount, List<Lotto> lottos, List<Integer> winningNumbers, int bonusNumber) {
         this.purchaseAmount = purchaseAmount;
