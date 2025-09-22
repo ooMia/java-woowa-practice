@@ -8,7 +8,7 @@ public class Application {
         var purchaseAmount = view.step1();
         var lottos = view.step2(purchaseAmount);
         var winningNumbers = view.step3();
-        var bonusNumber = view.step4();
+        var bonusNumber = view.step4(winningNumbers);
         view.step5(purchaseAmount, lottos, winningNumbers, bonusNumber);
     }
 }

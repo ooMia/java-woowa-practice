@@ -17,6 +17,20 @@ class Reader {
         }
     }
 
+    public int readUniqueInt(List<Integer> existingNumbers) {
+        while (true) {
+            try {
+                int number = _readInt();
+                if (existingNumbers.contains(number)) {
+                    throw new IllegalArgumentException("[ERROR] 중복된 번호입니다.");
+                }
+                return number;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
     public List<Integer> readIntegers(String delimiter) {
         while (true) {
             try {

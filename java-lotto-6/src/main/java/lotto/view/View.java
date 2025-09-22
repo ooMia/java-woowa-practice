@@ -44,9 +44,9 @@ public class View {
         return winningNumbers;
     }
 
-    public int step4() {
+    public int step4(List<Integer> winningNumbers) {
         System.out.println(BONUS_NUMBER_MESSAGE);
-        int bonusNumber = reader.readInt();
+        int bonusNumber = reader.readUniqueInt(winningNumbers);
         feedLine();
         return bonusNumber;
     }
