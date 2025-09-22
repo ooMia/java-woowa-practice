@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import lotto.util.Constant;
@@ -15,8 +16,15 @@ public class Lotto {
         this.numbers.sort(Integer::compareTo);
     }
 
-    public boolean contains(int number) {
-        return numbers.contains(number);
+    public Optional<Prize> toPrize(List<Integer> winningNumbers, int bonusNumber) {
+        int matchCount = 0;
+        for (int number : winningNumbers) {
+            if (numbers.contains(number)) {
+                matchCount++;
+            }
+        }
+        boolean bonusMatch = numbers.contains(bonusNumber);
+        return Optional.ofNullable(Prize.of(matchCount, bonusMatch));
     }
 
     private void validate(List<Integer> numbers) {

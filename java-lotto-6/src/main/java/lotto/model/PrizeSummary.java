@@ -14,29 +14,14 @@ public class PrizeSummary {
     public PrizeSummary(int purchaseAmount, List<Lotto> lottos, List<Integer> winningNumbers, int bonusNumber) {
         this.purchaseAmount = purchaseAmount;
         for (var lotto : lottos) {
-            int matchCount = countMatch(lotto, winningNumbers);
-            boolean bonusMatched = lotto.contains(bonusNumber);
-            var rank = Prize.of(matchCount, bonusMatched);
-            if (rank != null)
-                prizes.add(rank);
+            lotto.toPrize(winningNumbers, bonusNumber).ifPresent(prizes::add);
         }
-
         for (var prize : Prize.values()) {
             rankMap.put(prize, 0);
         }
         for (var prize : prizes) {
             rankMap.put(prize, rankMap.get(prize) + 1);
         }
-    }
-
-    private int countMatch(Lotto lotto, List<Integer> winningNumbers) {
-        int count = 0;
-        for (int number : winningNumbers) {
-            if (lotto.contains(number)) {
-                count++;
-            }
-        }
-        return count;
     }
 
     public String summary() {
