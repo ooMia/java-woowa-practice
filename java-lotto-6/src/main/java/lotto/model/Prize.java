@@ -1,10 +1,10 @@
-package lotto;
+package lotto.model;
 
-enum Prize {
+public enum Prize {
     FOURTH(3, false), THIRD(4, false), SECOND(5, false), SECOND_BONUS(5, true), FIRST(6, false);
 
-    final int matchCount;
-    final boolean bonusMatched;
+    public final int matchCount;
+    public final boolean bonusMatched;
 
     Prize(int matchCount, boolean bonusMatched) {
         this.matchCount = matchCount;

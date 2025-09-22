@@ -1,4 +1,4 @@
-package lotto;
+package lotto.view;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import lotto.model.Lotto;
+import lotto.model.Prize;
+import lotto.util.Constant;
 
 public class View {
     private Reader reader = new Reader();
