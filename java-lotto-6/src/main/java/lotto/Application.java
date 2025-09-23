@@ -10,7 +10,7 @@ public class Application {
             var lottos = view.step2(money);
             var winningNumbers = view.step3();
             var bonusNumber = view.step4(winningNumbers);
-            view.step5(money, lottos, winningNumbers, bonusNumber);
+            view.step5(lottos, winningNumbers, bonusNumber);
         } catch (final Exception ignore) {
             // unhandled exceptions
         }

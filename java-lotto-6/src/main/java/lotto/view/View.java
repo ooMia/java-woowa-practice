@@ -59,11 +59,11 @@ public class View {
         return bonusNumber;
     }
 
-    public void step5(int purchaseAmount, List<Lotto> lottos, List<Integer> winningNumbers, int bonusNumber) {
+    public void step5(List<Lotto> lottos, List<Integer> winningNumbers, int bonusNumber) {
         System.out.println(STATISTICS_MESSAGE);
         System.out.println(STATISTICS_DIVIDER);
 
-        var ps = new PrizeSummary(purchaseAmount, lottos, winningNumbers, bonusNumber);
+        var ps = new PrizeSummary(lottos, winningNumbers, bonusNumber);
         System.out.println(ps.summary());
         System.out.println(ps.stats());
         feedLine();
