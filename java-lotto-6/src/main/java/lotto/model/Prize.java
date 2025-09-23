@@ -1,7 +1,11 @@
 package lotto.model;
 
 public enum Prize {
-    FOURTH(3, false), THIRD(4, false), SECOND(5, false), SECOND_BONUS(5, true), FIRST(6, false);
+    FOURTH(3, false),
+    THIRD(4, false),
+    SECOND(5, false),
+    SECOND_BONUS(5, true),
+    FIRST(6, false);
 
     public final int matchCount;
     public final boolean bonusMatched;
