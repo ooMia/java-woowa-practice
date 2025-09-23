@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import camp.nextstep.edu.missionutils.Console;
-import lotto.util.ExceptionHandler;
+import lotto.util.ExceptionHandler.ErrorCode;
 
 class Reader {
     int readInt() {
@@ -13,7 +13,7 @@ class Reader {
             String input = Console.readLine();
             return Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
-            throw ExceptionHandler.exception("정수가 아닌 값이 입력되었습니다.");
+            throw ErrorCode.INVALID_INTEGER_INPUT.toException();
         }
     }
 
@@ -27,7 +27,7 @@ class Reader {
             }
             return numbers;
         } catch (NumberFormatException e) {
-            throw ExceptionHandler.exception("정수가 아닌 값이 입력되었습니다.");
+            throw ErrorCode.INVALID_INTEGER_INPUT.toException();
         }
     }
 }

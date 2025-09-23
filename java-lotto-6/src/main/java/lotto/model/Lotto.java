@@ -7,7 +7,7 @@ import java.util.Set;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import lotto.util.Constant;
-import lotto.util.ExceptionHandler;
+import lotto.util.ExceptionHandler.ErrorCode;
 
 public class Lotto {
     private final List<Integer> numbers;
@@ -20,34 +20,34 @@ public class Lotto {
 
     public static void validatePrice(int amount) {
         if (amount <= 0) {
-            throw ExceptionHandler.exception("양수가 아닌 값이 입력되었습니다.");
+            throw ErrorCode.INVALID_POSITIVE_INTEGER_INPUT.toException();
         }
         if (amount % Constant.LOTTO_PRICE != 0) {
-            throw ExceptionHandler.exception("구입 금액은 " + Constant.LOTTO_PRICE + "의 배수여야 합니다.");
+            throw ErrorCode.INVALID_LOTTO_PRICE.toException();
         }
     }
 
     public static void validateWinningNumbers(List<Integer> winningNumbers) {
         if (winningNumbers.size() != Constant.LOTTO_NUMBER_COUNT) {
-            throw ExceptionHandler.exception("당첨 번호는 6개여야 합니다.");
+            throw ErrorCode.INVALID_WINNING_NUMBER_COUNT.toException();
         }
         Set<Integer> numberSet = Set.copyOf(winningNumbers);
         if (numberSet.size() != Constant.LOTTO_NUMBER_COUNT) {
-            throw ExceptionHandler.exception("당첨 번호는 중복될 수 없습니다.");
+            throw ErrorCode.INVALID_WINNING_NUMBER_DUPLICATE.toException();
         }
         for (int number : winningNumbers) {
             if (number < Constant.LOTTO_MIN_NUMBER || number > Constant.LOTTO_MAX_NUMBER) {
-                throw ExceptionHandler.exception("당첨 번호는 1부터 45 사이의 숫자여야 합니다.");
+                throw ErrorCode.INVALID_WINNING_NUMBER_RANGE.toException();
             }
         }
     }
 
     public static void validateBonusNumber(int bonusNumber, List<Integer> winningNumbers) {
         if (bonusNumber < Constant.LOTTO_MIN_NUMBER || bonusNumber > Constant.LOTTO_MAX_NUMBER) {
-            throw ExceptionHandler.exception("보너스 번호는 1부터 45 사이의 숫자여야 합니다.");
+            throw ErrorCode.INVALID_BONUS_NUMBER_RANGE.toException();
         }
         if (winningNumbers.contains(bonusNumber)) {
-            throw ExceptionHandler.exception("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+            throw ErrorCode.INVALID_BONUS_NUMBER_DUPLICATE.toException();
         }
     }
 
@@ -79,15 +79,15 @@ public class Lotto {
 
     private void validate(List<Integer> numbers) {
         if (numbers.size() != Constant.LOTTO_NUMBER_COUNT) {
-            throw ExceptionHandler.exception("로또 번호는 6개여야 합니다.");
+            throw ErrorCode.INVALID_LOTTO_NUMBER_COUNT.toException();
         }
         Set<Integer> numberSet = Set.copyOf(numbers);
         if (numberSet.size() != Constant.LOTTO_NUMBER_COUNT) {
-            throw ExceptionHandler.exception("로또 번호는 중복될 수 없습니다.");
+            throw ErrorCode.INVALID_LOTTO_NUMBER_DUPLICATE.toException();
         }
         for (int number : numbers) {
             if (number < Constant.LOTTO_MIN_NUMBER || number > Constant.LOTTO_MAX_NUMBER) {
-                throw ExceptionHandler.exception("로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+                throw ErrorCode.INVALID_LOTTO_NUMBER_RANGE.toException();
             }
         }
     }
