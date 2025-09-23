@@ -16,22 +16,22 @@ public enum Prize {
     }
 
     public static Prize of(int matchCount, boolean bonusMatched) {
-        return switch (matchCount) {
-            case 3 -> FOURTH;
-            case 4 -> THIRD;
-            case 5 -> bonusMatched ? SECOND_BONUS : SECOND;
-            case 6 -> FIRST;
-            default -> null;
-        };
+        if (matchCount == 6) return FIRST;
+        if (matchCount == 5) {
+            if (bonusMatched) return SECOND_BONUS;
+            return SECOND;
+        }
+        if (matchCount == 4) return THIRD;
+        if (matchCount == 3) return FOURTH;
+        return null;
     }
 
     public int getPrize() {
-        return switch (this) {
-            case FOURTH -> 5_000;
-            case THIRD -> 50_000;
-            case SECOND -> 1_500_000;
-            case SECOND_BONUS -> 30_000_000;
-            case FIRST -> 2_000_000_000;
-        };
+        if (this == FIRST) return 2_000_000_000;
+        if (this == SECOND_BONUS) return 30_000_000;
+        if (this == SECOND) return 1_500_000;
+        if (this == THIRD) return 50_000;
+        if (this == FOURTH) return 5_000;
+        return 0;
     }
 }
