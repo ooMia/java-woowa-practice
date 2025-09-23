@@ -8,19 +8,19 @@ import lotto.model.PrizeSummary;
 import lotto.util.Constant;
 
 public class View {
-    private Reader reader = new Reader();
-
     private static final String PURCHASE_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String WINNING_NUMBERS_MESSAGE = "당첨 번호를 입력해 주세요.";
     private static final String BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요.";
     private static final String STATISTICS_MESSAGE = "당첨 통계";
     private static final String STATISTICS_DIVIDER = "---";
 
+    private Reader reader = new Reader();
+
     public Integer step1() {
         System.out.println(PURCHASE_AMOUNT_MESSAGE);
         Integer purchaseAmount = tryUntilValid(() -> {
             var res = reader.readInt();
-            Lotto.validatePrice(res);
+            Lotto.Validator.validatePrice(res);
             return res;
         });
         feedLine();
@@ -41,7 +41,7 @@ public class View {
         System.out.println(WINNING_NUMBERS_MESSAGE);
         List<Integer> winningNumbers = tryUntilValid(() -> {
             var res = reader.readIntegers(Constant.DELIMITER_WINNING_NUMBERS);
-            Lotto.validateWinningNumbers(res);
+            Lotto.Validator.validateWinningNumbers(res);
             return res;
         });
         feedLine();
@@ -52,7 +52,7 @@ public class View {
         System.out.println(BONUS_NUMBER_MESSAGE);
         Integer bonusNumber = tryUntilValid(() -> {
             var res = reader.readInt();
-            Lotto.validateBonusNumber(res, winningNumbers);
+            Lotto.Validator.validateBonusNumber(res, winningNumbers);
             return res;
         });
         feedLine();
@@ -82,5 +82,4 @@ public class View {
             }
         }
     }
-
 }
