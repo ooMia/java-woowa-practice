@@ -42,7 +42,10 @@ public class PrizeSummary {
     }
 
     private String formatPrizeSummaryLine(Prize rank, int count) {
-        return String.format("%d개 일치%s (%,d원) - %d개",
-                rank.matchCount, rank.bonusMatched ? ", 보너스 볼 일치" : "", rank.getPrize(), count);
+        String bonusText = "";
+        if (rank.bonusMatched) {
+            bonusText = ", 보너스 볼 일치";
+        }
+        return String.format("%d개 일치%s (%,d원) - %d개", rank.matchCount, bonusText, rank.getPrize(), count);
     }
 }
