@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import camp.nextstep.edu.missionutils.Console;
-import lotto.util.ExceptionHandler.ErrorCode;
+import lotto.model.ErrorCode;
 
 public class Reader {
     public static int readInt() {
