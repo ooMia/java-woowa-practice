@@ -16,17 +16,6 @@ public class Controller {
         this.view = view;
     }
 
-    public void run() {
-        // TODO view는 순수하게 출력만 처리해야 하고, 사용자 입력 및 tryUntilValid 로직은 Controller에서 처리되어야 한다
-        var money = inputMoney();
-        var lottos = Lotto.purchase(money);
-        view.printPurchasedLottos(lottos);
-
-        var winningNumbers = inputWinningNumbers();
-        var bonusNumber = inputBonusNumber(winningNumbers);
-        view.printSummary(lottos, winningNumbers, bonusNumber);
-    }
-
     public int inputMoney() {
         view.printInputMoneyMessage();
         int purchaseAmount = tryUntilValid(() -> {
@@ -34,7 +23,7 @@ public class Controller {
             Lotto.Validator.validatePrice(res);
             return res;
         });
-        view.feedLine();
+        postCallHook();
         return purchaseAmount;
     }
 
@@ -45,7 +34,7 @@ public class Controller {
             Lotto.Validator.validateWinningNumbers(res);
             return res;
         });
-        view.feedLine();
+        postCallHook();
         return winningNumbers;
     }
 
@@ -56,7 +45,7 @@ public class Controller {
             Lotto.Validator.validateBonusNumber(res, winningNumbers);
             return res;
         });
-        view.feedLine();
+        postCallHook();
         return bonusNumber;
     }
 
@@ -68,5 +57,9 @@ public class Controller {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    private void postCallHook() {
+        view.feedLine();
     }
 }
