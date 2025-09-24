@@ -21,13 +21,23 @@ public class Lotto {
     }
 
     public static List<Lotto> purchase(int money) {
-        List<Lotto> lottos = new ArrayList<>(money / Constant.LOTTO_PRICE);
-        for (int i = 0; i < money / Constant.LOTTO_PRICE; ++i) {
-            var numbers = Randoms.pickUniqueNumbersInRange(
-                    Constant.LOTTO_MIN_NUMBER, Constant.LOTTO_MAX_NUMBER, Constant.LOTTO_NUMBER_COUNT);
-            lottos.add(new Lotto(numbers));
+        int expected = money / Constant.LOTTO_PRICE;
+        List<Lotto> lottos = new ArrayList<>(expected);
+        while (lottos.size() < expected) {
+            try {
+                lottos.add(generate());
+            } catch (final IllegalArgumentException ignore) {
+                // Lotto.generate() might throws IllegalArgumentException
+                // while calling this.validate() in constructor
+            }
         }
         return lottos;
+    }
+
+    private static Lotto generate() {
+        var numbers = Randoms.pickUniqueNumbersInRange(
+                Constant.LOTTO_MIN_NUMBER, Constant.LOTTO_MAX_NUMBER, Constant.LOTTO_NUMBER_COUNT);
+        return new Lotto(numbers);
     }
 
     @Override
@@ -69,15 +79,15 @@ public class Lotto {
         }
 
         public static void validateWinningNumbers(List<Integer> winningNumbers) {
-            if (winningNumbers.size() != Constant.LOTTO_NUMBER_COUNT) {
+            if (!isLottoSize(winningNumbers.size())) {
                 throw ErrorCode.INVALID_WINNING_NUMBER_COUNT.toException();
             }
-            Set<Integer> numberSet = Set.copyOf(winningNumbers);
-            if (numberSet.size() != Constant.LOTTO_NUMBER_COUNT) {
+            Set<Integer> uniques = Set.copyOf(winningNumbers);
+            if (!isLottoSize(uniques.size())) {
                 throw ErrorCode.INVALID_WINNING_NUMBER_DUPLICATE.toException();
             }
             for (int number : winningNumbers) {
-                if (number < Constant.LOTTO_MIN_NUMBER || number > Constant.LOTTO_MAX_NUMBER) {
+                if (!isInLottoRange(number)) {
                     throw ErrorCode.INVALID_WINNING_NUMBER_RANGE.toException();
                 }
             }
