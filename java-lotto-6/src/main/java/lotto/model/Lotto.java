@@ -30,7 +30,7 @@ public class Lotto {
             try {
                 lottos.add(generate());
             } catch (final IllegalArgumentException ignore) {
-                // Lotto.generate() might throws IllegalArgumentException
+                // Lotto.generate() might throws unexpected IllegalArgumentException
                 // while calling this.validate() in constructor
             }
         }

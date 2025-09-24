@@ -66,8 +66,8 @@ public class View implements IView {
             bw.newLine();
 
             var ps = new PrizeSummary(lottos, winningNumbers, bonusNumber);
-            bw.write(ps.summary());
-            bw.write(ps.stats());
+            bw.write(ps.getSummary());
+            bw.write(ps.getStats());
             _flush();
         });
     }

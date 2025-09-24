@@ -27,7 +27,7 @@ class PrizeSummary {
         }
     }
 
-    String summary() {
+    String getSummary() {
         StringBuilder sb = new StringBuilder();
         for (var entry : prizeMap.entrySet()) {
             sb.append(formatPrizeSummaryLine(entry.getKey(), entry.getValue())).append("\n");
@@ -35,7 +35,7 @@ class PrizeSummary {
         return sb.toString();
     }
 
-    String stats() {
+    String getStats() {
         long totalPrize = 0;
         for (var prize : prizeMap.entrySet()) {
             int amount = prize.getKey().amount, count = prize.getValue();

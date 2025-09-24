@@ -23,6 +23,9 @@
 
 - [x] View는 BufferedWriter를 활용하여 구현
 
+- [x] PrizeSummary 클래스의 메서드명을 getter 스타일로 변경
+- [ ] 당첨 번호 입력 시, Set 활용
+
 # 요구 사항
 
 - [x] else 예약어 및 switch/case 예약어를 사용하지 않고 구현
