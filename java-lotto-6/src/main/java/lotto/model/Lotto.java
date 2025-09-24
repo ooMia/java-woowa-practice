@@ -8,7 +8,8 @@ import static lotto.util.Constant.LOTTO_PRICE;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
@@ -24,20 +25,11 @@ public class Lotto {
     }
 
     private void validate(List<Integer> numbers) {
-        if (!Validator.isLottoSize(numbers.size())) {
-            throw ErrorCode.INVALID_LOTTO_NUMBER_COUNT.toException();
-        }
-        if (!Validator.isLottoSize(Set.copyOf(numbers).size())) {
-            throw ErrorCode.INVALID_LOTTO_NUMBER_DUPLICATE.toException();
-        }
-        for (int number : numbers) {
-            if (!Validator.isInLottoRange(number)) {
-                throw ErrorCode.INVALID_LOTTO_NUMBER_RANGE.toException();
-            }
-        }
+        Validator.validateLottoNumbers(numbers);
     }
 
     public static List<Lotto> purchase(int money) {
+        Validator.validatePrice(money);
         int expected = money / LOTTO_PRICE;
         List<Lotto> lottos = new ArrayList<>(expected);
         while (lottos.size() < expected) {
@@ -71,36 +63,35 @@ public class Lotto {
     }
 
     public class Validator {
-        public static void validatePrice(int amount) {
-            if (amount <= 0) {
-                throw ErrorCode.INVALID_POSITIVE_INTEGER_INPUT.toException();
+        public static void validatePrice(int money) {
+            if (money < 0) {
+                throw ErrorCode.NEGATIVE_INTEGER_INPUT.toException();
             }
-            if (amount % LOTTO_PRICE != 0) {
-                throw ErrorCode.INVALID_LOTTO_PRICE.toException();
+            if (money % LOTTO_PRICE != 0) {
+                throw ErrorCode.LOTTO_PRICE_MUST_BE_MULTIPLE.toException();
             }
         }
 
-        public static void validateWinningNumbers(List<Integer> winningNumbers) {
-            if (!isLottoSize(winningNumbers.size())) {
-                throw ErrorCode.INVALID_WINNING_NUMBER_COUNT.toException();
+        public static void validateLottoNumbers(List<Integer> numbers) {
+            if (!isLottoSize(numbers.size())) {
+                throw ErrorCode.LOTTO_NUMBER_COUNT_MISMATCH.toException();
             }
-            Set<Integer> uniques = Set.copyOf(winningNumbers);
+            
+            SortedSet<Integer> uniques = new TreeSet<>(numbers);
             if (!isLottoSize(uniques.size())) {
-                throw ErrorCode.INVALID_WINNING_NUMBER_DUPLICATE.toException();
+                throw ErrorCode.LOTTO_NUMBER_DUPLICATE_ERROR.toException();
             }
-            for (int number : winningNumbers) {
-                if (!isInLottoRange(number)) {
-                    throw ErrorCode.INVALID_WINNING_NUMBER_RANGE.toException();
-                }
+            if (uniques.first() < LOTTO_MIN_NUMBER || uniques.last() > LOTTO_MAX_NUMBER) {
+                throw ErrorCode.LOTTO_NUMBER_OUT_OF_BOUNDS.toException();
             }
         }
 
         public static void validateBonusNumber(int bonusNumber, List<Integer> winningNumbers) {
             if (!isInLottoRange(bonusNumber)) {
-                throw ErrorCode.INVALID_BONUS_NUMBER_RANGE.toException();
+                throw ErrorCode.BONUS_NUMBER_OUT_OF_BOUNDS.toException();
             }
             if (winningNumbers.contains(bonusNumber)) {
-                throw ErrorCode.INVALID_BONUS_NUMBER_DUPLICATE.toException();
+                throw ErrorCode.BONUS_NUMBER_DUPLICATE_ERROR.toException();
             }
         }
 

@@ -36,7 +36,7 @@ public class Controller {
         view.printInputWinningNumbersMessage();
         List<Integer> winningNumbers = tryUntilValid(() -> {
             var res = Reader.readIntegers(DELIMITER_WINNING_NUMBERS);
-            Lotto.Validator.validateWinningNumbers(res);
+            Lotto.Validator.validateLottoNumbers(res);
             return res;
         });
         postCallHook();
