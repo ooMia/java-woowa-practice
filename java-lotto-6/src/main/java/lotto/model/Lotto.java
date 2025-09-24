@@ -1,5 +1,10 @@
 package lotto.model;
 
+import static lotto.util.Constant.LOTTO_MAX_NUMBER;
+import static lotto.util.Constant.LOTTO_MIN_NUMBER;
+import static lotto.util.Constant.LOTTO_NUMBER_COUNT;
+import static lotto.util.Constant.LOTTO_PRICE;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -7,8 +12,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import lotto.util.Constant;
-import lotto.util.ExceptionHandler.ErrorCode;
 
 public class Lotto {
     private final List<Integer> numbers;
@@ -21,7 +24,7 @@ public class Lotto {
     }
 
     public static List<Lotto> purchase(int money) {
-        int expected = money / Constant.LOTTO_PRICE;
+        int expected = money / LOTTO_PRICE;
         List<Lotto> lottos = new ArrayList<>(expected);
         while (lottos.size() < expected) {
             try {
@@ -35,8 +38,7 @@ public class Lotto {
     }
 
     private static Lotto generate() {
-        var numbers = Randoms.pickUniqueNumbersInRange(
-                Constant.LOTTO_MIN_NUMBER, Constant.LOTTO_MAX_NUMBER, Constant.LOTTO_NUMBER_COUNT);
+        var numbers = Randoms.pickUniqueNumbersInRange(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER, LOTTO_NUMBER_COUNT);
         return new Lotto(numbers);
     }
 
@@ -73,7 +75,7 @@ public class Lotto {
             if (amount <= 0) {
                 throw ErrorCode.INVALID_POSITIVE_INTEGER_INPUT.toException();
             }
-            if (amount % Constant.LOTTO_PRICE != 0) {
+            if (amount % LOTTO_PRICE != 0) {
                 throw ErrorCode.INVALID_LOTTO_PRICE.toException();
             }
         }
@@ -103,11 +105,11 @@ public class Lotto {
         }
 
         static boolean isLottoSize(long size) {
-            return size == Constant.LOTTO_NUMBER_COUNT;
+            return size == LOTTO_NUMBER_COUNT;
         }
 
         private static boolean isInLottoRange(int number) {
-            return number >= Constant.LOTTO_MIN_NUMBER && number <= Constant.LOTTO_MAX_NUMBER;
+            return number >= LOTTO_MIN_NUMBER && number <= LOTTO_MAX_NUMBER;
         }
     }
 }

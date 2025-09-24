@@ -1,10 +1,11 @@
 package lotto;
 
+import static lotto.util.Constant.DELIMITER_WINNING_NUMBERS;
+
 import java.util.List;
 import java.util.function.Supplier;
 
 import lotto.model.Lotto;
-import lotto.util.Constant;
 import lotto.util.Reader;
 import lotto.view.IView;
 
@@ -30,7 +31,7 @@ public class Controller {
     public List<Integer> inputWinningNumbers() {
         view.printInputWinningNumbersMessage();
         List<Integer> winningNumbers = tryUntilValid(() -> {
-            var res = Reader.readIntegers(Constant.DELIMITER_WINNING_NUMBERS);
+            var res = Reader.readIntegers(DELIMITER_WINNING_NUMBERS);
             Lotto.Validator.validateWinningNumbers(res);
             return res;
         });
