@@ -1,18 +1,20 @@
 package lotto.model;
 
 public enum Prize {
-    FOURTH(3, false),
-    THIRD(4, false),
-    SECOND(5, false),
-    SECOND_BONUS(5, true),
-    FIRST(6, false);
+    FOURTH(3, false, 5_000),
+    THIRD(4, false, 50_000),
+    SECOND(5, false, 1_500_000),
+    SECOND_BONUS(5, true, 30_000_000),
+    FIRST(6, false, 2_000_000_000);
 
     public final int matchCount;
     public final boolean bonusMatched;
+    public final int amount;
 
-    Prize(int matchCount, boolean bonusMatched) {
+    Prize(int matchCount, boolean bonusMatched, int amount) {
         this.matchCount = matchCount;
         this.bonusMatched = bonusMatched;
+        this.amount = amount;
     }
 
     public static Prize of(int matchCount, boolean bonusMatched) {
@@ -24,14 +26,5 @@ public enum Prize {
         if (matchCount == 4) return THIRD;
         if (matchCount == 3) return FOURTH;
         return null;
-    }
-
-    public int getPrize() {
-        if (this == FIRST) return 2_000_000_000;
-        if (this == SECOND_BONUS) return 30_000_000;
-        if (this == SECOND) return 1_500_000;
-        if (this == THIRD) return 50_000;
-        if (this == FOURTH) return 5_000;
-        return 0;
     }
 }
