@@ -23,6 +23,20 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
+    private void validate(List<Integer> numbers) {
+        if (!Validator.isLottoSize(numbers.size())) {
+            throw ErrorCode.INVALID_LOTTO_NUMBER_COUNT.toException();
+        }
+        if (!Validator.isLottoSize(Set.copyOf(numbers).size())) {
+            throw ErrorCode.INVALID_LOTTO_NUMBER_DUPLICATE.toException();
+        }
+        for (int number : numbers) {
+            if (!Validator.isInLottoRange(number)) {
+                throw ErrorCode.INVALID_LOTTO_NUMBER_RANGE.toException();
+            }
+        }
+    }
+
     public static List<Lotto> purchase(int money) {
         int expected = money / LOTTO_PRICE;
         List<Lotto> lottos = new ArrayList<>(expected);
@@ -54,20 +68,6 @@ public class Lotto {
         }
         boolean bonusMatch = numbers.contains(bonusNumber);
         return Optional.ofNullable(Prize.of(matchCount, bonusMatch));
-    }
-
-    private void validate(List<Integer> numbers) {
-        if (!Validator.isLottoSize(numbers.size())) {
-            throw ErrorCode.INVALID_LOTTO_NUMBER_COUNT.toException();
-        }
-        if (!Validator.isLottoSize(Set.copyOf(numbers).size())) {
-            throw ErrorCode.INVALID_LOTTO_NUMBER_DUPLICATE.toException();
-        }
-        for (int number : numbers) {
-            if (!Validator.isInLottoRange(number)) {
-                throw ErrorCode.INVALID_LOTTO_NUMBER_RANGE.toException();
-            }
-        }
     }
 
     public class Validator {
