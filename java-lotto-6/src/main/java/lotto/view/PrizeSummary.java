@@ -1,51 +1,31 @@
 package lotto.view;
 
-import static lotto.util.Constant.LOTTO_PRICE;
-
-import java.util.List;
-import java.util.SortedMap;
-import java.util.TreeMap;
-
-import lotto.model.Lotto;
+import lotto.model.LottoResult;
 import lotto.model.Prize;
 
 class PrizeSummary {
 
-    private final int purchaseAmount;
-    private final SortedMap<Prize, Integer> prizeMap = new TreeMap<>();
+    private final LottoResult result;
 
-    PrizeSummary(List<Lotto> lottos, List<Integer> winningNumbers, int bonusNumber) {
-        this.purchaseAmount = lottos.size() * LOTTO_PRICE;
-        for (var prize : Prize.values()) {
-            prizeMap.put(prize, 0);
-        }
-
-        for (var lotto : lottos) {
-            lotto.toPrize(winningNumbers, bonusNumber).ifPresent(prize -> {
-                prizeMap.put(prize, prizeMap.get(prize) + 1);
-            });
-        }
+    PrizeSummary(LottoResult result) {
+        this.result = result;
     }
 
-    String getSummary() {
+    public String getStats() {
+        return String.format("총 수익률은 %,.1f%%입니다.", result.getYieldPercentage());
+    }
+
+    public String getSummary() {
         StringBuilder sb = new StringBuilder();
-        for (var entry : prizeMap.entrySet()) {
-            sb.append(formatPrizeSummaryLine(entry.getKey(), entry.getValue())).append("\n");
+        Prize[] keyOrder = {Prize.FOURTH, Prize.THIRD, Prize.SECOND, Prize.SECOND_BONUS, Prize.FIRST};
+        for (Prize prize : keyOrder) {
+            int count = result.getCountForPrize(prize);
+            sb.append(formatPrizeLine(prize, count)).append("\n");
         }
         return sb.toString();
     }
 
-    String getStats() {
-        long totalPrize = 0;
-        for (var prize : prizeMap.entrySet()) {
-            int amount = prize.getKey().amount, count = prize.getValue();
-            totalPrize += amount * count;
-        }
-        double yield = (double) totalPrize / purchaseAmount * 100;
-        return String.format("총 수익률은 %,.1f%%입니다.", yield);
-    }
-
-    private String formatPrizeSummaryLine(Prize prize, int count) {
+    private String formatPrizeLine(Prize prize, int count) {
         String bonusText = "";
         if (prize.bonusMatched) {
             bonusText = ", 보너스 볼 일치";
