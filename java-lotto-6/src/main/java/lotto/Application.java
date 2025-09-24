@@ -15,6 +15,7 @@ public class Application {
             view.printSummary(lottos, winningNumbers, bonusNumber);
         } catch (final Exception ignore) {
             // unhandled exceptions
+            // exception test will fail with exception without this block
         }
     }
 }
