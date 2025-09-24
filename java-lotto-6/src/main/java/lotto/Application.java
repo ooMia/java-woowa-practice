@@ -8,7 +8,7 @@ public class Application {
 
         try {
             var money = api.inputMoney();
-            var lottos = lotto.model.Lotto.purchase(money);
+            var lottos = api.purchaseLottos(money);
             view.printPurchasedLottos(lottos);
 
             var winningNumbers = api.inputWinningNumbers();

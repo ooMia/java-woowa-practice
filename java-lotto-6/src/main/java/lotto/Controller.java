@@ -28,6 +28,10 @@ public class Controller {
         return purchaseAmount;
     }
 
+    public List<Lotto> purchaseLottos(int money) {
+        return Lotto.purchase(money);
+    }
+
     public List<Integer> inputWinningNumbers() {
         view.printInputWinningNumbersMessage();
         List<Integer> winningNumbers = tryUntilValid(() -> {
