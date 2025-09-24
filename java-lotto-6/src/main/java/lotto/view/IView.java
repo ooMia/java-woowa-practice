@@ -3,6 +3,7 @@ package lotto.view;
 import java.util.List;
 
 import lotto.model.Lotto;
+import lotto.model.LottoResult;
 
 public interface IView {
     void printInputMoneyMessage();
@@ -13,7 +14,7 @@ public interface IView {
 
     void printInputBonusNumberMessage(List<Integer> winningNumbers);
 
-    void printSummary(List<Lotto> lottos, List<Integer> winningNumbers, int bonusNumber);
+    void printSummary(LottoResult result);
 
     void feedLine();
 }

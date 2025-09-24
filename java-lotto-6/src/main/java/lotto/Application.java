@@ -13,7 +13,8 @@ public class Application {
 
             var winningNumbers = api.inputWinningNumbers();
             var bonusNumber = api.inputBonusNumber(winningNumbers);
-            view.printSummary(lottos, winningNumbers, bonusNumber);
+            var result = new lotto.model.LottoResult(lottos, winningNumbers, bonusNumber);
+            view.printSummary(result);
         } catch (final Exception ignore) {
             // unhandled exceptions
             // exception test will fail with exception without this block

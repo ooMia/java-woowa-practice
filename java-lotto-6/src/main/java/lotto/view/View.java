@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import lotto.model.Lotto;
+import lotto.model.LottoResult;
 
 public class View implements IView {
     private static final String PURCHASE_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
@@ -58,14 +59,14 @@ public class View implements IView {
     }
 
     @Override
-    public void printSummary(List<Lotto> lottos, List<Integer> winningNumbers, int bonusNumber) {
+    public void printSummary(LottoResult result) {
         _write(() -> {
             bw.write(STATISTICS_MESSAGE);
             bw.newLine();
             bw.write(STATISTICS_DIVIDER);
             bw.newLine();
 
-            var ps = new PrizeSummary(lottos, winningNumbers, bonusNumber);
+            var ps = new PrizeSummary(result);
             bw.write(ps.getSummary());
             bw.write(ps.getStats());
             _flush();
