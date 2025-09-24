@@ -1,17 +1,19 @@
-package lotto.model;
+package lotto.view;
 
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import lotto.model.Lotto;
+import lotto.model.Prize;
 import lotto.util.Constant;
 
-public class PrizeSummary {
+class PrizeSummary {
 
     private final int purchaseAmount;
     private final SortedMap<Prize, Integer> rankMap = new TreeMap<>();
 
-    public PrizeSummary(List<Lotto> lottos, List<Integer> winningNumbers, int bonusNumber) {
+    PrizeSummary(List<Lotto> lottos, List<Integer> winningNumbers, int bonusNumber) {
         this.purchaseAmount = lottos.size() * Constant.LOTTO_PRICE;
         for (var prize : Prize.values()) {
             rankMap.put(prize, 0);
@@ -24,7 +26,7 @@ public class PrizeSummary {
         }
     }
 
-    public String summary() {
+    String summary() {
         StringBuilder sb = new StringBuilder();
         for (var entry : rankMap.entrySet()) {
             sb.append(formatPrizeSummaryLine(entry.getKey(), entry.getValue())).append("\n");
@@ -32,7 +34,7 @@ public class PrizeSummary {
         return sb.toString();
     }
 
-    public String stats() {
+    String stats() {
         long totalPrize = 0;
         for (var entry : rankMap.entrySet()) {
             int prize = entry.getKey().getPrize(), count = entry.getValue();

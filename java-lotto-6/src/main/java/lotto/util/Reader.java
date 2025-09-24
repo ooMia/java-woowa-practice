@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,8 @@ import java.util.StringTokenizer;
 import camp.nextstep.edu.missionutils.Console;
 import lotto.util.ExceptionHandler.ErrorCode;
 
-class Reader {
-    int readInt() {
+public class Reader {
+    public static int readInt() {
         try {
             String input = Console.readLine();
             return Integer.parseInt(input.trim());
@@ -17,7 +17,7 @@ class Reader {
         }
     }
 
-    List<Integer> readIntegers(String delimiter) {
+    public static List<Integer> readIntegers(String delimiter) {
         try {
             String input = Console.readLine();
             StringTokenizer st = new StringTokenizer(input, delimiter);
