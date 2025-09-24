@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.List;
 
 import lotto.model.Lotto;
@@ -12,41 +14,90 @@ public class View implements IView {
     private static final String STATISTICS_MESSAGE = "당첨 통계";
     private static final String STATISTICS_DIVIDER = "---";
 
+    private final BufferedWriter bw;
+
+    public View(BufferedWriter bw) {
+        this.bw = bw;
+    }
+
     @Override
     public void printInputMoneyMessage() {
-        System.out.println(PURCHASE_AMOUNT_MESSAGE);
+        _write(() -> {
+            bw.write(PURCHASE_AMOUNT_MESSAGE);
+            _flush();
+        });
     }
 
     @Override
     public void printPurchasedLottos(List<Lotto> lottos) {
-        System.out.println(String.format(LOTTO_COUNT_MESSAGE_FORMAT, lottos.size()));
-        for (var lotto : lottos) {
-            System.out.println(lotto);
-        }
+        _write(() -> {
+            bw.write(String.format(LOTTO_COUNT_MESSAGE_FORMAT, lottos.size()));
+            bw.newLine();
+            for (var lotto : lottos) {
+                bw.write(lotto.toString());
+                bw.newLine();
+            }
+            _flush();
+        });
     }
 
     @Override
     public void printInputWinningNumbersMessage() {
-        System.out.println(WINNING_NUMBERS_MESSAGE);
+        _write(() -> {
+            bw.write(WINNING_NUMBERS_MESSAGE);
+            _flush();
+        });
     }
 
     @Override
     public void printInputBonusNumberMessage(List<Integer> winningNumbers) {
-        System.out.println(BONUS_NUMBER_MESSAGE);
+        _write(() -> {
+            bw.write(BONUS_NUMBER_MESSAGE);
+            _flush();
+        });
     }
 
     @Override
     public void printSummary(List<Lotto> lottos, List<Integer> winningNumbers, int bonusNumber) {
-        System.out.println(STATISTICS_MESSAGE);
-        System.out.println(STATISTICS_DIVIDER);
+        _write(() -> {
+            bw.write(STATISTICS_MESSAGE);
+            bw.newLine();
+            bw.write(STATISTICS_DIVIDER);
+            bw.newLine();
 
-        var ps = new PrizeSummary(lottos, winningNumbers, bonusNumber);
-        System.out.println(ps.summary());
-        System.out.println(ps.stats());
+            var ps = new PrizeSummary(lottos, winningNumbers, bonusNumber);
+            bw.write(ps.summary());
+            bw.write(ps.stats());
+            _flush();
+        });
     }
 
     @Override
     public void feedLine() {
-        System.out.println();
+        _write(() -> {
+            _flush();
+        });
+    }
+
+    @FunctionalInterface
+    private interface IOAction {
+        void write() throws IOException;
+    }
+
+    private void _write(IOAction action) {
+        try {
+            action.write();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void _flush() {
+        try {
+            bw.newLine();
+            bw.flush();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

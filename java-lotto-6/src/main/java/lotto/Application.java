@@ -2,7 +2,8 @@ package lotto;
 
 public class Application {
     public static void main(String[] args) {
-        var view = new lotto.view.View();
+        var bw = new java.io.BufferedWriter(new java.io.OutputStreamWriter(System.out));
+        var view = new lotto.view.View(bw);
         var api = new Controller(view);
 
         try {

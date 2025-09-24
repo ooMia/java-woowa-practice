@@ -21,6 +21,8 @@
 - [x] Lotto 수익률 계산
 - [x] View는 순수하게 출력만 처리하고, 사용자 입력 및 tryUntilValid 로직은 Controller에서 처리한다
 
+- [x] View는 BufferedWriter를 활용하여 구현
+
 # 요구 사항
 
 - [x] else 예약어 및 switch/case 예약어를 사용하지 않고 구현
@@ -29,7 +31,7 @@
 - [x] 함수(또는 메서드)의 길이가 15라인을 넘어가지 않도록 구현한다.
 - [x] Java Enum을 적용한다.
 
-- 도메인 로직에 단위 테스트를 구현한다.
+- [x] 도메인 로직에 단위 테스트를 구현한다. (Lotto)
 
 # 참고 사항
 
