@@ -11,11 +11,11 @@ class PrizeSummary {
         this.result = result;
     }
 
-    public String getStats() {
+    String getStats() {
         return String.format("총 수익률은 %,.1f%%입니다.", result.getYieldPercentage());
     }
 
-    public String getSummary() {
+    String getSummary() {
         StringBuilder sb = new StringBuilder();
         Prize[] keyOrder = {Prize.FOURTH, Prize.THIRD, Prize.SECOND, Prize.SECOND_BONUS, Prize.FIRST};
         for (Prize prize : keyOrder) {
