@@ -11,12 +11,12 @@ public class View {
         this.bw = bw;
     }
 
-    public void printStatus(racingcar.Game game) {
+    public void printStatus(racingcar.Car[] cars) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'printStatus'");
     }
 
-    public void printWinners(racingcar.Game game) {
+    public void printWinners(racingcar.Car[] winners) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'printWinners'");
     }

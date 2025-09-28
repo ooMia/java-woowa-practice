@@ -13,10 +13,10 @@ public class Application {
             var game = api.createGame(names);
             for (int i = 0; i < nRounds; ++i) {
                 api.playRound(game);
-                view.printStatus(game);
+                view.printStatus(game.getCars());
             }
 
-            view.printWinners(game);
+            view.printWinners(game.getWinners());
         } catch (final Exception ignore) {
             // unhandled exceptions
             // exception test will fail with exception without this block
