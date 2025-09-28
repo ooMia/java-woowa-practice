@@ -22,7 +22,8 @@ public class Game {
         var winners = new java.util.ArrayList<Car>();
         winners.add(cars[0]);
 
-        for (var car : cars) {
+        for (int i = 1; i < cars.length; ++i) {
+            var car = cars[i];
             int standard = winners.get(0).getPosition();
             int challenger = car.getPosition();
 
