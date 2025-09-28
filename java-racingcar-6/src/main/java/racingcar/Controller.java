@@ -19,16 +19,10 @@ public class Controller {
     }
 
     public racingcar.Game createGame(String[] names) {
-        // var game = new racingcar.Game(names);
-
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createGame'");
+        return new racingcar.Game(names);
     }
 
     public void playRound(racingcar.Game game) {
-        // game.moveCars();
-
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'playRound'");
+        game.playRound();
     }
 }
