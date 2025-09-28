@@ -1,6 +1,8 @@
 package racingcar;
 
 public class Car {
+    private static final int MAX_CAR_NAME_LENGTH = 5;
+    private static final int MOVE_CRITERIA = 4;
 
     private final String name;
     private int position = 0;
@@ -10,17 +12,13 @@ public class Car {
         validate();
     }
 
-    private void validate(){
-        if (name.length() > 5) { // TODO use racingcar.Constants.MAX_CAR_NAME_LENGTH = 5
-            throw new IllegalArgumentException("자동차 이름은 5자를 초과할 수 없습니다.");
-        }
+    private void validate() {
+        if (name.length() > MAX_CAR_NAME_LENGTH)
+            throw new IllegalArgumentException("자동차 이름 길이 제한을 초과했습니다.");
     }
 
     public void move(int fuel) {
-        // TODO racingcar.Constants.MOVE_CRITERIA = 4
-        if (fuel >= 4) {
-            ++position;
-        }
+        if (fuel >= MOVE_CRITERIA) ++position;
     }
 
     public String getName() {
