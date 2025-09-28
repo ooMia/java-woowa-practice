@@ -1,4 +1,4 @@
 - [x] MVC 패턴(Model-View-Controller) 기반으로 구현한다.
 - 이전에 구현한 `java-lotto-6`를 참고하자
   - [x] main() 메서드에서의 흐름 제어를 문제에 맞게 변형한다.
-  - [ ] View, Controller 내부의 헬퍼 메서드를 적절히 추가한다.
+  - [x] View, Controller 내부의 헬퍼 메서드를 적절히 추가한다.

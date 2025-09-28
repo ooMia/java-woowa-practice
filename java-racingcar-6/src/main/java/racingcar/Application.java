@@ -10,10 +10,8 @@ public class Application {
             var names = api.inputCarNames();
             var nRounds = api.inputNumberOfTrials();
 
-            // var game = new racingcar.Game(names);
             var game = api.createGame(names);
             for (int i = 0; i < nRounds; ++i) {
-                // game.moveCars();
                 api.playRound(game);
                 view.printStatus(game);
             }
