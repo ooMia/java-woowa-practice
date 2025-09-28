@@ -12,5 +12,5 @@
   - [x] 게임의 진행(각 라운드 진행)을 담당한다.
   - [x] 게임의 결과(현재 상태에서의 우승자)를 관리한다.
 - View
-  - [ ] printStatus: 각 Car에 대해 "{car.name} : {car.position * '-'}" 형식으로 출력한다.
-  - [ ] printWinners: 우승자 이름을 쉼표(,)로 구분하여 "최종 우승자: {name1}, {name2}, ..." 형식으로 출력한다.
+  - [x] printStatus: 각 Car에 대해 "{car.name} : {car.position * '-'}" 형식으로 출력한다.
+  - [x] printWinners: 우승자 이름을 쉼표(,)로 구분하여 "최종 우승자: {name1}, {name2}, ..." 형식으로 출력한다.
