@@ -8,21 +8,39 @@ public class Controller {
         this.view = view;
     }
 
-    public String[] inputCarNames() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'inputCarNames'");
+    public racingcar.Car[] inputCars() {
+        return throwIfFailed(() -> {
+            var line = camp.nextstep.edu.missionutils.Console.readLine();
+            var names = line.split(","); // TODO use Constant.DELIMITER
+
+            var cars = new racingcar.Car[names.length];
+            for (int i = 0; i < names.length; ++i) {
+                cars[i] = new racingcar.Car(names[i]);
+            }
+            return cars;
+        });
     }
 
     public int inputNumberOfTrials() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'inputNumberOfTrials'");
+        return throwIfFailed(() -> {
+            var line = camp.nextstep.edu.missionutils.Console.readLine();
+            return Integer.parseInt(line);
+        });
     }
 
-    public racingcar.Game createGame(String[] names) {
-        return new racingcar.Game(names);
+    public racingcar.Game createGame(racingcar.Car[] cars) {
+        return new racingcar.Game(cars);
     }
 
     public void playRound(racingcar.Game game) {
         game.playRound();
+    }
+
+    private static <T> T throwIfFailed(java.util.function.Supplier<T> supplier) {
+        try {
+            return supplier.get();
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 }

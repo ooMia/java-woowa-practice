@@ -7,13 +7,13 @@ public class Application {
         var api = new racingcar.Controller(view);
 
         try {
-            var names = api.inputCarNames();
+            var cars = api.inputCars();
             var nRounds = api.inputNumberOfTrials();
 
-            var game = api.createGame(names);
+            var game = api.createGame(cars);
             for (int i = 0; i < nRounds; ++i) {
                 api.playRound(game);
-                view.printStatus(game.getCars());
+                view.printStatus(cars);
             }
 
             view.printWinners(game.getWinners());
