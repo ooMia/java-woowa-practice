@@ -36,11 +36,6 @@ public class Constant {
     public static final int SPECIAL_DAY_DISCOUNT = 1_000;
     public static final int GIFT_EVENT_MIN_AMOUNT = 120_000;
 
-    // 배지 기준 금액
-    public static final int STAR_BADGE_AMOUNT = 5_000;
-    public static final int TREE_BADGE_AMOUNT = 10_000;
-    public static final int SANTA_BADGE_AMOUNT = 20_000;
-
     // 입력 형식 구분자
     public static final String MENU_QUANTITY_SEPARATOR = "-";
     public static final String MENU_ITEM_SEPARATOR = ",";
