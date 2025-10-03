@@ -1,19 +1,23 @@
 package christmas;
 
 import java.time.DayOfWeek;
+import java.time.YearMonth;
 import java.util.Set;
 
 public class Constant {
+
     // 이벤트 기간
     public static final int EVENT_YEAR = 2023;
     public static final int EVENT_MONTH = 12;
     public static final int EVENT_START_DAY = 1;
-    public static final int EVENT_END_DAY = 31;
+    public static final int EVENT_END_DAY = YearMonth.of(EVENT_YEAR, EVENT_MONTH).lengthOfMonth();
 
     // 이벤트 적용 조건
     public static final int MIN_ORDER_AMOUNT_FOR_EVENT = 10_000;
     public static final boolean ALLOW_BEVERAGE_ONLY_ORDER = false;
-    public static final int MAX_MENU_QUANTITY = 20;
+
+    public static final int MIN_QUANTITY_PER_MENU = 1; // 각 메뉴별 최소 주문 수량
+    public static final int MAX_TOTAL_ORDER_QUANTITY = 20; // 전체 주문(모든 메뉴 합산) 최대 수량
 
     // 크리스마스 디데이 할인
     public static final int CHRISTMAS_DDAY_START = 1;
