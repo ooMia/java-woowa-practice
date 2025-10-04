@@ -20,6 +20,10 @@ public enum ErrorCode {
     }
 
     public IllegalArgumentException exception() {
-        return new IllegalArgumentException(message);
+        return christmas.util.ExceptionHandler.exception(message);
+    }
+
+    public String getMessage() {
+        return message;
     }
 }
