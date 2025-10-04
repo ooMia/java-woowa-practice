@@ -16,7 +16,8 @@ public class InputView {
         try {
             println(ViewMessage.ASK_VISIT_DATE);
             String input = Console.readLine();
-            return new VisitDate(Integer.parseInt(input));
+            int day = Integer.parseInt(input);
+            return new VisitDate(day);
         } catch (NumberFormatException e) {
             throw ErrorCode.DATE_NOT_NUMBER.exception();
         }

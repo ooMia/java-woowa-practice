@@ -9,9 +9,9 @@ public class VisitDate {
     private final LocalDate date;
     private final int day;
 
-    public VisitDate(int day) {
-        if (day < Constant.EVENT_START_DAY || day > Constant.EVENT_END_DAY)
-            throw ErrorCode.VISIT_DATE_NOT_IN_RANGE.exception();
+    public VisitDate(int day) throws IllegalArgumentException {
+        if (day < Constant.MONTH_START_DAY || Constant.MONTH_END_DAY < day)
+            throw ErrorCode.DATE_NOT_FOUND.exception();
         this.day = day;
         this.date = LocalDate.of(Constant.EVENT_YEAR, Constant.EVENT_MONTH, day);
     }

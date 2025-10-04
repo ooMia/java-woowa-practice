@@ -84,14 +84,13 @@ public class BenefitService {
     }
 
     private Benefit calcChristmasDiscount(VisitDate date) {
-        if (date.isChristmasEventDay()) {
-            int baseDiscount = Constant.CHRISTMAS_DDAY_BASE_DISCOUNT;
-            int startDay = Constant.CHRISTMAS_DDAY_START;
-            int dailyIncrease = Constant.CHRISTMAS_DDAY_DAILY_INCREASE;
-            var discount = baseDiscount + (date.getDay() - startDay) * dailyIncrease;
-            return new Benefit(Event.CHRISTMAS_DDAY_DISCOUNT, discount);
-        }
-        return null;
+        if (!date.isChristmasEventDay()) return null;
+        
+        int baseDiscount = Constant.CHRISTMAS_DDAY_BASE_DISCOUNT;
+        int startDay = Constant.CHRISTMAS_DDAY_START;
+        int dailyIncrease = Constant.CHRISTMAS_DDAY_DAILY_INCREASE;
+        var discount = baseDiscount + (date.getDay() - startDay) * dailyIncrease;
+        return new Benefit(Event.CHRISTMAS_DDAY_DISCOUNT, discount);
     }
 
     private Benefit calcWeekdayDessertDiscount() {

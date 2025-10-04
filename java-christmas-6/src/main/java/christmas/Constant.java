@@ -9,8 +9,10 @@ public class Constant {
     // 이벤트 기간
     public static final int EVENT_YEAR = 2023;
     public static final int EVENT_MONTH = 12;
-    public static final int EVENT_START_DAY = 1;
-    public static final int EVENT_END_DAY = YearMonth.of(EVENT_YEAR, EVENT_MONTH).lengthOfMonth();
+    public static final int MONTH_START_DAY = 1, MONTH_END_DAY= YearMonth.of(EVENT_YEAR, EVENT_MONTH).lengthOfMonth();
+
+    public static final int EVENT_START_DAY = MONTH_START_DAY;
+    public static final int EVENT_END_DAY = MONTH_END_DAY;
 
     // 이벤트 적용 조건
     public static final int MIN_ORDER_AMOUNT_FOR_EVENT = 10_000;
