@@ -15,7 +15,7 @@ public class EdgeTest {
         Menu mostExpensiveMenu = Stream.of(Menu.values())
                 .max(Comparator.comparingInt(Menu::getPrice))
                 .orElse(null);
-        int maxQuantity = Constant.MAX_TOTAL_ORDER_QUANTITY;
+        int maxQuantity = Constant.MAX_QUANTITY_PER_MENU;
         long totalPrice = (long) mostExpensiveMenu.getPrice() * maxQuantity;
 
         if (totalPrice > Integer.MAX_VALUE) {

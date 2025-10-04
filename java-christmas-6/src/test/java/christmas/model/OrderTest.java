@@ -67,4 +67,20 @@ class OrderTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> new Order(menuStrings));
         assertEquals(getExpectedErrorMessage(ErrorCode.ORDER_MENU_DUPLICATE), exception.getMessage());
     }
+
+    @Test
+    @DisplayName("Throws exception for exceeding maximum order count")
+    void testExceedingMaxOrderCount() {
+        String[] menuStrings = {"양송이수프-21"};
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Order(menuStrings));
+        assertEquals(getExpectedErrorMessage(ErrorCode.ORDER_COUNT_EXCEEDS_LIMIT), exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Throws exception for ordering only drinks")
+    void testOrderingOnlyDrinks() {
+        String[] menuStrings = {"제로콜라-1", "레드와인-1"};
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Order(menuStrings));
+        assertEquals(getExpectedErrorMessage(ErrorCode.ORDER_ONLY_BEVERAGE_NOT_ALLOWED), exception.getMessage());
+    }
 }

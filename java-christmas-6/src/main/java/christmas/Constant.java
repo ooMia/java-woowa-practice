@@ -19,7 +19,7 @@ public class Constant {
     public static final boolean ALLOW_BEVERAGE_ONLY_ORDER = false;
 
     public static final int MIN_QUANTITY_PER_MENU = 1; // 각 메뉴별 최소 주문 수량
-    public static final int MAX_TOTAL_ORDER_QUANTITY = 20; // 전체 주문(모든 메뉴 합산) 최대 수량
+    public static final int MAX_QUANTITY_PER_MENU = 20; // 전체 주문(모든 메뉴 합산) 최대 수량
 
     // 크리스마스 디데이 할인
     public static final int CHRISTMAS_DDAY_START = 1;

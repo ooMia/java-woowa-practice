@@ -23,8 +23,23 @@ public class Order {
                 throw ErrorCode.MENU_FORMAT_INVALID.exception();
             Menu menu = parseMenuName(parts[0]);
             int count = parseMenuCount(parts[1]);
+            if (count > Constant.MAX_QUANTITY_PER_MENU)
+                throw ErrorCode.ORDER_COUNT_EXCEEDS_LIMIT.exception();
             putMenu(menu, count);
         }
+        validateOrderContents();
+    }
+
+    private void validateOrderContents() {
+        boolean hasNonBeverage = false;
+        for (var e : menus.entrySet()) {
+            if (MenuCategory.BEVERAGE != e.getKey().getCategory()) {
+                hasNonBeverage = true;
+                break;
+            }
+        }
+        if (!hasNonBeverage)
+            throw ErrorCode.ORDER_ONLY_BEVERAGE_NOT_ALLOWED.exception();
     }
 
     private Menu parseMenuName(String s) {
