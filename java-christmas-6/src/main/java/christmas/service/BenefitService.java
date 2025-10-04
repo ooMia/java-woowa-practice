@@ -26,6 +26,8 @@ public class BenefitService {
     );
 
     public static BenefitSummary toSummary(Order order, VisitDate visitDate) {
+        if (order.getTotalPrice() < Constant.MIN_ORDER_AMOUNT_FOR_EVENT)
+            return new BenefitSummary(Map.of(), List.of(), 0, order.getTotalPrice(), null);
         return new BenefitCalculator(policies).getSummary(order, visitDate);
     }
 

@@ -50,4 +50,18 @@ class BenefitServiceTest {
                         tuple(Event.FREEBIE_EVENT, 25_000)
                 );
     }
+
+    @Test
+    void 이벤트_최소_주문_금액_검증() {
+        Order order = new Order(new String[]{"시저샐러드-1"});
+        VisitDate visitDate = new VisitDate(25);
+
+        BenefitSummary summary = BenefitService.toSummary(order, visitDate);
+
+        assertThat(summary.finalCost()).isEqualTo(8_000);
+        assertThat(summary.totalBenefit()).isEqualTo(0);
+        assertThat(summary.benefits()).isEmpty();
+        assertThat(summary.freebies()).isEmpty();
+        assertThat(summary.badge()).isEqualTo(null);
+    }
 }
