@@ -9,7 +9,7 @@ public class Order {
     private final Map<Menu, Integer> menus;
     private final int totalPrice;
 
-    public Order(String[] menuStrings) {
+    public Order(String[] menuStrings) throws IllegalArgumentException {
         this.menus = new EnumMap<>(Menu.class);
         initMap(menuStrings);
         this.totalPrice = menus.entrySet().stream()
