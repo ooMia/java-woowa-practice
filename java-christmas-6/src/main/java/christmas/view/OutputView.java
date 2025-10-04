@@ -2,6 +2,8 @@ package christmas.view;
 
 import java.util.Map;
 
+import christmas.Constant;
+import christmas.model.Badge;
 import christmas.model.Menu;
 import christmas.model.dto.Benefit;
 
@@ -22,18 +24,32 @@ public class OutputView {
         printMenus(menus);
     }
 
-    public void printFreebies(Map<Menu, Integer> menus) {
-        println(ViewMessage.FREEBIE_MENU_HEADER.toString());
-        printMenus(menus);
-    }
-
     public void printInitialCost(int cost) {
         println(ViewMessage.ORDER_INITIAL_COST_HEADER.toString());
         println(formatPriceLine(cost));
     }
 
+    // ------------------------------
+    //          할인 관련 출력
+    // ------------------------------
+
+    public void printFreebies(Map<Menu, Integer> menus) {
+        println(ViewMessage.FREEBIE_MENU_HEADER.toString());
+        if (menus == null || menus.isEmpty()) {
+            printNone();
+            return;
+        }
+        
+        printMenus(menus);
+    }
+
     public void printBenefits(Iterable<Benefit> benefits) {
         println(ViewMessage.BENEFIT_DETAIL_HEADER.toString());
+        if (benefits == null || !benefits.iterator().hasNext()) {
+            printNone();
+            return;
+        }
+
         var sb = new StringBuilder();
         for (Benefit benefit : benefits) {
             var name = benefit.event().toString();
@@ -53,6 +69,24 @@ public class OutputView {
         println(formatPriceLine(cost));
     }
 
+    public void printEventBadge(Badge badge) {
+        println(ViewMessage.EVENT_BADGE_HEADER.toString());
+        if (badge == null) {
+            printNone();
+            return;
+        }
+
+        println(badge.getName());
+    }
+
+    private String formatBenefitLine(String name, int amount) {
+        return String.format(ViewMessage.BENEFIT_FORMAT.toString(), name, formatPriceLine(amount));
+    }
+
+    // ------------------------------
+    //          공통 출력 메서드
+    // ------------------------------
+
     private void println(String s) {
         try {
             bw.write(s);
@@ -61,6 +95,10 @@ public class OutputView {
         } catch (java.io.IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void printNone() {
+        println(Constant.STATE_UNDEFINED);
     }
 
     private void printMenus(Map<Menu, Integer> menus) {
@@ -81,7 +119,4 @@ public class OutputView {
         return String.format(ViewMessage.MONEY_FORMAT.toString(), price);
     }
 
-    private String formatBenefitLine(String name, int amount) {
-        return String.format(ViewMessage.BENEFIT_FORMAT.toString(), name, formatPriceLine(amount));
-    }
 }

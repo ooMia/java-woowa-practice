@@ -43,4 +43,7 @@ public class Constant {
 
     // 에러 메시지 접두사
     public static final String ERROR_PREFIX = "[ERROR]";
+
+    // 기타
+    public static final String STATE_UNDEFINED = "없음";
 }

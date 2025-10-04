@@ -39,6 +39,7 @@ public class Controller {
         out.printBenefits(orderInfo.benefits()); // 혜택 내역
         out.printTotalBenefitAmount(orderInfo.totalBenefitAmount()); // 총혜택 금액
         out.printFinalCost(orderInfo.finalCost()); // 할인 후 예상 결제 금액
+        out.printEventBadge(orderInfo.badge()); // 이벤트 뱃지
     }
 
     private <T> T tryUntilValid(java.util.function.Supplier<T> func) {
