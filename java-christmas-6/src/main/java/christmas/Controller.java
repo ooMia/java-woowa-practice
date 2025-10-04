@@ -2,14 +2,13 @@ package christmas;
 
 import christmas.model.Order;
 import christmas.model.dto.VisitDate;
-import christmas.service.OrderService;
+import christmas.service.BenefitService;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
 public class Controller {
     private final InputView in;
     private final OutputView out;
-    private final OrderService service = new OrderService();
 
     public Controller(InputView inputView, OutputView outputView) {
         this.in = inputView;
@@ -34,7 +33,7 @@ public class Controller {
     }
 
     public void printDiscountSummary(Order order, VisitDate visitDate) {
-        var orderInfo = service.createBenefitSummary(order, visitDate);
+        var orderInfo = BenefitService.of(order, visitDate).toSummary();
         out.printFreebies(orderInfo.freebies()); // 증정 메뉴
         out.printBenefits(orderInfo.benefits()); // 혜택 내역
         out.printTotalBenefitAmount(orderInfo.totalBenefitAmount()); // 총혜택 금액
