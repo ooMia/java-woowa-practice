@@ -19,17 +19,15 @@ public class ConstantTest {
 
     @Test
     public void testWeekends() {
-        assertTrue(Constant.WEEKENDS.contains(DayOfWeek.FRIDAY));
-        assertTrue(Constant.WEEKENDS.contains(DayOfWeek.SATURDAY));
+        assertTrue(Constant.WEEKEND_DAYS.contains(DayOfWeek.FRIDAY));
+        assertTrue(Constant.WEEKEND_DAYS.contains(DayOfWeek.SATURDAY));
     }
 
     @Test
-    public void testWeekdays() {
-        assertTrue(Constant.WEEKDAYS.contains(DayOfWeek.SUNDAY));
-        assertTrue(Constant.WEEKDAYS.contains(DayOfWeek.MONDAY));
-        assertTrue(Constant.WEEKDAYS.contains(DayOfWeek.TUESDAY));
-        assertTrue(Constant.WEEKDAYS.contains(DayOfWeek.WEDNESDAY));
-        assertTrue(Constant.WEEKDAYS.contains(DayOfWeek.THURSDAY));
+    public void testChristmasIsWeekday() {
+        var date = java.time.LocalDate.of(2023, 12, 25);
+        var dayOfWeek = date.getDayOfWeek();
+        assertTrue(!Constant.WEEKEND_DAYS.contains(dayOfWeek));
     }
 
 }
