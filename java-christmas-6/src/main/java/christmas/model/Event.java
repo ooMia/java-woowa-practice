@@ -8,14 +8,13 @@ public enum Event {
     SPECIAL_DISCOUNT("특별 할인"),
     FREEBIE_EVENT("증정 이벤트");
 
-    private final String name;
+    private final String description;
 
-    private Event(String name) {
-        this.name = name;
+    private Event(String description) {
+        this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return name;
+    public String getDescription() {
+        return description;
     }
 }
