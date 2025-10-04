@@ -39,7 +39,6 @@ public class OutputView {
             printNone();
             return;
         }
-
         printMenus(menus);
     }
 
@@ -52,11 +51,9 @@ public class OutputView {
 
         var sb = new StringBuilder();
         for (Benefit benefit : benefits) {
-            var name = benefit.event().toString();
-            var amount = benefit.amount();
-            sb.append(formatBenefitLine(name, amount)).append(System.lineSeparator());
+            sb.append(formatBenefitLine(benefit)).append(System.lineSeparator());
         }
-        println(sb.toString());
+        if (!sb.isEmpty()) println(sb.toString());
     }
 
     public void printTotalBenefitAmount(int amount) {
@@ -79,8 +76,10 @@ public class OutputView {
         println(badge.getName());
     }
 
-    private String formatBenefitLine(String name, int amount) {
-        return String.format(ViewMessage.BENEFIT_FORMAT.toString(), name, formatPriceLine(-amount));
+    private String formatBenefitLine(Benefit benefit) {
+        String description = benefit.event().getDescription();
+        int amount = benefit.amount();
+        return String.format(ViewMessage.BENEFIT_FORMAT.toString(), description, formatPriceLine(-amount));
     }
 
     // ------------------------------
@@ -103,16 +102,14 @@ public class OutputView {
 
     private void printMenus(Map<Menu, Integer> menus) {
         var sb = new StringBuilder();
-        for (Menu menu : menus.keySet()) {
-            var name = menu.getName();
-            var count = menus.get(menu);
-            sb.append(formatMenuLine(name, count)).append(System.lineSeparator());
+        for (var entry : menus.entrySet()) {
+            sb.append(formatMenuLine(entry)).append(System.lineSeparator());
         }
         println(sb.toString());
     }
 
-    private String formatMenuLine(String name, int count) {
-        return String.format(ViewMessage.ORDER_ITEM_FORMAT.toString(), name, count);
+    private String formatMenuLine(Map.Entry<Menu, Integer> entry) {
+        return String.format(ViewMessage.ORDER_ITEM_FORMAT.toString(), entry.getKey().getName(), entry.getValue());
     }
 
     private String formatPriceLine(int price) {
