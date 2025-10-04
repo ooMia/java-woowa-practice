@@ -19,8 +19,7 @@ class BenefitServiceTest {
         Order order = new Order(new String[]{"타파스-1", "제로콜라-1"});
         VisitDate visitDate = new VisitDate(26);
 
-        BenefitService service = new BenefitService(order, visitDate);
-        BenefitSummary summary = service.toSummary();
+        BenefitSummary summary = BenefitService.toSummary(order, visitDate);
 
         assertThat(summary.finalCost()).isEqualTo(8500);
         assertThat(summary.totalBenefit()).isEqualTo(0);
@@ -34,8 +33,7 @@ class BenefitServiceTest {
         Order order = new Order(new String[]{"티본스테이크-1", "바비큐립-1", "초코케이크-2", "제로콜라-1"});
         VisitDate visitDate = new VisitDate(3);
 
-        BenefitService service = new BenefitService(order, visitDate);
-        BenefitSummary summary = service.toSummary();
+        BenefitSummary summary = BenefitService.toSummary(order, visitDate);
 
         assertThat(summary.finalCost()).isEqualTo(135_754);
         assertThat(summary.totalBenefit()).isEqualTo(31_246);

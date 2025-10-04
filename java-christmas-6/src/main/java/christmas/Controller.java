@@ -33,7 +33,7 @@ public class Controller {
     }
 
     public void printDiscountSummary(Order order, VisitDate visitDate) {
-        var orderInfo = BenefitService.of(order, visitDate).toSummary();
+        var orderInfo = BenefitService.toSummary(order, visitDate);
         out.printFreebies(orderInfo.freebies()); // 증정 메뉴
         out.printBenefits(orderInfo.benefits()); // 혜택 내역
         out.printTotalBenefitAmount(orderInfo.totalBenefit()); // 총혜택 금액
