@@ -39,7 +39,7 @@ public class OutputView {
             printNone();
             return;
         }
-        
+
         printMenus(menus);
     }
 
@@ -61,7 +61,7 @@ public class OutputView {
 
     public void printTotalBenefitAmount(int amount) {
         println(ViewMessage.TOTAL_BENEFIT_AMOUNT_HEADER.toString());
-        println(formatPriceLine(amount));
+        println(formatPriceLine(-amount));
     }
 
     public void printFinalCost(int cost) {
@@ -80,7 +80,7 @@ public class OutputView {
     }
 
     private String formatBenefitLine(String name, int amount) {
-        return String.format(ViewMessage.BENEFIT_FORMAT.toString(), name, formatPriceLine(amount));
+        return String.format(ViewMessage.BENEFIT_FORMAT.toString(), name, formatPriceLine(-amount));
     }
 
     // ------------------------------
