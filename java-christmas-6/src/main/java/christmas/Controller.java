@@ -45,7 +45,7 @@ public class Controller {
         while (true) {
             try {
                 return func.get();
-            } catch (Exception e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
