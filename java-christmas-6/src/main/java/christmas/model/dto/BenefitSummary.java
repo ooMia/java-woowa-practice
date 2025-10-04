@@ -8,7 +8,7 @@ import christmas.model.Menu;
 public record BenefitSummary(
         Map<Menu, Integer> freebies,
         Iterable<Benefit> benefits,
-        int totalBenefitAmount,
+        int totalBenefit,
         int finalCost,
         Badge badge) {
 }

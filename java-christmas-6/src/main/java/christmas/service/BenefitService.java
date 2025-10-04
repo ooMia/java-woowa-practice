@@ -39,7 +39,8 @@ public class BenefitService {
         if (summary != null) return summary;
 
         Map<Menu, Integer> freebies = calcFreebies();
-        int freebiesValue = calcFreebiesValue(freebies);
+        int freebiesValue = freebies.entrySet().stream()
+                .mapToInt(e -> e.getKey().getPrice() * e.getValue()).sum();
 
         addBenefits(freebiesValue);
         int totalBenefit = benefits.stream().mapToInt(Benefit::amount).sum();
@@ -55,14 +56,6 @@ public class BenefitService {
             return Map.of(Menu.샴페인, 1);
         }
         return Map.of();
-    }
-
-    private int calcFreebiesValue(Map<Menu, Integer> freebies) {
-        if (freebies.isEmpty()) return 0;
-        int value = 0;
-        for (var entry : freebies.entrySet())
-            value += entry.getKey().getPrice() * entry.getValue();
-        return value;
     }
 
     // ------------------------------
@@ -85,7 +78,7 @@ public class BenefitService {
 
     private Benefit calcChristmasDiscount(VisitDate date) {
         if (!date.isChristmasEventDay()) return null;
-        
+
         int baseDiscount = Constant.CHRISTMAS_DDAY_BASE_DISCOUNT;
         int startDay = Constant.CHRISTMAS_DDAY_START;
         int dailyIncrease = Constant.CHRISTMAS_DDAY_DAILY_INCREASE;
