@@ -1,23 +1,25 @@
 package christmas.view;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-
 import camp.nextstep.edu.missionutils.Console;
+import christmas.model.ErrorCode;
 import christmas.model.Order;
 import christmas.model.dto.VisitDate;
 
 public class InputView {
-    private final BufferedWriter bw;
+    private final java.io.BufferedWriter bw;
 
-    public InputView(BufferedWriter bw) {
+    public InputView(java.io.BufferedWriter bw) {
         this.bw = bw;
     }
 
     public VisitDate readDate() {
-        println(ViewMessage.ASK_VISIT_DATE);
-        String input = Console.readLine();
-        return new VisitDate(Integer.parseInt(input));
+        try {
+            println(ViewMessage.ASK_VISIT_DATE);
+            String input = Console.readLine();
+            return new VisitDate(Integer.parseInt(input));
+        } catch (NumberFormatException e) {
+            throw ErrorCode.DATE_NOT_NUMBER.exception();
+        }
     }
 
     public Order readOrder() {
@@ -32,7 +34,7 @@ public class InputView {
             bw.write(message.toString());
             bw.newLine();
             bw.flush();
-        } catch (IOException e) {
+        } catch (java.io.IOException e) {
             throw new RuntimeException(e);
         }
     }
