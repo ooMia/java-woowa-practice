@@ -25,11 +25,8 @@ public class Constant {
     public static final int CHRISTMAS_DDAY_BASE_DISCOUNT = 1_000;
     public static final int CHRISTMAS_DDAY_DAILY_INCREASE = 100;
 
-    // 요일 정의
-    public static final Set<DayOfWeek> WEEKDAYS = Set.of(
-            DayOfWeek.SUNDAY, DayOfWeek.MONDAY, DayOfWeek.TUESDAY,
-            DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY);
-    public static final Set<DayOfWeek> WEEKENDS = Set.of(DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
+    // 주말 정의
+    public static final Set<DayOfWeek> WEEKEND_DAYS = Set.of(DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
 
     // 요일별 할인
     public static final int WEEKDAY_DESSERT_DISCOUNT = 2_023;
