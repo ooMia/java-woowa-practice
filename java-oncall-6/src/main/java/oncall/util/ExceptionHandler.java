@@ -10,4 +10,14 @@ public class ExceptionHandler {
         var message = String.format("%s %s", oncall.Constant.ERROR_PREFIX, _message);
         return new IllegalStateException(message.trim());
     }
+
+    public static <T> T tryUntilValid(java.util.function.Supplier<T> func) {
+        while (true) {
+            try {
+                return func.get();
+            } catch (IllegalArgumentException e) {
+                Console.println(e.getMessage());
+            }
+        }
+    }
 }
