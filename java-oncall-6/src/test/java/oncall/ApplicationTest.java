@@ -31,6 +31,65 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 예외_테스트_2() {
+        assertSimpleTest(() -> {
+            run("4,토",
+                    "허브,쥬니,말랑,헤나,xxx", // '각 1번씩 배정' 불충족
+                    "허브,쥬니,말랑,헤나,라온"
+            );
+            assertThat(output()).contains(
+                    "[ERROR]"
+            );
+        });
+
+        assertSimpleTest(() -> {
+            run("4,토",
+                    "허브,쥬니,말랑,헤나,라온,라온", // 중복 
+                    "허브,쥬니,말랑,헤나,라온"
+            );
+            assertThat(output()).contains(
+                    "[ERROR]"
+            );
+        });
+    }
+
+    @Test
+    void 예외_테스트_5() {
+        assertSimpleTest(() -> { // 직원 목록 길이 부족
+            run("4,토",
+                    "1,2,3,4",
+                    "1,2,3,4"
+            );
+            assertThat(output()).contains(
+                    "[ERROR]"
+            );
+        });
+
+        assertSimpleTest(() -> { // 직원 목록 길이 초과
+            run("4,토",
+                    "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36",
+                    "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36"
+            );
+            assertThat(output()).contains(
+                    "[ERROR]"
+            );
+        });
+    }
+
+    @Test
+    void 예외_테스트_6() {
+        assertSimpleTest(() -> { // 닉네임 길이 초과
+            run("4,토",
+                    "1,2,3,4,하나둘셋넷a",
+                    "1,2,3,4,하나둘셋넷a"
+            );
+            assertThat(output()).contains(
+                    "[ERROR]"
+            );
+        });
+    }
+
+    @Test
     void 기능_테스트() {
         assertSimpleTest(() -> {
             run(
