@@ -47,6 +47,16 @@ public class Constant {
                         "일", DayOfWeek.SUNDAY
         );
 
+        public static final Map<DayOfWeek, String> 요일_문자열_맵 = Map.of(
+                        DayOfWeek.MONDAY, "월",
+                        DayOfWeek.TUESDAY, "화",
+                        DayOfWeek.WEDNESDAY, "수",
+                        DayOfWeek.THURSDAY, "목",
+                        DayOfWeek.FRIDAY, "금",
+                        DayOfWeek.SATURDAY, "토",
+                        DayOfWeek.SUNDAY, "일"
+        );
+
         // #L97 휴일은 토요일, 일요일, 법정공휴일
         public static final Set<DayOfWeek> 휴일_요일 = Set.of(
                         DayOfWeek.SATURDAY, DayOfWeek.SUNDAY
