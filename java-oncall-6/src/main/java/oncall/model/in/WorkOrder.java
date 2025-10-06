@@ -7,8 +7,8 @@ import oncall.Constant;
 import oncall.ErrorCode;
 import oncall.model.Employee;
 
-record WorkOrder(List<Employee> orders) {
-    WorkOrder(List<Employee> orders) {
+public record WorkOrder(List<Employee> orders) {
+    public WorkOrder(List<Employee> orders) {
         this.orders = orders;
         var length = orders.size();
 
@@ -16,7 +16,8 @@ record WorkOrder(List<Employee> orders) {
             throw ErrorCode.유효하지_않은_입력.exception();
     }
 
-    public static WorkOrder of(String line) {
+    // helper method for testing
+    static WorkOrder of(String line) {
         var args = line.split("\\s*,\\s*");
         var list = Stream.of(args).map(Employee::new).toList();
         return new WorkOrder(list);
