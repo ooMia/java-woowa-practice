@@ -8,6 +8,8 @@ import oncall.model.Employee;
 record WorkOrder(List<Employee> orders) {
     WorkOrder(List<Employee> orders) {
         this.orders = orders;
+
+        // TODO: validation
     }
 
     public static WorkOrder of(String line) {
