@@ -1,5 +1,9 @@
 package oncall;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import oncall.model.Employee;
 import oncall.model.in.WorkDate;
 import oncall.model.in.WorkOrder;
 import oncall.model.output.Result;
@@ -23,10 +27,19 @@ public class Controller {
 
     public WorkOrder[] 순번_입력() {
         return ExceptionHandler.tryUntilValid(() -> {
-            return new WorkOrder[]{
-                    InputView.평일_순번_입력(),
-                    InputView.휴일_순번_입력()
-            };
+            WorkOrder v1 = iv.평일_순번_입력();
+            Set<Employee> s1 = new HashSet<>(v1.orders());
+            if (v1.orders().size() != s1.size())
+                throw ErrorCode.유효하지_않은_입력.exception();
+
+            WorkOrder v2 = iv.휴일_순번_입력();
+            Set<Employee> s2 = new HashSet<>(v2.orders());
+            if (v2.orders().size() != s2.size())
+                throw ErrorCode.유효하지_않은_입력.exception();
+
+            if (!s1.containsAll(s2))
+                throw ErrorCode.유효하지_않은_입력.exception();
+            return new WorkOrder[]{v1, v2};
         });
     }
 
