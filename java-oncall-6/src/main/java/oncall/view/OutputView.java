@@ -8,8 +8,8 @@ public class OutputView {
 
     // 3. 출력 #L124
     public static void printResult(Result r) {
-        Console.println(toString(r));
-        Console.print('0'); // TODO 나중에 왜 이렇게 해야만 해결되는지 알아보기
+        Console.print("");
+        Console.print(toString(r));
     }
 
     static String toString(Result r) {

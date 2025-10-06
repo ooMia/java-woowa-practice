@@ -11,7 +11,7 @@ import oncall.util.Console;
 public class InputView {
     // 1. WorkDate 비상 근무를 배정할 월과 시작 요일 입력 #L106
     public static WorkDate 일자_입력() {
-        Console.println(Message.비상_근무_헤더.toString());
+        Console.print(Message.비상_근무_헤더.toString());
         var line = Console.readLine();
         var args = line.split("\\s*,\\s*");
         var month = Integer.parseInt(args[0]);

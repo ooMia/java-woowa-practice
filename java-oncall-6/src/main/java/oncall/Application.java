@@ -15,8 +15,9 @@ public class Application {
 
             // 4. 출력 #L124
             Controller.결과_출력(result);
-        } catch (Exception e) {
-            // TODO: handle exception
+        } catch (final Exception e) {
+            System.err.println();
+            e.printStackTrace();
         }
     }
 }
