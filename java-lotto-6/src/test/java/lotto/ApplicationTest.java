@@ -1,17 +1,19 @@
 package lotto;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import camp.nextstep.edu.missionutils.test.NsTest;
+
 class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
 
+    @SuppressWarnings("unchecked")
     @Test
     void 기능_테스트() {
         assertRandomUniqueNumbersInRangeTest(
@@ -46,10 +48,33 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @SuppressWarnings("unchecked")
     @Test
-    void 예외_테스트() {
+    void 예외_테스트_중복된_보너스_번호() {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    runException("1000", "1,2,3,4,5,6", "6");
+                    assertThat(output()).contains(
+                            "1개를 구매했습니다.",
+                            "[8, 21, 23, 41, 42, 43]", ERROR_MESSAGE
+                    );
+                },
+                List.of(8, 21, 23, 41, 42, 43)
+        );
+    }
+
+    @Test
+    void 예외_테스트_정수가_아닌_입력() {
         assertSimpleTest(() -> {
             runException("1000j");
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @Test
+    void 예외_테스트_가격의_정수배가_아닌_입력() {
+        assertSimpleTest(() -> {
+            runException("999");
             assertThat(output()).contains(ERROR_MESSAGE);
         });
     }
