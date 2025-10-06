@@ -14,4 +14,6 @@ public class WorkDateTest {
         assertEquals(5, o.month());
         assertEquals(DayOfWeek.MONDAY, o.weekDay());
     }
+
+    // TODO 입력이 실패해야 하는 상황이 model.in에 대한 단위 테스트로 모두 작성되었는가?
 }

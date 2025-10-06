@@ -3,8 +3,11 @@ package oncall.model.in;
 import java.time.DayOfWeek;
 import java.util.Map;
 
+import oncall.Constant;
+import oncall.ErrorCode;
+
 record WorkDate(int month, DayOfWeek weekDay) {
-    private static Map<String, DayOfWeek> map = Map.of(
+    private static Map<String, DayOfWeek> weekDayMap = Map.of(
             "월", DayOfWeek.MONDAY,
             "화", DayOfWeek.TUESDAY,
             "수", DayOfWeek.WEDNESDAY,
@@ -18,11 +21,20 @@ record WorkDate(int month, DayOfWeek weekDay) {
         this.month = month;
         this.weekDay = weekDay;
 
-        // TODO: validation
+        if (month < Constant.MIN_MONTH || month > Constant.MAX_MONTH)
+            throw ErrorCode.유효하지_않은_입력.exception();
+        if (weekDay == null)
+            throw ErrorCode.유효하지_않은_입력.exception();
     }
 
     public static WorkDate of(String line) {
-        var args = line.split("\\s*,\\s*");
-        return new WorkDate(Integer.parseInt(args[0]), map.get(args[1]));
+        try {
+            var args = line.split("\\s*,\\s*");
+            var month = Integer.parseInt(args[0]);
+            var weekDay = weekDayMap.get(args[1]);
+            return new WorkDate(month, weekDay);
+        } catch (Exception e) {
+            throw ErrorCode.유효하지_않은_입력.exception();
+        }
     }
 }

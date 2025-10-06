@@ -14,10 +14,14 @@ public class Constant {
     // notice-1#L2 닉네임은 최대 5자로 유지
     public static final int 최대_닉네임_길이 = 5;
 
+    // WorkOrder 제약
     // notice-1#L3 최소 5명의 근무자가 유지될 수 있도록 채용
-    public static final int 최소_근무자_수 = 5;
     // notice-1#L4 최대 35명의 근무자를 넘지 않도록 관리
-    public static final int 최대_근무자_수 = 35;
+    public static final int MIN_EMPLOYEE = 5, MAX_EMPLOYEE = 35;
+
+    // WorkDate, Date 제약
+    public static final int MIN_MONTH = 1, MAX_MONTH = 12;
+    public static final int MIN_DAY = 1, MAX_DAY = 31;
 
     // notice-2#L2 법정 공휴일
     public static final Set<Date> 법정_공휴일 = Set.of(
@@ -26,6 +30,7 @@ public class Constant {
             new Date(8, 15), new Date(10, 3),
             new Date(10, 9), new Date(12, 25)
     );
+
 
     // #L95 2월은 28일까지만
     public static final List<Integer> 월별_말일 = List.of(null,

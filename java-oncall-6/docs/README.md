@@ -61,10 +61,10 @@
 # 기본 준비사항
 
 1. [x] model.in 타입 결정
-2. [ ] README.md 정리
-   - [ ] Constant 작성; 주석 `// 줄_번호`
-   - [ ] model.in `static record::of(String)` 제약조건 작성
-   - [ ] 예제
+2. [x] README.md 정리
+   - [x] Constant 작성; 주석 `// 줄_번호`
+   - [x] model.in `static record::of(String)` 제약조건 작성
+   - [x] 예제
 3. [ ] 예제 -> 코드화
    - [ ] ApplicationTest 추가 (naive form)
    - [ ] Application::main 흐름

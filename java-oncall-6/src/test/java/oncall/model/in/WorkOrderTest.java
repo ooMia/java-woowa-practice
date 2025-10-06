@@ -13,4 +13,6 @@ public class WorkOrderTest {
         assertEquals(new Employee("준팍"), o.orders().get(0));
         assertEquals(new Employee("도리"), o.orders().get(o.orders().size() - 1));
     }
+
+    // TODO 입력이 실패해야 하는 상황이 model.in에 대한 단위 테스트로 모두 작성되었는가?
 }
