@@ -6,14 +6,18 @@ import oncall.model.output.Result;
 import oncall.util.Console;
 
 public class OutputView {
+    private final Console console;
 
-    // 3. 출력 #L124
-    public static void printResult(Result r) {
-        Console.print("");
-        Console.print(toString(r));
+    public OutputView(Console c) {
+        this.console = c;
     }
 
-    static String toString(Result r) {
+    // 3. 출력 #L124
+    public void printResult(Result r) {
+        console.print(toString(r));
+    }
+
+    String toString(Result r) {
         var sb = new StringBuilder();
         int day = 1;
         final var startDayOfWeek = r.start();

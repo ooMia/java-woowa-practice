@@ -16,7 +16,7 @@ public class ExceptionHandler {
             try {
                 return func.get();
             } catch (IllegalArgumentException e) {
-                Console.println(e.getMessage());
+                System.out.println(e.getMessage());
             }
         }
     }

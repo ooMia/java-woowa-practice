@@ -2,6 +2,8 @@ package oncall.view;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
 import java.time.DayOfWeek;
 import java.util.List;
 
@@ -9,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import oncall.model.Employee;
 import oncall.model.output.Result;
+import oncall.util.Console;
 
 public class OutputViewTest {
     @Test
@@ -21,6 +24,10 @@ public class OutputViewTest {
                 4월 3일 월 허브
                 4월 4일 화 쥬니
                 4월 5일 수 말랑""";
-        assertEquals(expect, OutputView.toString(result));
+
+        var bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        var console = new Console(bw);
+        var ov = new OutputView(console);
+        assertEquals(expect, ov.toString(result));
     }
 }
