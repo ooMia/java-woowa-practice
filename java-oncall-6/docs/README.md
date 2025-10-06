@@ -65,18 +65,18 @@
    - [x] Constant 작성; 주석 `// 줄_번호`
    - [x] model.in `static record::of(String)` 제약조건 작성
    - [x] 예제
-3. [ ] 예제 -> 코드화
-   - [ ] ApplicationTest 추가 (naive form)
-   - [ ] Application::main 흐름
-   - [ ] view.Message 정리
-   - [ ] model.out 타입 결정
+3. [x] 예제 -> 코드화
+   - [x] ApplicationTest 추가 (naive form)
+   - [x] Application::main 흐름
+   - [x] view.Message 정리
+   - [x] model.out 타입 결정
 
 # 1차 체크리스트 (설계)
 
-- [ ] Application::main에서 전체 흐름이 명확히 표현되어 있는가?
+- [x] Application::main에서 전체 흐름이 명확히 표현되어 있는가?
 - [ ] controller에 `model.out foo(model.in)` 래퍼 함수를 호출하고 있는가?
-- [ ] 연속적인 데이터가 model에 enum 자료으로 관리되고 있는가?
-- [ ] 출력 관련 메세지가 view.Message에 모두 명시되었는가?
+- [x] 연속적인 데이터가 model에 enum 자료으로 관리되고 있는가?
+- [x] 출력 관련 메세지가 view.Message에 모두 명시되었는가?
 
 # 2차 체크리스트 (메인 스트림)
 

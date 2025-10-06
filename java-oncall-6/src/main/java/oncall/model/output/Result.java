@@ -17,7 +17,7 @@ public record Result(int month, DayOfWeek start, List<Employee> orders) {
             throw ErrorCode.인자_오류.assertion();
         if (start == null)
             throw ErrorCode.인자_오류.assertion();
-        if (orders.size() < Constant.월별_말일.get(month))
-            throw ErrorCode.인자_오류.assertion();
+        // if (orders.size() < Constant.월별_말일.get(month))
+        //     throw ErrorCode.인자_오류.assertion();
     }
 }

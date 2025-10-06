@@ -20,6 +20,10 @@ public class Console {
         }
     }
 
+    public static void print(Object o) {
+        print(o.toString());
+    }
+
     public static void println(String s) {
         try {
             bw.write(s);
@@ -28,5 +32,9 @@ public class Console {
         } catch (IOException e) {
             throw new RuntimeException();
         }
+    }
+
+    public static void println(Object o) {
+        println(o.toString());
     }
 }
