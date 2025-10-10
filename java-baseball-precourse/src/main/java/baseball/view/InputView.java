@@ -4,17 +4,11 @@ import baseball.Constant;
 import baseball.ErrorCode;
 import baseball.model.in.ExitCode;
 import baseball.model.in.Guess;
-import baseball.model.in.SampleInput;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
     public String guessInstruction() {
         return Message.IN_GUESS_INSTRUCTION.text();
-    }
-
-    public SampleInput readBoo() {
-        var number = Integer.parseInt(Console.readLine());
-        return new SampleInput(number);
     }
 
     public String readLine() {

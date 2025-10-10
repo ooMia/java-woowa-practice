@@ -4,17 +4,10 @@ import java.util.List;
 
 import baseball.Constant;
 import baseball.model.in.Guess;
-import baseball.model.in.SampleInput;
 import baseball.model.out.GuessResult;
-import baseball.model.out.SampleOutput;
 
 public class MainService {
     private final AnswerStorageService service = new AnswerStorageService();
-
-    public SampleOutput process(SampleInput input) {
-        var message = service.doWork("ok");
-        return new SampleOutput(input.a(), message);
-    }
 
     public boolean isAnswer(GuessResult result) {
         return result.nStrikes() == Constant.자리_수_제한;
@@ -26,17 +19,19 @@ public class MainService {
     }
 
     public GuessResult judge(int id, Guess guess) {
-        List<Integer> obj = service.get(id);
-        var ns = guess.ns();
+        List<Integer> answer = service.get(id);
+        return judge(answer, guess.ns());
+    }
 
+    private GuessResult judge(List<Integer> answer, int[] guess) {
         int nBalls = 0, nStrikes = 0;
-        for (int i = 0; i < ns.length; ++i) {
-            var n = ns[i];
-            if (obj.get(i) == n) {
+        for (int i = 0; i < guess.length; ++i) {
+            var n = guess[i];
+            if (answer.get(i) == n) {
                 ++nStrikes;
                 continue;
             }
-            if (obj.contains(n))
+            if (answer.contains(n))
                 ++nBalls;
         }
         return new GuessResult(nBalls, nStrikes);

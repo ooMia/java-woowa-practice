@@ -19,10 +19,6 @@ enum Message {
 
     IN_NEW_GAME_QUESTION("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."),
     IN_NEW_GAME_QUESTION_FORMAT("게임을 새로 시작하려면 %s, 종료하려면 %s를 입력하세요."),
-
-    // TODO 샘플 코드: 나중에 지우기
-    OUT_QUESTION_FORMAT("%s의 답은?"),
-    IN_INSTRUCTION("입력해주세요: ");
     ;
 
     private final String text;

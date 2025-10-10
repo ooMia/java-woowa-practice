@@ -11,10 +11,6 @@ import camp.nextstep.edu.missionutils.Randoms;
 class AnswerStorageService {
     private final Map<Integer, List<Integer>> map = new HashMap<>();
 
-    String doWork(String s) {
-        return s.toUpperCase();
-    }
-
     List<Integer> get(int id) {
         return map.get(id);
     }

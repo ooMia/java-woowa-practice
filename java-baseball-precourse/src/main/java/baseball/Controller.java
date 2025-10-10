@@ -1,11 +1,8 @@
 package baseball;
 
 import baseball.model.in.Guess;
-import baseball.model.in.SampleInput;
 import baseball.model.out.GuessResult;
-import baseball.model.out.SampleOutput;
 import baseball.service.MainService;
-import baseball.util.ExceptionHandler;
 import baseball.view.InputView;
 import baseball.view.OutputView;
 
@@ -13,21 +10,6 @@ public class Controller {
     private final MainService service = new MainService();
     private final InputView in = new InputView();
     private final OutputView out = new OutputView();
-
-    public SampleInput inputBoo() {
-        return ExceptionHandler.tryUntilValid(() -> {
-            in.guessInstruction();
-            return in.readBoo();
-        });
-    }
-
-    public SampleOutput process(SampleInput input) {
-        return service.process(input);
-    }
-
-    public void outputBoo(SampleOutput output) {
-        out.print(output);
-    }
 
     public void printGreeting() {
         System.out.println(out.greeting());
