@@ -37,16 +37,14 @@
   - model.in -> (mainService => subServices) -> model.out
 - model 엔티티는 도메인 로직을 처리하기 위한 핵심 객체이다.
   - 가능하다면 외부에 노출하지 않는 것이 가장 좋다.
-  - 각 엔티티 별로 subService를 분리하면 좋다.
-  - 엔티티 설계 시, 유사성과 차이점을 고려하면 좋다.
+  - 일반적으로 엔티티 객체는 여러 개가 활용되어야 한다.
+    - 하나 밖에 안 보이면, 더 작은 단위로 나누거나, 통쨰로 서비스 로직에 통합시킨다.
+    - 여유가 되면 각 엔티티마다 subService를 할당하여 처리하자.
+  - 엔티티 설계 시, 유사성과 차이점을 고려하자.
     (e.g. 유사성을 가진 객체들 간에 차이가 있는 상황)
     - 단순 나열이라면 컬렉션 또는 enum으로 관리
     - 또는 서비스 수준에서 분기문으로 처리하거나
     - 너무 복잡하면 공통 인터페이스 추상화 후, 개별 구현체 컬렉션으로 관리 (전략/정책 패턴)
-- util.ExceptionHandler
-  - Constant.ERROR_PREFIX 활용
-  - ExceptionHandler::exception(String message)
-  - ExceptionHandler::tryUntilValid
 
 ## 프로젝트 설정
 
