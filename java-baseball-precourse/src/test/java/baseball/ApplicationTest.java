@@ -12,6 +12,17 @@ import camp.nextstep.edu.missionutils.test.NsTest;
 class ApplicationTest extends NsTest {
 
     @Test
+    void 실행_결과_예제() {
+        assertRandomNumberInRangeTest(
+                () -> {
+                    run("123", "145", "671", "216", "713", "2");
+                    assertThat(output()).contains("1볼 1스트라이크", "1볼", "2볼", "1스트라이크", "3스트라이크", "게임 종료");
+                },
+                7, 1, 3
+        );
+    }
+
+    @Test
     void 게임종료_후_재시작() {
         assertRandomNumberInRangeTest(
                 () -> {
@@ -23,8 +34,27 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트() {
+    void 예외_테스트_입력_길이() {
         assertSimpleTest(() -> assertThatThrownBy(() -> runException("1234"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() -> assertThatThrownBy(() -> runException("12"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_비문자열() {
+        assertSimpleTest(() -> assertThatThrownBy(() -> runException("abc"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() -> assertThatThrownBy(() -> runException("12 "))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() -> assertThatThrownBy(() -> runException("123 "))
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }

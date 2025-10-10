@@ -36,7 +36,7 @@ public class MainService {
                 ++nStrikes;
                 continue;
             }
-            if (obj.subList(i + 1, obj.size()).contains(n))
+            if (obj.contains(n))
                 ++nBalls;
         }
         return new GuessResult(nBalls, nStrikes);
