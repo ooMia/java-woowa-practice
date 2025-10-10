@@ -5,7 +5,7 @@
 
 # 1차 체크리스트 (공통 정의)
 
-- [ ] Constant 초안 작성 (README 줄 번호 주석)
+- [x] Constant 초안 작성 (README 줄 번호 주석)
 - [ ] ErrorCode enum
 - [ ] view.Message
 
