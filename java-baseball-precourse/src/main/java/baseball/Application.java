@@ -8,7 +8,7 @@ public class Application {
         api.printGreeting();
 
         var id = Constant.사용자_고유_번호;
-        while (run(id) != Constant.기호_게임_재시작);
+        while (run(id) != Constant.기호_게임_종료);
     }
 
     private static int run(int id) {
