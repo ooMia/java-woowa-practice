@@ -52,8 +52,9 @@ public class Controller {
     }
 
     public boolean isCorrect(GuessResult guessResult) {
-        System.out.println(out.celebrate());
-        return service.isAnswer(guessResult);
+        var res = service.isAnswer(guessResult);
+        if (res) System.out.println(out.celebrate());
+        return res;
     }
 
     public void reset(int id) {
