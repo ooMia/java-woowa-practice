@@ -3,9 +3,9 @@ package baseball.model.in;
 import baseball.Constant;
 import baseball.ErrorCode;
 
-public record ExitCode(int a) {
+public record ExitCode(int code) {
     public ExitCode {
-        if (!isCaseDefined(a))
+        if (!isCaseDefined(code))
             throw ErrorCode.INPUT_CASE_CANNOT_HANDLE.exception();
     }
 

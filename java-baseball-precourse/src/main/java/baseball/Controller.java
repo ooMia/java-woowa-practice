@@ -48,10 +48,11 @@ public class Controller {
 
     public int inputExitCode() {
         System.out.println(in.exitCodeInstruction());
-        return in.inputExitCode();
+        return in.inputExitCode().code();
     }
 
-    public boolean isCorrect(Object guessResult) {
+    public boolean isCorrect(GuessResult guessResult) {
+        System.out.println(out.celebrate());
         return service.isAnswer(guessResult);
     }
 

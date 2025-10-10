@@ -1,5 +1,7 @@
 package baseball.view;
 
+import baseball.Constant;
+import baseball.model.in.ExitCode;
 import baseball.model.in.Guess;
 import baseball.model.in.SampleInput;
 import camp.nextstep.edu.missionutils.Console;
@@ -19,17 +21,18 @@ public class InputView {
     }
 
     public Guess inputGuess() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'inputGuess'");
+        var line = Console.readLine();
+        int[] ns = new int[Constant.자리_수_제한];
+        for (int i = 0; i < ns.length; ++i) ns[i] = line.charAt(i);
+        return new Guess(ns);
     }
 
-    public char[] exitCodeInstruction() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'exitCodeInstruction'");
+    public String exitCodeInstruction() {
+        return Message.IN_NEW_GAME_QUESTION.format(Constant.기호_게임_재시작, Constant.기호_게임_종료);
     }
 
-    public int inputExitCode() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'inputExitCode'");
+    public ExitCode inputExitCode() {
+        var number = Integer.parseInt(Console.readLine());
+        return new ExitCode(number);
     }
 }

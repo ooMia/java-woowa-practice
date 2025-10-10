@@ -18,7 +18,7 @@ public class MainService {
         throw new UnsupportedOperationException("Unimplemented method 'judge'");
     }
 
-    public boolean isAnswer(Object guessResult) {
+    public boolean isAnswer(GuessResult guessResult) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'isAnswer'");
     }
