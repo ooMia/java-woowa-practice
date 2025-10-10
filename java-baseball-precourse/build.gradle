@@ -1,16 +1,24 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'
+plugins {
+    id 'java'
+}
 
-version = '1.0.0'
-sourceCompatibility = 1.8
+group = 'camp.nextstep.edu'
+version = '1.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
 
 repositories {
-    maven { url 'https://jitpack.io' }
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    implementation('com.github.woowacourse-projects:mission-utils:1.0.0')
+    implementation 'com.github.woowacourse-projects:mission-utils:1.2.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 test {
