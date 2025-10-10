@@ -9,7 +9,7 @@ import baseball.model.out.GuessResult;
 import baseball.model.out.SampleOutput;
 
 public class MainService {
-    private final SampleSubService service = new SampleSubService();
+    private final AnswerStorageService service = new AnswerStorageService();
 
     public SampleOutput process(SampleInput input) {
         var message = service.doWork("ok");

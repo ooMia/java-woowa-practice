@@ -8,7 +8,7 @@ import java.util.Map;
 import baseball.Constant;
 import camp.nextstep.edu.missionutils.Randoms;
 
-class SampleSubService {
+class AnswerStorageService {
     private final Map<Integer, List<Integer>> map = new HashMap<>();
 
     String doWork(String s) {
