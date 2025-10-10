@@ -18,7 +18,7 @@ public class Application {
             // IN_GUESS_INSTRUCTION("숫자를 입력해주세요 : "),
             var guess = api.inputGuess();
             // 반복
-            var guessResult = api.judge(guess);
+            var guessResult = api.judge(id, guess);
             api.printGuessResult(guessResult);
 
             // OUT_BALL("볼"),

@@ -38,8 +38,8 @@ public class Controller {
         return in.inputGuess();
     }
 
-    public GuessResult judge(Guess guess) {
-        return service.judge(guess);
+    public GuessResult judge(int id, Guess guess) {
+        return service.judge(id, guess);
     }
 
     public void printGuessResult(GuessResult result) {

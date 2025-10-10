@@ -1,5 +1,8 @@
 package baseball.service;
 
+import java.util.List;
+
+import baseball.Constant;
 import baseball.model.in.Guess;
 import baseball.model.in.SampleInput;
 import baseball.model.out.GuessResult;
@@ -13,18 +16,29 @@ public class MainService {
         return new SampleOutput(input.a(), message);
     }
 
-    public GuessResult judge(Guess guess) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'judge'");
+    public boolean isAnswer(GuessResult result) {
+        return result.nStrikes() == Constant.자리_수_제한;
     }
 
-    public boolean isAnswer(GuessResult guessResult) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isAnswer'");
-    }
-
+    // id 매핑된 정답 객체가 없다면 생성하고, 있다면 다시 생성
     public void resetAnswer(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'resetAnswer'");
+        service.recreate(id);
+    }
+
+    public GuessResult judge(int id, Guess guess) {
+        List<Integer> obj = service.get(id);
+        var ns = guess.ns();
+
+        int nBalls = 0, nStrikes = 0;
+        for (int i = 0; i < ns.length; ++i) {
+            var n = ns[i];
+            if (obj.get(i) == n) {
+                ++nStrikes;
+                continue;
+            }
+            if (obj.subList(i + 1, obj.size()).contains(n))
+                ++nBalls;
+        }
+        return new GuessResult(nBalls, nStrikes);
     }
 }
