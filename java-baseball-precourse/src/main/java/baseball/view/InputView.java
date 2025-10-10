@@ -23,7 +23,8 @@ public class InputView {
     public Guess inputGuess() {
         var line = Console.readLine();
         int[] ns = new int[Constant.자리_수_제한];
-        for (int i = 0; i < ns.length; ++i) ns[i] = line.charAt(i);
+        for (int i = 0; i < ns.length; ++i)
+            ns[i] = Integer.parseInt(String.valueOf(line.charAt(i)));
         return new Guess(ns);
     }
 
