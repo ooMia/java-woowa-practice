@@ -26,4 +26,39 @@ public class Controller {
     public void outputBoo(SampleOutput output) {
         outputView.print(output);
     }
+
+    public void printGreeting() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'printGreeting'");
+    }
+
+    public Object inputGuess() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'inputGuess'");
+    }
+
+    public Object judge(Object guess) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'judge'");
+    }
+
+    public void printGuessResult(Object guessResult) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'printGuessResult'");
+    }
+
+    public int inputExitCode() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'inputExitCode'");
+    }
+
+    public boolean isCorrect(Object guessResult) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isCorrect'");
+    }
+
+    public void reset(int id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'reset'");
+    }
 }

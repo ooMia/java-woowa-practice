@@ -11,6 +11,9 @@ public final class Constant {
     private Constant() {
     }
 
+    // Controller stateless 설계 방침에 따라 사용자 구분 인자 도입 // TODO NOTE에 반영
+    public static final int 사용자_고유_번호 = 1_234;
+
     // 1부터 9까지 서로 다른 수로 이루어진 3자리의 수를 맞추는 게임 // #L39
     public static final int 자리_수_제한 = 3;
     public static final int 각_자리_최솟값 = 1, 각_자리_최댓값 = 9;
