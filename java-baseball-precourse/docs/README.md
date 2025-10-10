@@ -7,7 +7,7 @@
 
 - [x] Constant 초안 작성 (README 줄 번호 주석)
 - [x] ErrorCode enum
-- [ ] view.Message
+- [x] view.Message
 
 # 2차 체크리스트 (설계)
 
