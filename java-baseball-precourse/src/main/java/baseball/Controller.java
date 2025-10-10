@@ -1,6 +1,8 @@
 package baseball;
 
+import baseball.model.in.Guess;
 import baseball.model.in.SampleInput;
+import baseball.model.out.GuessResult;
 import baseball.model.out.SampleOutput;
 import baseball.service.MainService;
 import baseball.util.ExceptionHandler;
@@ -8,57 +10,52 @@ import baseball.view.InputView;
 import baseball.view.OutputView;
 
 public class Controller {
-    private final MainService mainService = new MainService();
-    private final InputView inputView = new InputView();
-    private final OutputView outputView = new OutputView();
+    private final MainService service = new MainService();
+    private final InputView in = new InputView();
+    private final OutputView out = new OutputView();
 
     public SampleInput inputBoo() {
         return ExceptionHandler.tryUntilValid(() -> {
-            inputView.inputBooHeader();
-            return inputView.readBoo();
+            in.guessInstruction();
+            return in.readBoo();
         });
     }
 
     public SampleOutput process(SampleInput input) {
-        return mainService.process(input);
+        return service.process(input);
     }
 
     public void outputBoo(SampleOutput output) {
-        outputView.print(output);
+        out.print(output);
     }
 
     public void printGreeting() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'printGreeting'");
+        System.out.println(out.greeting());
     }
 
-    public Object inputGuess() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'inputGuess'");
+    public Guess inputGuess() {
+        System.out.print(in.guessInstruction());
+        return in.inputGuess();
     }
 
-    public Object judge(Object guess) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'judge'");
+    public GuessResult judge(Guess guess) {
+        return service.judge(guess);
     }
 
-    public void printGuessResult(Object guessResult) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'printGuessResult'");
+    public void printGuessResult(GuessResult result) {
+        System.out.println(out.getResult(result));
     }
 
     public int inputExitCode() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'inputExitCode'");
+        System.out.println(in.exitCodeInstruction());
+        return in.inputExitCode();
     }
 
     public boolean isCorrect(Object guessResult) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isCorrect'");
+        return service.isAnswer(guessResult);
     }
 
     public void reset(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'reset'");
+        service.resetAnswer(id);
     }
 }

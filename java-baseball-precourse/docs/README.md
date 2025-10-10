@@ -13,9 +13,9 @@
 
 - [x] model.in; 제약 반영하기
 - [x] model.out
-- [ ] InputView/OutputView (Message 활용)
 - [x] Application::main -> Controller 흐름
-- [ ] Controller -> MainService 흐름
+- [x] Controller -> MainService 흐름
+- [ ] InputView/OutputView (Message 활용)
 
 # 2차 체크리스트 (메인 스트림)
 
