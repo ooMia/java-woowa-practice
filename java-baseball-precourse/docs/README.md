@@ -11,7 +11,7 @@
 
 # 2차 체크리스트 (설계)
 
-- [ ] model.in; 제약 반영하기
+- [x] model.in; 제약 반영하기
 - [ ] model.out
 - [ ] Application::main -> Controller -> MainService 흐름
 - [ ] InputView/OutputView (Message 활용)
