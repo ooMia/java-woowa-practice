@@ -12,7 +12,7 @@
 # 2차 체크리스트 (설계)
 
 - [x] model.in; 제약 반영하기 (ErrorCode 참조)
-- [ ] model.out
+- [x] model.out
 - [ ] Application::main -> Controller 흐름
 - [ ] Controller -> MainService 흐름
 - [ ] InputView/OutputView (Message 활용)
