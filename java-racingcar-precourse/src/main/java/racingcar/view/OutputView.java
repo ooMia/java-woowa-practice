@@ -16,14 +16,12 @@ public class OutputView {
     // woni : ----
     // jun : ---
     public String status(RacingStatus status) {
-        var map = status.status(); // Map<String, Integer> status
+        var cars = status.cars(); // List<Car> status
         var sb = new StringBuilder();
 
-        // TODO map 특성 때문에 순서 어긋난다
-        for (var e : map.entrySet()) {
-            var name = e.getKey();
-            var pos = e.getValue();
-            sb.append(formatStatus(name, pos)).append(System.lineSeparator());
+        for (var car : cars){
+            var format = formatStatus(car.getName(), car.getPosition());
+            sb.append(format).append(System.lineSeparator());
         }
         return sb.toString();
     }

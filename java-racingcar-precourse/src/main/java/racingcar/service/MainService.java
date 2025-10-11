@@ -1,11 +1,9 @@
 package racingcar.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import racingcar.Car;
 import racingcar.model.in.CarName;
-import racingcar.model.out.RacingStatus;
 import racingcar.model.out.RacingWinners;
 
 public class MainService {
@@ -15,13 +13,9 @@ public class MainService {
         service.createGame(id, carNames);
     }
 
-    public RacingStatus doRaceOnce(int gameId) {
+    public List<Car> doRaceOnce(int gameId) {
         service.raceOnce(gameId);
-        var cars = service.currentStatus(gameId);
-        Map<String, Integer> res = new HashMap<>();
-        for (var car : cars)
-            res.put(car.getName(), car.getPosition());
-        return new RacingStatus(res);
+        return service.currentStatus(gameId);
     }
 
     public RacingWinners currentWinners(int gameId) {

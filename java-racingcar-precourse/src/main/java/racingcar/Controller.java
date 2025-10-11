@@ -43,7 +43,8 @@ public class Controller {
     }
 
     public RacingStatus runRaceOnce(int gameId) {
-        return service.doRaceOnce(gameId);
+        var res = service.doRaceOnce(gameId);
+        return new RacingStatus(res);
     }
 
     public RacingWinners getWinners(int gameId) {
