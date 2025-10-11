@@ -23,6 +23,6 @@ public final class Constant {
     public static final int MAX_VALUE_FORWARD = 9;
     public static final int STANDARD_VALUE_FORWARD = 4;
 
-    public static final String 우승자_구분자 = ","; // #L46
+    public static final String 우승자_구분자 = ", "; // #L46, 84(공백 필요)
 
 }
