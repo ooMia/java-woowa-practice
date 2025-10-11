@@ -6,7 +6,7 @@
 - [x] [java-oncall-6](./java-oncall-6/)
 - [x] [java-racingcar-6](./java-racingcar-6/)
 - [x] [java-baseball-precourse](./java-baseball-precourse/)
-- [ ] [java-racingcar-precourse](./java-racingcar-precourse/)
+- [x] [java-racingcar-precourse](./java-racingcar-precourse/)
 - [ ] [java-vendingmachine-precourse](./java-vendingmachine-precourse/)
 - [ ] [java-subway-map-precourse](./java-subway-map-precourse/)
 - [ ] [java-subway-path-precourse](./java-subway-path-precourse/)
