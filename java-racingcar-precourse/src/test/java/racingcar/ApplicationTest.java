@@ -25,15 +25,6 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 이름에_대한_예외_처리() {
-        assertSimpleTest(
-                () -> {
-                    runException("pobi,javaji");
-                    assertThat(output()).contains(ERROR_MESSAGE);
-                });
-    }
-
-    @Test
     void 예제_1() {
         // 2 4 3
         // o o o // MOVING_FORWARD, MOVING_FORWARD, MOVING_FORWARD
@@ -79,6 +70,24 @@ class ApplicationTest extends NsTest {
                 MOVING_FORWARD, MOVING_FORWARD, MOVING_FORWARD,
                 MOVING_FORWARD, MOVING_FORWARD, MOVING_FORWARD,
                 MOVING_FORWARD, STOP, MOVING_FORWARD);
+    }
+
+    @Test
+    void 이름에_대한_예외_처리() {
+        assertSimpleTest(
+                () -> {
+                    runException("pobi,javaji");
+                    assertThat(output()).contains(ERROR_MESSAGE);
+                });
+    }
+
+    @Test
+    void 횟수에_대한_예외_처리() {
+        assertSimpleTest(
+                () -> {
+                    runException("pobi,java", "1a");
+                    assertThat(output()).contains(ERROR_MESSAGE, "시도 횟수는 숫자여야 한다.");
+                });
     }
 
     @Override

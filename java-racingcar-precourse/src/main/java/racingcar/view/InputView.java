@@ -5,6 +5,7 @@ import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
 import racingcar.Constant;
+import racingcar.ErrorCode;
 import racingcar.model.in.CarName;
 import racingcar.model.in.RaceTrial;
 
@@ -31,7 +32,12 @@ public class InputView {
 
     public RaceTrial inputRaceTrial() {
         var line = Console.readLine();
-        var number = Integer.parseInt(line);
+        int number;
+        try {
+            number = Integer.parseInt(line);
+        } catch (NumberFormatException e) {
+            throw ErrorCode.INPUT_횟수_수.exception();
+        }
         return new RaceTrial(number);
     }
 }

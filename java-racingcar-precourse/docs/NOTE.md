@@ -2,6 +2,9 @@
 
 - 이 방법대로 진행하면 fail-fast가 불가능하다.
 - 내부적에서는 커스텀 예외를 활용하고, 결과만 IllegalArgumentException을 던지는 방식을 생각해보자.
+- "For input string: %s"와 같은 포맷은 짐작하기로 Exception.getMessage()를 수행했을 때, 나타나는 형식인 것 같다.
+  만약 이걸 봤다면, ExceptionHandler에서 처리하지 못한 예외가 출력되고 있는 것
+  대부분의 경우, 입력부에서 try-catch block을 사용해서 흘러나가는 예외를 잡지 못한 것이 원인이다.
 
 ## 코딩 스타일 가이드
 
