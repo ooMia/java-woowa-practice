@@ -7,21 +7,8 @@ import camp.nextstep.edu.missionutils.Console;
 import racingcar.Constant;
 import racingcar.model.in.CarName;
 import racingcar.model.in.RaceTrial;
-import racingcar.model.in.SampleInput;
 
 public class InputView {
-    public void inputBooHeader() {
-        System.out.print(Message.IN_INSTRUCTION.text());
-    }
-
-    public SampleInput readBoo() {
-        var number = Integer.parseInt(Console.readLine());
-        return new SampleInput(number);
-    }
-
-    public String readLine() {
-        return Console.readLine();
-    }
 
     public String CarNamesInstruction() {
         return Message.IN_자동차_이름.text();

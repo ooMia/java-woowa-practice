@@ -57,9 +57,4 @@ class GameStorageService {
         Collections.sort(cars, (o1, o2) -> Integer.compare(o2.getPosition(), o1.getPosition()));
         return cars;
     }
-
-    // TODO 삭제
-    String doWork(String s) {
-        return s.toUpperCase();
-    }
 }

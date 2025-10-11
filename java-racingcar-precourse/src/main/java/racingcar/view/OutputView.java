@@ -5,14 +5,8 @@ import java.util.List;
 import racingcar.Constant;
 import racingcar.model.out.RacingStatus;
 import racingcar.model.out.RacingWinners;
-import racingcar.model.out.SampleOutput;
 
 public class OutputView {
-
-    public void print(SampleOutput output) {
-        System.out.println(Message.OUT_QUESTION_FORMAT.format(output.foo()));
-        System.out.println(output.boo());
-    }
 
     public String racingHeader() {
         return Message.OUT_레이싱_실행_결과_헤더.text();

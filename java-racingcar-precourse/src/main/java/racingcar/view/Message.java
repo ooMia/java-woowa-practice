@@ -13,11 +13,7 @@ enum Message {
     OUT_레이싱_실행_결과_헤더("실행 결과"),
     OUT_상태_출력_FORMAT("%s : %s"), // 자동차 이름, 현재 주행 거리 * '-'
     OUT_최종_우승자_FORMAT("최종 우승자 : %s"), // 한 명이면 이름만, 여러 명이면 사이에 ", "로 구분
-
-    // TODO 나중에 삭제하기
-    OUT_GREETING("반갑습니다."),
-    OUT_QUESTION_FORMAT("%s의 답은?"),
-    IN_INSTRUCTION("입력해주세요: ");
+    ;
 
     private final String text;
 

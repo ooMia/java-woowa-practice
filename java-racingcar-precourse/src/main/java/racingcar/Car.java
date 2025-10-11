@@ -32,8 +32,6 @@ public class Car {
         if (fuel >= Constant.STANDARD_VALUE_FORWARD) ++position;
     }
 
-    // 사용하게 될 것 같아서 일단 정의해둠
-    // TODO 필요없으면 삭제
     public String getName() {
         return name;
     }

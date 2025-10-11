@@ -3,10 +3,8 @@ package racingcar;
 import java.util.List;
 
 import racingcar.model.in.CarName;
-import racingcar.model.in.SampleInput;
 import racingcar.model.out.RacingStatus;
 import racingcar.model.out.RacingWinners;
-import racingcar.model.out.SampleOutput;
 import racingcar.service.MainService;
 import racingcar.util.ExceptionHandler;
 import racingcar.view.InputView;
@@ -65,22 +63,4 @@ public class Controller {
     public void printWinners(RacingWinners winners) {
         System.out.println(out.winners(winners));
     }
-
-    // TODO 나머지 삭제
-
-    public SampleInput inputBoo() {
-        return ExceptionHandler.tryUntilValid(() -> {
-            in.inputBooHeader();
-            return in.readBoo();
-        });
-    }
-
-    public SampleOutput process(SampleInput input) {
-        return service.process(input);
-    }
-
-    public void outputBoo(SampleOutput output) {
-        out.print(output);
-    }
-
 }
