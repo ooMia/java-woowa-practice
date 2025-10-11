@@ -23,15 +23,15 @@ public class Controller {
     // "[ERROR]"로 시작하는 에러 메시지를 출력 후 그 부분부터 입력을 다시 받는다.
 
     public List<CarName> inputCarNames() {
+        System.out.println(in.CarNamesInstruction()); // #L96
         return ExceptionHandler.tryUntilValid(() -> {
-            System.out.print(in.CarNamesInstruction());
             return in.inputCarNames();
         });
     }
 
     public int inputRaceTrial() {
+        System.out.println(in.RaceTrialInstruction()); // #L98
         return ExceptionHandler.tryUntilValid(() -> {
-            System.out.print(in.RaceTrialInstruction());
             return in.inputRaceTrial().number();
         });
     }
