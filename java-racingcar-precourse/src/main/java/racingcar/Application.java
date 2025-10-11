@@ -13,9 +13,16 @@ public class Application {
 
         // id를 기반으로 돌리고 그 결과를 바로 반환
         var nTrials = api.inputRaceTrial();
+
+        // 현재의 직접 int를 받아 반복하는 부분은
+        // dto의 필드에 의존적인 형태가 되어서 별로인듯 싶어서
+        // 이렇게 바꾸고 바로 출력할까 싶었는데 일단 그냥 진행함
+        // var winners = api.runRaces(gameId, nTrials);
+
+        api.printRacingHeader();
         for (int i = 0; i < nTrials; ++i) {
             var result = api.runRaceOnce(gameId);
-            api.printResult(result);
+            api.printStatus(result);
         }
 
         // id 기반으로 승자 정보 추적

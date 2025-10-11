@@ -1,7 +1,7 @@
 package racingcar.view;
 
-import racingcar.model.in.SampleInput;
 import camp.nextstep.edu.missionutils.Console;
+import racingcar.model.in.SampleInput;
 
 public class InputView {
     public void inputBooHeader() {
@@ -15,5 +15,15 @@ public class InputView {
 
     public String readLine() {
         return Console.readLine();
+    }
+
+    public char[] CarNamesInstruction() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'CarNamesInstruction'");
+    }
+
+    public <T> T inputCarNames() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'inputCarNames'");
     }
 }

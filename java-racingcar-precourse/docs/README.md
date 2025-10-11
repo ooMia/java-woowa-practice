@@ -15,6 +15,7 @@
 - [x] model.out
 - [x] Application::main -> Controller 흐름
 - [ ] Controller -> MainService 흐름
+- [x] Controller -> InputView/OutputView 흐름
 - [ ] InputView/OutputView (Message 활용)
 - [ ] service 구현
 
