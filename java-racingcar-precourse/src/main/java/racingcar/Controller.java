@@ -26,4 +26,44 @@ public class Controller {
     public void outputBoo(SampleOutput output) {
         outputView.print(output);
     }
+
+    public Object inputCarNames() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'inputCarNames'");
+    }
+
+    public int inputRaceTrial() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'inputRaceTrialNumber'");
+    }
+
+    public void generateCars(int id, Object carNames) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'generateCars'");
+    }
+
+    public Object runRaceOnce(int gameId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'runRaceOnce'");
+    }
+
+    public void printResult(Object result) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'printResult'");
+    }
+
+    public Object getWinners(int gameId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getWinners'");
+    }
+
+    public void printWinners(Object winners) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'printWinners'");
+    }
+
+    // #L47
+    // 사용자가 잘못된 값을 입력할 경우
+    // `IllegalArgumentException`를 발생시키고,
+    // "[ERROR]"로 시작하는 에러 메시지를 출력 후 그 부분부터 입력을 다시 받는다.
 }

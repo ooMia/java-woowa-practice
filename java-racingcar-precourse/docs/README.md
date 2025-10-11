@@ -13,7 +13,7 @@
 
 - [x] model.in; 제약 반영하기 (ErrorCode 참조)
 - [x] model.out
-- [ ] Application::main -> Controller 흐름
+- [x] Application::main -> Controller 흐름
 - [ ] Controller -> MainService 흐름
 - [ ] InputView/OutputView (Message 활용)
 - [ ] service 구현

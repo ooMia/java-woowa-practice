@@ -25,4 +25,6 @@ public final class Constant {
 
     public static final String 우승자_구분자 = ", "; // #L46, 84(공백 필요)
 
+    // Car 모델이 외부로 노출되지 않도록 내부 StorageService를 사용하자
+    public static final int GAME_ID = 1_234; // 임시 ID
 }
