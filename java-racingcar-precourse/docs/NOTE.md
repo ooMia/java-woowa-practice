@@ -1,6 +1,7 @@
 # NOTE
 
 - 이 방법대로 진행하면 fail-fast가 불가능하다.
+- 내부적에서는 커스텀 예외를 활용하고, 결과만 IllegalArgumentException을 던지는 방식을 생각해보자.
 
 ## 코딩 스타일 가이드
 
