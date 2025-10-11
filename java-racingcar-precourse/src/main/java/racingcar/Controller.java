@@ -33,8 +33,8 @@ public class Controller {
 
     public int inputRaceTrial() {
         return ExceptionHandler.tryUntilValid(() -> {
-            System.out.print(in.CarNamesInstruction());
-            return in.inputCarNames();
+            System.out.print(in.RaceTrialInstruction());
+            return in.inputRaceTrial().number();
         });
     }
 

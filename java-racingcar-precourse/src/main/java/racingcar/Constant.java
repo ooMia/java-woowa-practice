@@ -23,6 +23,7 @@ public final class Constant {
     public static final int MAX_VALUE_FORWARD = 9;
     public static final int STANDARD_VALUE_FORWARD = 4;
 
+    public static final String 상태_거리_표시자 = "-"; // #L70-72
     public static final String 우승자_구분자 = ", "; // #L46, 84(공백 필요)
 
     // Car 모델이 외부로 노출되지 않도록 내부 StorageService를 사용하자

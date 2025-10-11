@@ -16,7 +16,7 @@
 - [x] Application::main -> Controller 흐름
 - [x] Controller -> MainService 흐름
 - [x] Controller -> InputView/OutputView 흐름
-- [ ] InputView/OutputView (Message 활용)
+- [x] InputView/OutputView (Message 활용)
 - [x] MainService 구현
 - [x] SubService 구현
 
