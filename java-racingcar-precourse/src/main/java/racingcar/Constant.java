@@ -15,7 +15,7 @@ public final class Constant {
 
     // public static final ;// #L
     public static final String 자동차_이름_구분자_패턴 = "\\s*,\\s*"; // #L42
-    public static final int 자동차_이름_길이_제한 = 5; // #L42
+    public static final int 자동차_이름_길이_제한 = 5; // 5 이하 // #L42
 
     // 0에서 9 사이에서 무작위 값에 대해
     // 값이 4 이상일 경우, 자동차가 전진한다. // #L44
