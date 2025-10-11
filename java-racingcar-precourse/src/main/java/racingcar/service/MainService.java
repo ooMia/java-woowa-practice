@@ -32,7 +32,7 @@ public class MainService {
     }
 
     public RacingWinners currentWinners(int gameId) {
-        var winners = service.currentWinners(gameId);
+        var winners = service.currentWinnersName(gameId);
         return new RacingWinners(winners);
     }
 }
