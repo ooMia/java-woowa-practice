@@ -17,7 +17,8 @@
 - [x] Controller -> MainService 흐름
 - [x] Controller -> InputView/OutputView 흐름
 - [ ] InputView/OutputView (Message 활용)
-- [ ] service 구현
+- [x] MainService 구현
+- [ ] SubService 구현
 
 # 2차 체크리스트 (메인 스트림)
 

@@ -1,6 +1,8 @@
 package racingcar.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import racingcar.model.in.CarName;
 import racingcar.model.in.SampleInput;
@@ -9,7 +11,7 @@ import racingcar.model.out.RacingWinners;
 import racingcar.model.out.SampleOutput;
 
 public class MainService {
-    private final SampleSubService service = new SampleSubService();
+    private final GameStorageService service = new GameStorageService();
 
     public SampleOutput process(SampleInput input) {
         var message = service.doWork("ok");
@@ -17,17 +19,20 @@ public class MainService {
     }
 
     public void initCars(int id, List<CarName> carNames) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'initCars'");
+        service.createGame(id, carNames);
     }
 
     public RacingStatus doRaceOnce(int gameId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'runRace'");
+        service.raceOnce(gameId);
+        var cars = service.currentStatus(gameId);
+        Map<String, Integer> res = new HashMap<>();
+        for (var car : cars)
+            res.put(car.getName(), car.getPosition());
+        return new RacingStatus(res);
     }
 
     public RacingWinners currentWinners(int gameId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'currentWinners'");
+        var winners = service.currentWinners(gameId);
+        return new RacingWinners(winners);
     }
 }
