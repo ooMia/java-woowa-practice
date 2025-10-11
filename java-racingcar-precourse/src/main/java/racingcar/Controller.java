@@ -40,19 +40,16 @@ public class Controller {
 
     // --------- SERVICE ------------
 
-    public void generateCars(int id, Object carNames) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'generateCars'");
+    public void generateCars(int id, List<CarName> carNames) {
+        service.initCars(id, carNames);
     }
 
     public RacingStatus runRaceOnce(int gameId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'runRaceOnce'");
+        return service.doRaceOnce(gameId);
     }
 
     public RacingWinners getWinners(int gameId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getWinners'");
+        return service.currentWinners(gameId);
     }
 
     // --------- OUTPUT ------------
