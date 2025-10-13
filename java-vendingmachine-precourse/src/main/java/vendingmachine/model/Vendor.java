@@ -5,7 +5,6 @@ import java.util.Map;
 
 import vendingmachine.ErrorCode;
 import vendingmachine.model.in.Item;
-import vendingmachine.model.in.TradableItem;
 import vendingmachine.model.in.UserBalance;
 import vendingmachine.model.in.VendorBalance;
 import vendingmachine.model.in.VendorItems;
