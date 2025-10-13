@@ -30,12 +30,6 @@ class Controller {
     // read String from std.in return as model.in object
 
     // 42 사용자가 잘못된 값을 입력할 경우 ... 해당 부분부터 다시 입력을 받는다.
-    public UserBalance inputUserBalance() {
-        var target = UserBalance.class;
-        System.out.print(in.instruction(target));
-        return _tryParseUntilValid(target);
-    }
-
     public VendorBalance inputVendorBalance() {
         var target = VendorBalance.class;
         System.out.print(in.instruction(target));
@@ -48,30 +42,30 @@ class Controller {
         return _tryParseUntilValid(target);
     }
 
-    // TODO process model.in objects and return model.out object
-
-    public CoinBalance getVendorBalance(Vendor vendor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getVendorBalance'");
+    public UserBalance inputUserBalance() {
+        var target = UserBalance.class;
+        System.out.print(in.instruction(target));
+        return _tryParseUntilValid(target);
     }
 
     public Item inputUserItem(Vendor vendor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'inputUserItem'");
+        var target = Item.class;
+        System.out.print(in.instruction(target));
+        return _tryParseUntilValid(target);
     }
 
-    public boolean canPurchaseSomething(Vendor vendor) {
-        // 종료 조건
-        // 1. 남은 금액이 상품의 최저 가격보다 적거나
-        // 2. 모든 상품이 소진된 경우 바로 잔돈을 돌려준다.
+    // process model.in objects and return model.out object
 
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'canPurchase'");
+    public CoinBalance getVendorBalance(Vendor vendor) {
+        return serviceEntry.getVendorBalanceAsCoins(vendor);
+    }
+
+    public boolean canPurchase(Vendor vendor) {
+        return serviceEntry.canUserPerchaseAnything(vendor);
     }
 
     public CoinBalance userExit(Vendor vendor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'userExit'");
+        return serviceEntry.getUserChangeAsCoins(vendor);
     }
 
     // print model.out object to std.out

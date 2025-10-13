@@ -34,7 +34,7 @@ public class Application {
             // 직접 정의한 방식대로 내가 구매 방식을 통제하고 싶어서
             // 내가 vendor를 활용하는 방식이라 생각해서
             // controller 통해서 처리
-            while (api.canPurchaseSomething(vendor)) {
+            while (api.canPurchase(vendor)) {
                 // 종료 조건
                 // 1. 남은 금액이 상품의 최저 가격보다 적거나
                 // 2. 모든 상품이 소진된 경우 바로 잔돈을 돌려준다.

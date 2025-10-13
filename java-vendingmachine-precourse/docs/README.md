@@ -14,8 +14,8 @@
 # 2차 체크리스트 (설계)
 
 - [x] Application::main -> Controller 흐름
-- [ ] Controller -> MainService 흐름
-- [ ] Controller -> InputView/OutputView 흐름
+- [x] Controller -> MainService 흐름
+- [x] Controller -> InputView/OutputView 흐름
 - [ ] MainService -> Parser 흐름
 - [ ] MainService -> Mapper 흐름
 - [ ] SubService 흐름
