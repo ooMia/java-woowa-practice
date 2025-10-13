@@ -14,6 +14,9 @@ public enum ErrorCode {
             INPUT_BALANCE_UNDER_MIN("금액은 숫자여야 합니다.", Constant.INPUT_EXCEPTION),
 
     INPUT_INVALID("유효하지 않은 입력 값입니다.", Constant.INPUT_EXCEPTION),
+
+    // vendor
+    USER_NOT_ENOUGH_MONEY("돈이 없으면 물건을 살 수 없습니다.", Constant.INPUT_EXCEPTION),
     ;
 
     private final String message;

@@ -13,12 +13,13 @@
 
 # 2차 체크리스트 (설계)
 
-- [ ] Application::main -> Controller 흐름
+- [x] Application::main -> Controller 흐름
 - [ ] Controller -> MainService 흐름
 - [ ] Controller -> InputView/OutputView 흐름
 - [ ] MainService -> Parser 흐름
 - [ ] MainService -> Mapper 흐름
 - [ ] SubService 흐름
+    - [x] Vendor 틀
 
 # 3차 체크리스트 (메인 스트림)
 
