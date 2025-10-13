@@ -8,7 +8,7 @@
 - [x] Constant 초안 작성 (README 줄 번호 주석)
 - [x] model.in / out
 - [x] ErrorCode enum
-- [ ] model.in 제약 반영
+- [x] model.in 제약 반영
 - [ ] view.Message
 
 # 2차 체크리스트 (설계)
