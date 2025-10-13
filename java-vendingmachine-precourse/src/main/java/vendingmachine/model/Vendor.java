@@ -58,6 +58,8 @@ public class Vendor {
 
     public TradableItem purchase(Item userItem) {
         // TODO 가지고 있는 코인도 반영되어야 함
+
+        // TODO 등록되지 않은 아이템을 구매하려 하면 오류
         var item = dict.get(userItem.name()); // 구매하려는 아이템 추적
         var price = item.price(); // 가격 확인
 
@@ -97,7 +99,7 @@ public class Vendor {
         userBalance = 0;
 
         for (Coin key : Coin.values()) {
-            int cur = coins.get(key);
+            int cur = coins.getOrDefault(key, 0);
             int need = amount / key.getAmount(); // 최대로 지불한다면 필요한 개수 
             int afford = Math.min(cur, need);
 
