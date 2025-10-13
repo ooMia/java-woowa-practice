@@ -57,6 +57,7 @@ public class Vendor {
     }
 
     public TradableItem purchase(Item userItem) {
+        // TODO 가지고 있는 코인도 반영되어야 함
         var item = dict.get(userItem.name()); // 구매하려는 아이템 추적
         var price = item.price(); // 가격 확인
 
@@ -74,13 +75,44 @@ public class Vendor {
     }
 
     public CoinBalance getVendorBalance() {
+        return toCoinBalance(coins);
+    }
+
+    public boolean canUserPerchaseAnything() {
+        // 1. 남은 금액이 상품의 최저 가격보다 적거나
+        // 2. 모든 상품이 소진된 경우
+        // 가정: 재고가 0인 상품은 items에서 삭제된다.
+        if (items.size() == 0) return false;
+        int minPriceValue = Integer.MAX_VALUE;
+        for (var item : items.keySet())
+            minPriceValue = Math.min(minPriceValue, item.price());
+        return userBalance < minPriceValue;
+    }
+
+    public CoinBalance userExit() {
+        var res = new EnumMap<Coin, Integer>(Coin.class);
+
+        // 현재 Vendor 보유 코인으로만 지불 가능
+        int amount = userBalance;
+        userBalance = 0;
+
+        for (Coin key : Coin.values()) {
+            int cur = coins.get(key);
+            int need = amount / key.getAmount(); // 최대로 지불한다면 필요한 개수 
+            int afford = Math.min(cur, need);
+
+            amount -= key.getAmount() * afford; // pay
+            coins.put(key, cur - afford); // update
+            res.put(key, afford);
+        }
+        return toCoinBalance(res);
+    }
+
+    private CoinBalance toCoinBalance(Map<Coin, Integer> map) {
         var n10 = coins.getOrDefault(Coin.COIN_10, 0);
         var n50 = coins.getOrDefault(Coin.COIN_50, 0);
         var n100 = coins.getOrDefault(Coin.COIN_100, 0);
         var n500 = coins.getOrDefault(Coin.COIN_500, 0);
         return new CoinBalance(n10, n50, n100, n500);
     }
-
-    // TODO user exit 할 떄 vendorBalance에 대한 메서드 필요할듯
-
 }

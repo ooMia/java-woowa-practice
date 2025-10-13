@@ -24,7 +24,6 @@ public final class Constant {
     // L#130 프로그래밍 요구사항 - Coin 반드시 Coin 클래스 활용
     // L#136 코인 종류 정도?
     // TODO 이것도 enum 활용해서 더 우아하게 표현할 수 있을까?
-    public static final List<Integer> COIN_TYPE = List.of(10, 50, 100, 500);
-
+    public static final List<Integer> COIN_VALUES = List.of(500, 100, 50, 10);
 
 }

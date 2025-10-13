@@ -39,7 +39,7 @@ public class Application {
             VendorItems vendorItems = api.inputVendorItems();
             vendor.addItems(vendorItems);
 
-            while (service.canUserPerchaseAnything(vendor)) {
+            while (vendor.canUserPerchaseAnything()) {
                 Balance userBalanceLeft = vendor.getUserBalance();
                 out.투입_금액(userBalanceLeft);
 
@@ -47,7 +47,7 @@ public class Application {
                 vendor.purchase(userItem);
             }
 
-            CoinBalance userChangeCoinBalance = service.getUserChangeAsCoins(vendor);
+            CoinBalance userChangeCoinBalance = vendor.userExit();
             out.잔돈(userChangeCoinBalance);
         } catch (Exception e) {
             System.err.println(e.getMessage());
