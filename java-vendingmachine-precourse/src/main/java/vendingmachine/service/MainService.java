@@ -1,10 +1,7 @@
 package vendingmachine.service;
 
 import vendingmachine.model.Vendor;
-import vendingmachine.model.in.Boo;
-import vendingmachine.model.in.Foo;
 import vendingmachine.model.out.CoinBalance;
-import vendingmachine.model.out.SampleOutput;
 
 public class MainService {
     private final Mapper mapper = new Mapper();
@@ -13,11 +10,7 @@ public class MainService {
     public <T> T parse(String line, Class<T> target) {
         return parser.parse(line, target);
     }
-
-    public SampleOutput process(Foo foo, Boo boo) {
-        return mapper.map(foo, boo);
-    }
-
+    
     public CoinBalance getVendorBalanceAsCoins(Vendor vendor) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getVendorBalanceAsCoins'");

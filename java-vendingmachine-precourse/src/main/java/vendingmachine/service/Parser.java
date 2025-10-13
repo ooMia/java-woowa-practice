@@ -1,9 +1,5 @@
 package vendingmachine.service;
 
-import java.util.Map;
-
-import vendingmachine.model.in.Boo;
-import vendingmachine.model.in.Foo;
 import vendingmachine.util.ExceptionUtil;
 
 // responsible for parsing inputs
@@ -19,8 +15,7 @@ class Parser {
     }
 
     public <T> T parse(String line, Class<T> target) {
-        if (target == Foo.class) return target.cast(toFoo(line));
-        if (target == Boo.class) return target.cast(toBoo(line));
+        // if (target == Foo.class) return target.cast(toFoo(line));
         throw unsupported(target);
     }
 
@@ -32,14 +27,7 @@ class Parser {
     // L#82 자판기가 보유하고 있는 금액
     // L#94 투입 금액
 
-    Foo toFoo(String line) {
-        return new Foo(Integer.parseInt(line));
-    }
+    // 총 4개
+    // 
 
-    Boo toBoo(String line) {
-        return new Boo(Map.of(
-                "a", 1,
-                "b", 2
-        ));
-    }
 }

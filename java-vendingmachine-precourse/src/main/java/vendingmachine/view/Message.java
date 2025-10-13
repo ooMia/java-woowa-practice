@@ -39,8 +39,6 @@ enum Message {
     OUT_USER_CHANGE_COIN_BALANCE("잔돈"),
 
     // 각각의 코인에 대한 표현은 실제 구현 시에 필요하게 되면 정의
-
-    IN_("input foo: "),
     ;
 
     private final String text;
