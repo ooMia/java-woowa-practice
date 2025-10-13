@@ -4,7 +4,7 @@ import vendingmachine.util.ExceptionUtil;
 
 public enum ErrorCode {
     // SCOPE_(REASON)
-    INPUT_INVALID("유효하지 않은 입력 값입니다.", IllegalArgumentException.class),
+    INPUT_INVALID("유효하지 않은 입력 값입니다.", Constant.INPUT_EXCEPTION),
     ;
 
     private final String message;

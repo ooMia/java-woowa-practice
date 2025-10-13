@@ -10,6 +10,7 @@ public class OutputView {
     }
 
     public <T> String stringify(Object target) {
+        // L#127 switch/case로 구현하는 경우가 있는데 switch/case도 허용하지 않는다.
         return switch (target) {
             case SampleOutput sampleOutput -> stringify(sampleOutput);
             default -> throw unsupported(target);
