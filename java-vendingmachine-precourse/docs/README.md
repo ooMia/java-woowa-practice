@@ -6,7 +6,7 @@
 # 1차 체크리스트 (공통 정의)
 
 - [x] Constant 초안 작성 (README 줄 번호 주석)
-- [ ] model.in / out
+- [x] model.in / out
 - [ ] ErrorCode enum
 - [ ] model.in 제약 반영
 - [ ] view.Message

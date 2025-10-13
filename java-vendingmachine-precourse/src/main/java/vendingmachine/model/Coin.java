@@ -1,5 +1,6 @@
-package vendingmachine;
+package vendingmachine.model;
 
+// #L128 프로그래밍 요구사항에서 별도로 변경 불가 안내가 없는 경우 파일 수정과 패키지 이동을 자유롭게 할 수 있다.
 public enum Coin {
     COIN_500(500),
     COIN_100(100),
