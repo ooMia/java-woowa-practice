@@ -48,7 +48,7 @@ class Parser {
 
         // for-each
         for (var _item : _items) {
-            var item = _item.substring(1, _item.length()); // 2. subString [1, N)
+            var item = _item.substring(1, _item.length() - 1); // 2. subString [1, N-1)
             var itemArgs = _split(",", item); // 3. split ,
             // String, int, int
             var key = new TradableItem(itemArgs[0], Integer.parseInt(itemArgs[1]));
