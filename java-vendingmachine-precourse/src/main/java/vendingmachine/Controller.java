@@ -1,23 +1,23 @@
 package vendingmachine;
 
+import java.util.List;
+
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.model.Coin;
 import vendingmachine.model.Vendor;
 import vendingmachine.model.in.Item;
 import vendingmachine.model.in.UserBalance;
 import vendingmachine.model.in.VendorBalance;
 import vendingmachine.model.in.VendorItems;
-import vendingmachine.model.out.Balance;
 import vendingmachine.model.out.CoinBalance;
 import vendingmachine.service.MainService;
 import vendingmachine.util.ExceptionUtil;
 import vendingmachine.view.InputView;
-import vendingmachine.view.OutputView;
 
 class Controller {
 
     private static final MainService serviceEntry = new MainService();
     private static final InputView in = new InputView();
-    private static final OutputView out = new OutputView();
 
     private static <T> T _parse(Class<T> target) throws RuntimeException {
         return serviceEntry.parse(Console.readLine(), target);
@@ -68,18 +68,9 @@ class Controller {
         return serviceEntry.getUserChangeAsCoins(vendor);
     }
 
-    // print model.out object to std.out
-
-    public void printCoinBalanceOfVendor(CoinBalance vendorCoinBalance) {
-        System.out.println(out.stringify(vendorCoinBalance));
-    }
-
-    public void printBalanceOfUser(Balance balance) {
-        System.out.println(out.stringify(balance));
-    }
-
-    public void printCoinBalanceOfUserChange(CoinBalance userChangeCoinBalance) {
-        System.out.println(out.stringify(userChangeCoinBalance));
+    public List<Coin> toRandomCoins(VendorBalance vendorBalance) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toRandomCoins'");
     }
 
 }

@@ -16,7 +16,7 @@ enum Message {
     // 100원 - 4개
     // 50원 - 1개
     // 10원 - 0개
-    OUT_VENDOR_COIN_BALANCE("자판기가 보유한 동전"),
+    OUT_HEADER_VENDOR_COIN_BALANCE("자판기가 보유한 동전"),
 
     // 91 상품명과 가격, 수량을 입력해 주세요.
     // [콜라,1500,20];[사이다,1000,10]
@@ -27,7 +27,7 @@ enum Message {
     IN_USER_BALANCE("투입 금액을 입력해 주세요."),
 
     // 97 투입 금액: 3000원
-    OUT_USER_BALANCE_FORMAT("투입 금액: %d원"),
+    OUT_HEADER_USER_BALANCE("투입 금액: "),
 
     // 98 구매할 상품명을 입력해 주세요.
     // 콜라
@@ -36,7 +36,7 @@ enum Message {
     // 106 잔돈
     // 100원 - 4개
     // 50원 - 1개
-    OUT_USER_CHANGE_COIN_BALANCE("잔돈"),
+    OUT_HEADER_USER_CHANGE_COIN_BALANCE("잔돈"),
 
     // 각각의 코인에 대한 표현은 실제 구현 시에 필요하게 되면 정의
     ;
