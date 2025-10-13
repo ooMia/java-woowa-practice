@@ -1,4 +1,4 @@
-package test.java.calculator;
+package calculator;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;

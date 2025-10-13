@@ -2,8 +2,13 @@ plugins {
     id 'java'
 }
 
-group 'camp.nextstep.edu'
-version '1.0-SNAPSHOT'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
 
 repositories {
     mavenCentral()
@@ -11,13 +16,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.woowacourse-projects:mission-utils:1.0.0'
-}
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(8)
-    }
+    implementation 'com.github.woowacourse-projects:mission-utils:1.2.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 test {
