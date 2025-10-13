@@ -1,6 +1,7 @@
 package vendingmachine.model;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import vendingmachine.ErrorCode;
@@ -33,6 +34,11 @@ public class Vendor {
 
     public void addVendorBalance(VendorBalance vendorBalance) {
         this.vendorBalance += vendorBalance.money();
+    }
+
+    // TODO vendor balance는 Coin으로 다뤄야 함
+    public void addVendorBalance(List<Coin> coins) {
+        throw new UnsupportedOperationException("Unimplemented method 'addVendorBalance'");
     }
 
     public void addUserBalance(UserBalance userBalance) {

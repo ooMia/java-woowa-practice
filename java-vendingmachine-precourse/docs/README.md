@@ -17,7 +17,7 @@
 - [x] Controller -> MainService 흐름
 - [x] Controller -> InputView/OutputView 흐름
 - [x] InputView 구현
-- [ ] MainService -> Parser 흐름
+- [x] MainService -> Parser 흐름
 - [ ] MainService -> Mapper 흐름
 - [ ] SubService 흐름
     - [x] Vendor 틀
