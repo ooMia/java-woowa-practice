@@ -28,19 +28,19 @@ class Controller {
     // 42 사용자가 잘못된 값을 입력할 경우 ... 해당 부분부터 다시 입력을 받는다.
     public VendorBalance inputVendorBalance() {
         var target = VendorBalance.class;
-        System.out.print(in.instruction(target));
+        System.out.println(in.instruction(target));
         return _tryParseUntilValid(target);
     }
 
     public VendorItems inputVendorItems() {
         var target = VendorItems.class;
-        System.out.print(in.instruction(target));
+        System.out.println(in.instruction(target));
         return _tryParseUntilValid(target);
     }
 
     public UserBalance inputUserBalance() {
         var target = UserBalance.class;
-        System.out.print(in.instruction(target));
+        System.out.println(in.instruction(target));
         return _tryParseUntilValid(target);
     }
 
@@ -53,7 +53,7 @@ class Controller {
         // 그래서 vendor 필요함
 
         var target = Item.class;
-        System.out.print(in.instruction(target));
+        System.out.println(in.instruction(target));
         return _tryParseUntilValid(target);
     }
 

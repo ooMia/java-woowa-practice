@@ -35,6 +35,8 @@ public class Vendor {
     // 41 반환되지 않은 금액은 자판기에 남는다.
 
     // vendor balance는 Coin으로 다뤄야 함
+    // #32 보유하고 있는 금액으로 동전을 무작위로 생성하는 주체가 자판기여야 한다면
+    // int amount를 파라미터로 하고, 내부적으로 Randoms 돌려서 발급받는 방식이 더 적합해보임
     public void addVendorBalance(List<Coin> coins) {
         for (var coin : coins) {
             vendorBalance += coin.getAmount();
@@ -83,7 +85,9 @@ public class Vendor {
     public boolean canUserPerchaseAnything() {
         // 1. 남은 금액이 상품의 최저 가격보다 적거나
         // 2. 모든 상품이 소진된 경우
+
         // 가정: 재고가 0인 상품은 items에서 삭제된다.
+        System.out.println(items.toString());
         if (items.size() == 0) return false;
         int minPriceValue = Integer.MAX_VALUE;
         for (var item : items.keySet())
