@@ -1,5 +1,6 @@
 package vendingmachine.model;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,9 +8,9 @@ import java.util.Map;
 import vendingmachine.ErrorCode;
 import vendingmachine.model.in.Item;
 import vendingmachine.model.in.UserBalance;
-import vendingmachine.model.in.VendorBalance;
 import vendingmachine.model.in.VendorItems;
 import vendingmachine.model.out.Balance;
+import vendingmachine.model.out.CoinBalance;
 
 public class Vendor {
 
@@ -17,6 +18,7 @@ public class Vendor {
     private final Map<TradableItem, Integer> items = new HashMap<>();
     private final Map<String, TradableItem> dict = new HashMap<>();
     private int vendorBalance = 0, userBalance = 0;
+    private final EnumMap<Coin, Integer> coins = new EnumMap<>(Coin.class);
 
     //     반환되는 동전이 최소한이 되는 자판기를 구현한다.
     // L#30 반환되는 동전이 최소한? 이게 무슨 말이지?
@@ -32,13 +34,13 @@ public class Vendor {
     // - 잔돈을 반환할 수 없는 경우 잔돈으로 반환할 수 있는 금액만 반환한다.
     // 41 반환되지 않은 금액은 자판기에 남는다.
 
-    public void addVendorBalance(VendorBalance vendorBalance) {
-        this.vendorBalance += vendorBalance.money();
-    }
-
-    // TODO vendor balance는 Coin으로 다뤄야 함
+    // vendor balance는 Coin으로 다뤄야 함
     public void addVendorBalance(List<Coin> coins) {
-        throw new UnsupportedOperationException("Unimplemented method 'addVendorBalance'");
+        for (var coin : coins) {
+            vendorBalance += coin.getAmount();
+            int prev = this.coins.getOrDefault(coin, 0);
+            this.coins.put(coin, prev + 1);
+        }
     }
 
     public void addUserBalance(UserBalance userBalance) {
@@ -69,6 +71,14 @@ public class Vendor {
 
     public Balance getUserBalance() {
         return new Balance(this.userBalance);
+    }
+
+    public CoinBalance getVendorBalance() {
+        var n10 = coins.getOrDefault(Coin.COIN_10, 0);
+        var n50 = coins.getOrDefault(Coin.COIN_50, 0);
+        var n100 = coins.getOrDefault(Coin.COIN_100, 0);
+        var n500 = coins.getOrDefault(Coin.COIN_500, 0);
+        return new CoinBalance(n10, n50, n100, n500);
     }
 
     // TODO user exit 할 떄 vendorBalance에 대한 메서드 필요할듯

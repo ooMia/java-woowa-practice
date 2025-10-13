@@ -1,15 +1,11 @@
 package vendingmachine;
 
-import java.util.List;
-
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.model.Coin;
 import vendingmachine.model.Vendor;
 import vendingmachine.model.in.Item;
 import vendingmachine.model.in.UserBalance;
 import vendingmachine.model.in.VendorBalance;
 import vendingmachine.model.in.VendorItems;
-import vendingmachine.model.out.CoinBalance;
 import vendingmachine.service.MainService;
 import vendingmachine.util.ExceptionUtil;
 import vendingmachine.view.InputView;
@@ -49,28 +45,16 @@ class Controller {
     }
 
     public Item inputUserItem(Vendor vendor) {
+
+        // 현재 최저 상품 가격이 500원이고
+        // 잔여 금액은 1000원인데
+        // 사용자가 2000원짜리 구매하려 하면 오류 발생
+        // 즉, 입력부터 잘못된 것
+        // 그래서 vendor 필요함
+
         var target = Item.class;
         System.out.print(in.instruction(target));
         return _tryParseUntilValid(target);
-    }
-
-    // process model.in objects and return model.out object
-
-    public CoinBalance getVendorBalance(Vendor vendor) {
-        return serviceEntry.getVendorBalanceAsCoins(vendor);
-    }
-
-    public boolean canPurchase(Vendor vendor) {
-        return serviceEntry.canUserPerchaseAnything(vendor);
-    }
-
-    public CoinBalance userExit(Vendor vendor) {
-        return serviceEntry.getUserChangeAsCoins(vendor);
-    }
-
-    public List<Coin> toRandomCoins(VendorBalance vendorBalance) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toRandomCoins'");
     }
 
 }

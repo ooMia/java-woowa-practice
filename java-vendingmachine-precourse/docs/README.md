@@ -19,7 +19,7 @@
 - [x] InputView 구현
 - [x] MainService -> Parser 흐름
 - [ ] MainService -> Mapper 흐름
-- [ ] SubService 흐름
+- [x] SubService 흐름
     - [x] Vendor 틀
 
 # 3차 체크리스트 (메인 스트림)

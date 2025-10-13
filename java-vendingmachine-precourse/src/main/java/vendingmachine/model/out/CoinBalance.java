@@ -1,7 +1,4 @@
 package vendingmachine.model.out;
 
-import java.util.EnumMap;
-
-import vendingmachine.model.Coin;
-
-public record CoinBalance(EnumMap<Coin, Integer> map) { }
+public record CoinBalance(int n10, int n50, int n100, int n500) {
+}

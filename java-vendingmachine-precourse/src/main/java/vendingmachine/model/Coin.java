@@ -13,5 +13,14 @@ public enum Coin {
         this.amount = amount;
     }
 
-    // 추가 기능 구현
+    public static Coin of(int v) {
+        var name = "COIN_" + v;
+        return Coin.valueOf(name);
+    }
+
+    // TODO ? getter를 만들지 않고 처리할 수 없을까?
+    public int getAmount() {
+        return amount;
+    }
+
 }
