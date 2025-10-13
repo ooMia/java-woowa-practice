@@ -1,6 +1,10 @@
 # NOTE
 
 - 특정한 작업(ex. 사용자 입력) 시, 반환할 예외 클래스를 Constant에 반영해두기
+- 이 난리쳐보니까 핵심 객체가 있는 상황에서는 왜 도메인 주도로 시작하는 게 좋을지 알게 됨
+  - 왜냐하면 클래스 역할에 대한 고민을 토대로 일단 완성하고 나면, 거기서 생긴 제약을 기반으로 확장할 수 있으니까
+  - README 보고 클래스가 직접 구현해야 하는 기능에 넣으면, 나중에 "어, 이 기능 있었는데, 이거 활용해서 ~하게 하면 되겠다."로 이어지니까 그 처리 경계를 정하는데 도움이 됨
+- 보일러플레이트에서 시작된 코드가 지금처럼 깔끔하게 진행되지 않는다는 것은, 해결해야할 문제가 객체지향적으로 주어졌을 때, 현재 체크리스트 순서는 이에 부합하지 않는다는 결론
 
 ## 코딩 스타일 가이드
 
@@ -67,7 +71,7 @@ dependencies {
 ### .vscode/settings.json
 
 - `java.format.settings.url`은 다음 링크를 통해 웹에서 로드해도 된다.
-`https://gist.githubusercontent.com/ooMia/1a47bdf9ef00c3466d1f506aa99f4acb/raw/d59ed8e847a582970c3f62e1e9883e3b1c62e908/woowa-style.xml`
+  `https://gist.githubusercontent.com/ooMia/1a47bdf9ef00c3466d1f506aa99f4acb/raw/d59ed8e847a582970c3f62e1e9883e3b1c62e908/woowa-style.xml`
 
 ```json
 {
