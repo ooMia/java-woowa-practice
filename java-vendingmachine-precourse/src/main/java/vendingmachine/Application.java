@@ -1,8 +1,5 @@
 package vendingmachine;
 
-import java.util.List;
-
-import vendingmachine.model.Coin;
 import vendingmachine.model.Vendor;
 import vendingmachine.model.in.Item;
 import vendingmachine.model.in.UserBalance;
@@ -23,8 +20,8 @@ public class Application {
 
             Vendor vendor = new Vendor();
             VendorBalance vendorBalance = api.inputVendorBalance();
-            List<Coin> coins = api.toRandomCoins(vendorBalance);
-            vendor.addVendorBalance(coins);
+            // List<Coin> coins = api.toRandomCoins(vendorBalance);
+            vendor.addVendorBalance(vendorBalance);
 
             // Coin이라는 클래스를 사용해서
             // 특수한 방법으로 vendor를 내가 다루는 방법은 controller 통해서 처리
