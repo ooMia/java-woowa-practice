@@ -9,7 +9,7 @@
 - [x] model.in / out
 - [x] ErrorCode enum
 - [x] model.in 제약 반영
-- [ ] view.Message
+- [x] view.Message
 
 # 2차 체크리스트 (설계)
 
