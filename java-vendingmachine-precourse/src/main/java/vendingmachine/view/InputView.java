@@ -1,7 +1,9 @@
 package vendingmachine.view;
 
-import vendingmachine.model.in.Boo;
-import vendingmachine.model.in.Foo;
+import vendingmachine.model.in.Item;
+import vendingmachine.model.in.UserBalance;
+import vendingmachine.model.in.VendorBalance;
+import vendingmachine.model.in.VendorItems;
 import vendingmachine.util.ExceptionUtil;
 
 public class InputView {
@@ -10,11 +12,13 @@ public class InputView {
         return ExceptionUtil.unsupported("InputView::instruction", cls.getSimpleName());
     }
 
-    // TODO map instruction message for each model.in class
+    // map instruction message for each model.in class
 
     public <T> String instruction(Class<T> target) {
-        if (target == Foo.class) return Message.IN_.toString();
-        if (target == Boo.class) return "input boo: ";
+        if (target == VendorBalance.class) return Message.IN_VENDOR_BALANCE.toString();
+        if (target == VendorItems.class) return Message.IN_VENDOR_ITEMS.toString();
+        if (target == UserBalance.class) return Message.IN_USER_BALANCE.toString();
+        if (target == Item.class) return Message.IN_USER_ITEM.toString();
         throw unsupported(target);
     }
 

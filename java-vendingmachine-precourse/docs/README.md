@@ -16,6 +16,7 @@
 - [x] Application::main -> Controller 흐름
 - [x] Controller -> MainService 흐름
 - [x] Controller -> InputView/OutputView 흐름
+- [x] InputView 구현
 - [ ] MainService -> Parser 흐름
 - [ ] MainService -> Mapper 흐름
 - [ ] SubService 흐름
@@ -25,7 +26,7 @@
 
 - [ ] SubService 구현 및 단위 테스트
 - [ ] MainService 구현
-- [ ] InputView/OutputView 구현 (Message 활용)
+- [ ] OutputView 구현
 
 # 4차 체크리스트 (테스트)
 
