@@ -4,11 +4,9 @@ import java.util.List;
 
 class IntegerDefaultDelimiter extends DefaultDelimiter<Integer> {
 
-    private static final String REGEX = "[,:]";
-
     @Override
     protected List<String> split(String expression) {
-        return List.of(expression.split(REGEX));
+        return List.of(expression.split(DefaultDelimiter.DEFAULT_REGEX));
     }
 
     @Override

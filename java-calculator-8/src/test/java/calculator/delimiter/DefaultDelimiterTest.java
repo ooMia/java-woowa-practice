@@ -54,6 +54,7 @@ class DefaultDelimiterTest {
     class DoubleDelimiter {
 
         @BeforeEach
+        @SuppressWarnings("deprecation")
         void setUp() {
             delimiter = new DoubleDefaultDelimiter();
         }

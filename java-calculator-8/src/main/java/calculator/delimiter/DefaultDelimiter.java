@@ -5,8 +5,10 @@ import java.util.SequencedCollection;
 
 abstract class DefaultDelimiter<T extends Number> implements Delimiter<T> {
 
+    protected static final String DEFAULT_REGEX = "[,:]";
+
     @Override
-    public final Iterable<T> parse(String expression) {
+    public final Iterable<T> parse(String expression) throws IllegalArgumentException {
         if (expression == null || expression.isEmpty()) {
             return Collections.emptyList();
         }
