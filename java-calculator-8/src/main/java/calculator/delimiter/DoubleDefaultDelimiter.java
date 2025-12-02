@@ -1,29 +1,23 @@
 package calculator.delimiter;
 
-import java.util.Arrays;
 import java.util.List;
 
-class DoubleDefaultDelimiter implements Delimiter<Double> {
+class DoubleDefaultDelimiter extends DefaultDelimiter<Double> {
 
     private static final String REGEX = "[,:]";
 
     @Override
-    public Iterable<Double> parse(String expression) {
-        if (expression == null || expression.isEmpty()) {
-            return List.of();
-        }
+    protected List<String> split(String expression) {
+        return List.of(expression.split(REGEX));
+    }
 
-        var tokens = expression.split(REGEX);
-        return Arrays.stream(tokens).map(s -> {
-            try {
-                var token = Double.parseDouble(s);
-                if (token <= 0) {
-                    throw new IllegalArgumentException();
-                }
-                return token;
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException();
-            }
-        }).toList();
+    @Override
+    protected Double parseNumber(String token) {
+        return Double.parseDouble(token);
+    }
+
+    @Override
+    protected boolean isValid(Double number) {
+        return number > 0;
     }
 }
