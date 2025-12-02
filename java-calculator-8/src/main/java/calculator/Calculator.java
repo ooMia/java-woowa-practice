@@ -21,5 +21,4 @@ public class Calculator {
             throw new IllegalArgumentException();
         }
     }
-
 }
