@@ -1,6 +1,7 @@
 package calculator.delimiter;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
@@ -20,14 +21,28 @@ class CustomDelimiterTest {
     @Nested
     class IntegerDelimiter {
 
-        private static IntStream charRange() {
-            return IntStream.rangeClosed(0x00, 0xFF)
+        private static IntStream basicLatin() {
+            return IntStream.rangeClosed(0x00, 0x7F) // 128
                     .filter(value -> value != ',' && value != ':')
                     .filter(value -> value < '0' || '9' < value);
         }
 
         private static IntStream charRangeNumbers() {
             return IntStream.rangeClosed('0', '9');
+        }
+
+        private static IntStream emoji() {
+            java.util.function.Supplier<Integer> utf8Code = () -> {
+                byte[] utf8Bytes = new byte[]{(byte) 0xF0, (byte) 0x9F, (byte) 0xA4, (byte) 0x94};
+                // String constructor use default charset UTF-8
+                return new String(utf8Bytes).codePointAt(0);
+            };
+
+            return IntStream.of("🤔".codePointAt(0), // internally treated as UTF-16
+                    "\uD83E\uDD14".codePointAt(0), // UTF-16
+                    0x0001_F914, // UTF-32
+                    utf8Code.get() // UTF-8
+            );
         }
 
         @BeforeEach
@@ -44,20 +59,27 @@ class CustomDelimiterTest {
         }
 
         @ParameterizedTest
-        @MethodSource(value = "charRange")
-        void testParse_basic(int code) {
+        @MethodSource(value = "basicLatin")
+        void testParse_function(int code) {
             var expression = String.format("//%c\\n1%c2%c3", code, code, code);
             var actual = delimiter.parse(expression);
             assertThat(actual).isEqualTo(List.of(1, 2, 3));
         }
 
-        /**
-         * UTF16 범위로의 확장성을 설명하는 테스트.<br> `IntStream.rangeClosed(0x00, 0xFFFF)` 범위의 파라미터 테스트도 통과한다.
-         */
         @Test
-        void testParse_withUTF16() {
-            int code = "🤔".codePoints().findFirst().orElseThrow(); // equivalent to "\uD83E\uDD14"
+        void testParse_BMPWithoutBasicLatin() {
+            var codes = IntStream.rangeClosed(0x80, 0xFFFF);
+            codes.forEach(this::testParse_function);
+        }
+
+        /**
+         * BMP(Basic Multilingual Plane) 외부 문자의 surrogate pair 매칭 케이스
+         */
+        @ParameterizedTest
+        @MethodSource("emoji")
+        void testParse_withSurrogatePair(int code) {
             var expression = String.format("//%c\\n1%c2%c3", code, code, code);
+            assertEquals("//🤔\\n1🤔2🤔3", expression);
             var actual = delimiter.parse(expression);
             assertThat(actual).isEqualTo(List.of(1, 2, 3));
         }
