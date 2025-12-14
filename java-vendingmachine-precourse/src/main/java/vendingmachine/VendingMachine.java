@@ -18,53 +18,45 @@ public class VendingMachine {
     // vendor operations
 
     public void supplyCoins(Map<Coin, Integer> coins) throws IllegalArgumentException {
-        // 개수 음수 x
+        coins.values().forEach(quantity -> GlobalExceptions.INVALID_ARGUMENTS.throwsIf(quantity < 0));
         vendor.addBalance(coins);
     }
 
     public void supplyStocks(List<Stock> stocks) throws IllegalArgumentException {
-        // 상품 이름 같은데 가격 다르면 x
-        for (Stock stock : stocks) {
-            vendor.addStock(stock);
-        }
+        stocks.forEach(vendor::addStock);
     }
 
     // user operations
 
     public void depositUserBalance(int balance) throws IllegalArgumentException {
-        // 음수이면 x
+        GlobalExceptions.INVALID_ARGUMENTS.throwsIf(balance < 0);
         user.addBalance(balance);
     }
 
-    public int getUserBalance() {
+    public long getUserBalance() {
         return user.getBalance();
     }
 
-    public boolean canUserPurchaseSomething(int balance) {
-        // 사용자가 상품을 구매할 수 없는 상황이 되면 잔돈을 반환하면 돼
-        // 구체화하면 남은 금액이 상품의 최저 가격보다 적거나, 모든 상품이 소진된 경우야
-        return false;
+    public boolean canUserPurchaseSomething() {
+        // 사용자가 상품을 구매할 수 있으려면 1. 어떤 상품이 존재하고, 2. 사용자 잔액으로 최저 상품을 구매할 수 있어야 해
+        return vendor.isStockAvailable() && vendor.findCheapestStock().price() <= user.getBalance();
     }
 
     public void purchase(String itemName) throws IllegalArgumentException {
-        // stock 조회
-        // 등록 안 된 상품이면 x
-        Stock stock = vendor.findStockByName(itemName).orElseThrow(GlobalExceptions.INVALID_ARGUMENTS::exception);
-
-        // 현재 보유 금액으로 못 사면 x
-        int balance = user.getBalance();
-        GlobalExceptions.INVALID_ARGUMENTS.throwsIf(balance < stock.price());
-
-        // 구매
-        vendor.popSingleStockByName(itemName);
+        Stock stock = vendor.findStockByName(itemName)
+                .orElseThrow(GlobalExceptions.INVALID_ARGUMENTS::exception); // 존재하지 않는 아이템
+        var balance = user.getBalance();
+        GlobalExceptions.INVALID_ARGUMENTS.throwsIf(balance < stock.price()); // 잔액 부족
+        vendor.popSingleStockByName(itemName); // 구매 처리
     }
 
     public SortedMap<Coin, Integer> withdrawUserBalance() {
-        // Operator를 활용하여 테스트하고 구현할 부분
-        return null;
-    }
+        // 사용자의 잔액은 vendor의 잔금을 기준으로 동전의 형태로 인출한다.
+        long userBalance = user.getBalance();
+        Map<Coin, Integer> result = vendor.withdrawCoins(userBalance);
 
-    static class Operator {
-        // 사용자의 잔액이
+        // 사용자의 산술적 잔액은 모두 vendor가 가진다. 계좌 이체처럼 보유 동전에는 영향을 미치지 않는다.
+        vendor.addBalance(user.withdraw(userBalance));
+        return Coin.descSortedCoins(result);
     }
 }

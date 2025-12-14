@@ -22,7 +22,7 @@ final class OutputView {
         }
     }
 
-    void printUserBalanceInProgress(int balance) {
+    void printUserBalanceInProgress(long balance) {
         console.printLine(String.format("투입 금액: %s원", balance));
     }
 

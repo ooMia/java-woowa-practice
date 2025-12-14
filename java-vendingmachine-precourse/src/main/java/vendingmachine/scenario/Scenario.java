@@ -16,7 +16,9 @@ public class Scenario extends AbstractScenario {
     }
 
     /*
-     *  사용자의 투입액은 `int`로 받아서 산술 연산을 적용하면 돼
+     *  투입 금액으로는 동전을 생성하지 않아
+     *  \+ `사용자가 동전을 넣어서 자판기의 상태가 변하는 경우`를 생각하지 말라는 뜻이야.
+     *  \+ 자판기의 동전은 최초 초기화 이후로 불변이라 생각하고, `int`로 받아서 산술 연산을 적용하면 돼
      *
      *  상품은 (상품명, 가격)으로 정의되고, 추가적으로 수량 정보가 존재할 수 있어
      *  상품 가격은 100원 이상이고, 10원으로 나누어 떨어져야 해
@@ -54,9 +56,9 @@ public class Scenario extends AbstractScenario {
         });
 
         while (true) {
-            int balance = machine.getUserBalance();
+            long balance = machine.getUserBalance();
             outputView.printUserBalanceInProgress(balance);
-            if (!machine.canUserPurchaseSomething(balance)) {
+            if (!machine.canUserPurchaseSomething()) {
                 break;
             }
             exceptionHandler.tryUntilValid(() -> {
