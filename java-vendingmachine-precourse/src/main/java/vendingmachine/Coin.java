@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import java.util.Map;
+
 public enum Coin {
     COIN_500(500),
     COIN_100(100),
@@ -10,6 +12,10 @@ public enum Coin {
 
     Coin(final int amount) {
         this.amount = amount;
+    }
+
+    public static Map<Coin, Integer> ofRandom(int balance) {
+        return null;
     }
 
     // 추가 기능 구현
