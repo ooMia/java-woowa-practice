@@ -3,10 +3,12 @@ package vendingmachine.scenario;
 import java.util.List;
 import vendingmachine.Stock;
 import vendingmachine.util.Console;
+import vendingmachine.util.Parser;
 
 @SuppressWarnings({"ALL", "java:S1068"})
 final class InputView {
 
+    private final Parser semicolonParser = new Parser(';');
     private final Console console;
 
     public InputView(Console console) {
@@ -19,8 +21,8 @@ final class InputView {
 
     List<Stock> readStocks() {
         // 상품의 목록은 각각을 대괄호(`[]`)로 묶어 세미콜론(`;`)으로 구분 (`[상품A];[상품B]`)
-        // 각 상품의 속성(상품명, 가격, 수량)은 대괄호를 제외하고, 쉼표(`,`)로 구분 (`[콜라,1500,20]`)
-        return null;
+        // 나머지는 Stock.of를 활용하자
+        return semicolonParser.parse(console.readLine(), Stock::of);
     }
 
     int readUserBalance() {

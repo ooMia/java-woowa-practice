@@ -26,6 +26,9 @@ camp.nextstep.edu.missionutils.Console.readLine()
 public enum Coin 활용: 필드(인스턴스 변수)인 `amount`의 접근 제어자 private을 변경할 수 없다.
 ```
 
+- 자판기는 상태를 가지기 때문에 테스트가 어렵다. 자판기의 핵심은 계산이다.
+   - 따라서, 별도의 연산기 클래스를 작성하여 별도의 상태 없이 테스트 가능하도록 만든다.
+
 ## 마무리
 
 - 점검: 요구사항을 놓쳤을 가능성을 염두에 둔다.
