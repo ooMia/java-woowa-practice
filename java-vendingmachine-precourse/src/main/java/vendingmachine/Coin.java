@@ -29,6 +29,8 @@ public enum Coin {
         return Collections.unmodifiableSortedMap(container);
     }
 
+    public static final List<Integer> COIN_AMOUNT_TYPES = List.of(10, 50, 100, 500);
+
     // balance를 상한으로 갖고 최대한 근접한 가치를 갖는 <Coin, 개수> 집합으로 표현
     // 최종 결과는 coin의 가치에 따라 내림차순 정렬된 SortedMap으로 반환
     public static SortedMap<Coin, Integer> ofRandom(int balance) {
@@ -36,9 +38,8 @@ public enum Coin {
         for (var coin : Coin.values()) {
             container.putIfAbsent(coin, 0);
         }
-        var coinAmountTypes = List.of(10, 50, 100, 500);
         while (balance >= 10) {
-            int random = Randoms.pickNumberInList(coinAmountTypes);
+            int random = Randoms.pickNumberInList(COIN_AMOUNT_TYPES);
             if (balance < random) {
                 continue;
             }
@@ -48,7 +49,7 @@ public enum Coin {
         return descSortedCoins(container);
     }
 
-    // 나중에 private Map으로 리팩토링 가능
+    // TODO 나중에 private Map으로 리팩토링 가능
     static Coin of(int amount) {
         for (var coin : Coin.values()) {
             if (coin.amount == amount) {
@@ -61,6 +62,4 @@ public enum Coin {
     public int getAmount() {
         return amount;
     }
-
-    // 추가 기능 구현
 }
