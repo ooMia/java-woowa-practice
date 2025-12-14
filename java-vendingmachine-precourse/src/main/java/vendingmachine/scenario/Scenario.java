@@ -1,7 +1,7 @@
 package vendingmachine.scenario;
 
 import java.util.List;
-import java.util.Map;
+import java.util.SortedMap;
 import vendingmachine.Coin;
 import vendingmachine.Stock;
 import vendingmachine.VendingMachine;
@@ -16,9 +16,6 @@ public class Scenario extends AbstractScenario {
     }
 
     /*
-     *  자판기는 현금을 동전의 형태로 전달받아야 해 `List<Coin>`
-     *  이 때, 전달하는 동전은 요구사항에 따라 무작위로 생성되어야 해
-     *
      *  사용자의 투입액은 `int`로 받아서 산술 연산을 적용하면 돼
      *
      *  상품은 (상품명, 가격)으로 정의되고, 추가적으로 수량 정보가 존재할 수 있어
@@ -40,35 +37,35 @@ public class Scenario extends AbstractScenario {
     @Override
     public void run() {
         exceptionHandler.tryUntilValid(() -> {
-            int balance = inputView.readVendingMachineBalance(); // 자판기가 보유하고 있는 금액을 입력해 주세요.
-            Map<Coin, Integer> coins = Coin.ofRandom(balance);
+            int balance = inputView.readVendingMachineBalance();
+            SortedMap<Coin, Integer> coins = Coin.ofRandom(balance);
             machine.supplyCoins(coins);
-            outputView.printVendingMachineBalance(coins); // 자판기가 보유한 동전 (500원 - 0개, 100원 - 4개...)
+            outputView.printVendingMachineBalance(coins);
         });
 
         exceptionHandler.tryUntilValid(() -> {
-            List<Stock> stocks = inputView.readStocks(); // 상품명과 가격, 수량을 입력해 주세요.
+            List<Stock> stocks = inputView.readStocks();
             machine.supplyStocks(stocks);
         });
 
         exceptionHandler.tryUntilValid(() -> {
-            int balance = inputView.readUserBalance(); // 투입 금액을 입력해 주세요.
+            int balance = inputView.readUserBalance();
             machine.depositUserBalance(balance);
         });
 
         while (true) {
             int balance = machine.getUserBalance();
-            outputView.printUserBalanceInProgress(balance); // 투입 금액: 3000, 1500, 500원
+            outputView.printUserBalanceInProgress(balance);
             if (!machine.canUserPurchaseSomething(balance)) {
                 break;
             }
             exceptionHandler.tryUntilValid(() -> {
-                String itemName = inputView.readPurchaseItemName(); // 구매할 상품명을 입력해 주세요.
+                String itemName = inputView.readPurchaseItemName();
                 machine.purchase(itemName);
             });
         }
 
-        Map<Coin, Integer> balance = machine.withdrawUserBalance();
-        outputView.printUserBalanceComplete(balance); // 잔돈 (100원 - 4개, 50원 - 1개, ...)
+        SortedMap<Coin, Integer> balance = machine.withdrawUserBalance();
+        outputView.printUserBalanceComplete(balance);
     }
 }

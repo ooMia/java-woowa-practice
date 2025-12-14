@@ -11,6 +11,6 @@ class Vault extends Wallet {
         return Optional.empty();
     }
 
-    void popStockByName(String itemName) {
+    void popSingleStockByName(String itemName) {
     }
 }

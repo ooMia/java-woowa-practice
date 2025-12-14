@@ -2,6 +2,7 @@ package vendingmachine;
 
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
 import vendingmachine.util.GlobalExceptions;
 
 public class VendingMachine {
@@ -55,14 +56,15 @@ public class VendingMachine {
         GlobalExceptions.INVALID_ARGUMENTS.throwsIf(balance < stock.price());
 
         // 구매
-        vendor.popStockByName(itemName);
+        vendor.popSingleStockByName(itemName);
     }
 
-    public Map<Coin, Integer> withdrawUserBalance() {
+    public SortedMap<Coin, Integer> withdrawUserBalance() {
         // Operator를 활용하여 테스트하고 구현할 부분
         return null;
     }
 
     static class Operator {
+        // 사용자의 잔액이
     }
 }
