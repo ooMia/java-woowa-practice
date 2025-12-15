@@ -8,7 +8,7 @@
 - [x] [java-calculator-8](java-calculator-8)
 - [x] [java-baseball-precourse](java-baseball-precourse)
 - [x] [java-racingcar-precourse](java-racingcar-precourse)
-- [ ] [java-vendingmachine-precourse](java-vendingmachine-precourse)
+- [x] [java-vendingmachine-precourse](java-vendingmachine-precourse)
 - [ ] [java-subway-map-precourse](java-subway-map-precourse)
 - [ ] [java-subway-path-precourse](java-subway-path-precourse)
 - [ ] [java-pairmatching-precourse](java-pairmatching-precourse)
