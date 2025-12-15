@@ -1,0 +1,20 @@
+{
+    "java.format.settings.url": "../.vscode/woowa-style.xml",
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "[java]": {
+        "editor.detectIndentation": false,
+        "editor.renderWhitespace": "boundary",
+        "editor.inlayHints.enabled": "on",
+        "editor.parameterHints.enabled": true,
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.suggest.showMethods": true,
+        "editor.suggest.showFields": true,
+    },
+    "java.saveActions.organizeImports": true,
+    "java.codeGeneration.toString.codeStyle": "STRING_FORMAT",
+    "java.completion.favoriteStaticMembers": [
+        "org.assertj.core.api.Assertions.*",
+        "org.junit.Assert.*",
+        "org.junit.jupiter.api.Assertions.*",
+    ],
+}
