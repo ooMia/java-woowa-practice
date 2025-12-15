@@ -2,6 +2,7 @@ package vendingmachine;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import vendingmachine.vault.Stock;
 
 class StockTest {
 

@@ -1,8 +1,7 @@
 package vendingmachine.scenario;
 
-import java.util.SortedMap;
-import vendingmachine.Coin;
 import vendingmachine.util.Console;
+import vendingmachine.vault.Coin;
 
 @SuppressWarnings({"ALL", "java:S1068"})
 final class OutputView {
@@ -13,28 +12,26 @@ final class OutputView {
         this.console = console;
     }
 
-    void printVendingMachineBalance(SortedMap<Coin, Integer> coins) {
-        for (var entry : coins.entrySet()) {
-            var amount = entry.getKey().getAmount();
-            var number = entry.getValue();
-            // 자판기가 보유한 동전은 0개도 출력 (`500원 - 0개, 100원 - 4개, 50원 - 1개, 10원 - 0개`)
-            console.printLine(String.format("%s원 - %s개", amount, number));
-        }
+    void printVendingMachineBalance(Coin.Pocket pocket) {
+        console.printLine("자판기가 보유한 동전");
+        pocket.asDescSortedCoins().forEach(this::printCoinQuantity);
     }
 
     void printUserBalanceInProgress(long balance) {
         console.printLine(String.format("투입 금액: %s원", balance));
     }
 
-    void printUserBalanceComplete(SortedMap<Coin, Integer> coins) {
-        for (var entry : coins.entrySet()) {
-            var amount = entry.getKey().getAmount();
-            var number = entry.getValue();
-            // 사용자 최종 잔액은 0개 생략 (`100원 - 4개, 50원 - 1개`)
-            if (number < 1) {
-                continue;
+    void printUserBalanceComplete(Coin.Pocket pocket) {
+        console.printLine("잔돈");
+        pocket.asDescSortedCoins().forEach((coin, quantity) -> {
+            if (quantity > 0) { // 사용자 최종 잔액은 0개 생략 (`100원 - 4개, 50원 - 1개`)
+                printCoinQuantity(coin, quantity);
             }
-            console.printLine(String.format("%s원 - %s개", amount, number));
-        }
+        });
+    }
+
+    // 자판기가 보유한 동전 출력
+    private void printCoinQuantity(Coin coin, Integer quantity) {
+        console.printLine(String.format("%s원 - %s개", coin.getAmount(), quantity));
     }
 }

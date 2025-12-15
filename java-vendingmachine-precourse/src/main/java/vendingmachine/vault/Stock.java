@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.vault;
 
 import java.util.List;
 import java.util.regex.Pattern;

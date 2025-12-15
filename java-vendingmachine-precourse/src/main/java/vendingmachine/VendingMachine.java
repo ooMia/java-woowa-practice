@@ -1,36 +1,41 @@
 package vendingmachine;
 
-import java.util.List;
-import java.util.Map;
-import java.util.SortedMap;
+import vendingmachine.scenario.Scenario;
 import vendingmachine.util.GlobalExceptions;
+import vendingmachine.vault.Coin;
+import vendingmachine.vault.Coin.Pocket;
+import vendingmachine.vault.CoinWallet;
+import vendingmachine.vault.DigitalWallet;
+import vendingmachine.vault.Inventory;
+import vendingmachine.vault.Stock;
+import vendingmachine.vault.Wallet;
 
 public class VendingMachine {
 
-    private final Vault vendor;
-    private final Wallet user;
+    private final Inventory inventory;
+    private final Wallet<Coin.Pocket> vendor;
+    private final Wallet<Integer> user;
 
     public VendingMachine() {
-        this.vendor = new Vault();
-        this.user = new Wallet();
+        this.inventory = new Inventory();
+        this.vendor = new CoinWallet();
+        this.user = new DigitalWallet();
     }
 
     // vendor operations
 
-    public void supplyCoins(Map<Coin, Integer> coins) throws IllegalArgumentException {
-        coins.values().forEach(quantity -> GlobalExceptions.INVALID_ARGUMENTS.throwsIf(quantity < 0));
-        vendor.addBalance(coins);
+    public void supplyCoins(Coin.Pocket pocket) {
+        vendor.deposit(pocket);
     }
 
-    public void supplyStocks(List<Stock> stocks) throws IllegalArgumentException {
-        stocks.forEach(vendor::addStock);
+    public void supplyStocks(Iterable<Stock> stocks) {
+        stocks.forEach(inventory::addStock);
     }
 
     // user operations
 
-    public void depositUserBalance(int balance) throws IllegalArgumentException {
-        GlobalExceptions.INVALID_ARGUMENTS.throwsIf(balance < 0);
-        user.addBalance(balance);
+    public void depositUserBalance(int balance) {
+        user.deposit(balance);
     }
 
     public long getUserBalance() {
@@ -39,24 +44,28 @@ public class VendingMachine {
 
     public boolean canUserPurchaseSomething() {
         // 사용자가 상품을 구매할 수 있으려면 1. 어떤 상품이 존재하고, 2. 사용자 잔액으로 최저 상품을 구매할 수 있어야 해
-        return vendor.isStockAvailable() && vendor.findCheapestStock().price() <= user.getBalance();
+        return inventory.isStockAvailable() && inventory.findCheapestStock().price() <= user.getBalance();
     }
 
-    public void purchase(String itemName) throws IllegalArgumentException {
-        Stock stock = vendor.findStockByName(itemName)
-                .orElseThrow(GlobalExceptions.INVALID_ARGUMENTS::exception); // 존재하지 않는 아이템
+    public void purchase(String itemName) {
+        Stock stock = inventory.findStockByName(itemName); // 존재하지 않는 아이템
         var balance = user.getBalance();
         GlobalExceptions.INVALID_ARGUMENTS.throwsIf(balance < stock.price()); // 잔액 부족
-        vendor.popSingleStockByName(itemName); // 구매 처리
+        user.withdraw(stock.price());
+        inventory.popSingleStockByName(itemName); // 구매 처리
     }
 
-    public SortedMap<Coin, Integer> withdrawUserBalance() {
-        // 사용자의 잔액은 vendor의 잔금을 기준으로 동전의 형태로 인출한다.
-        long userBalance = user.getBalance();
-        Map<Coin, Integer> result = vendor.withdrawCoins(userBalance);
-
-        // 사용자의 산술적 잔액은 모두 vendor가 가진다. 계좌 이체처럼 보유 동전에는 영향을 미치지 않는다.
-        vendor.addBalance(user.withdraw(userBalance));
-        return Coin.descSortedCoins(result);
+    // DigitalWallet / CoinWallet 사이의 어댑터를 만든다
+    public Coin.Pocket withdrawUserBalance() {
+        var container = new java.util.EnumMap<Coin, Integer>(Coin.class);
+        int userBalance = user.getBalance() % Scenario.PAPER_MONEY_UNIT;
+        for (var entry : vendor.getBalance().asDescSortedCoins().entrySet()) {
+            var coin = entry.getKey();
+            var balanceQuantity = entry.getValue();
+            int maxAffordQuantity = Math.min(balanceQuantity, userBalance / coin.getAmount());
+            container.put(coin, maxAffordQuantity);
+            userBalance -= coin.getAmount() * maxAffordQuantity;
+        }
+        return new Pocket(container);
     }
 }
