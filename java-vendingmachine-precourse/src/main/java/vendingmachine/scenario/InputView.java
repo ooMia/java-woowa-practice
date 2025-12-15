@@ -1,12 +1,16 @@
 package vendingmachine.scenario;
 
+import java.util.List;
+import vendingmachine.Stock;
 import vendingmachine.util.Console;
 import vendingmachine.util.GlobalExceptions;
+import vendingmachine.util.Parser;
 import vendingmachine.util.ValueRules;
 
 @SuppressWarnings({"java:S1144", "ClassCanBeRecord"})
 final class InputView {
 
+    private final Parser semicolonParser = new Parser(';');
     private final Console console;
 
     public InputView(Console console) {
@@ -28,5 +32,12 @@ final class InputView {
         } catch (ValueRules.InvalidValueException e) {
             throw GlobalExceptions.INVALID_ARGUMENTS.exception(e);
         }
+    }
+
+    int readVendingMachineBalance() {
+    }
+
+    List<Stock> readVendingMachineStocks() {
+return         semicolonParser.parse(readNonBlankString(), Stock::of);
     }
 }
