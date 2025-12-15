@@ -3,8 +3,8 @@ package vendingmachine.scenario;
 import java.util.List;
 import vendingmachine.Coin;
 import vendingmachine.Coin.Pocket;
-import vendingmachine.Stock;
 import vendingmachine.IVendingMachine;
+import vendingmachine.Stock;
 import vendingmachine.VendingMachine;
 import vendingmachine.util.Console;
 
@@ -35,7 +35,6 @@ public class Scenario extends AbstractScenario {
         exceptionHandler.tryUntilValid(() -> {
             int balance = inputView.readUserBalance();
             vm.depositUserBalance(balance);
-            return balance;
         });
         while (true) {
             int balance = vm.getUserBalance();

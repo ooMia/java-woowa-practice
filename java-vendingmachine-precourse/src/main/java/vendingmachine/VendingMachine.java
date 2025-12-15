@@ -61,7 +61,7 @@ public class VendingMachine implements IVendingMachine {
         GlobalExceptions.INVALID_STATE.throwsIf(userBalance >= PAPER_MONEY_MIN);
         var container = new java.util.EnumMap<Coin, Integer>(Coin.class);
         for (int amount : Coin.DESC_SORTED_COINS) {
-            Coin coin = Coin.of(amount);
+            Coin coin = Coin.ofAmount(amount);
             int affordableAmount = Math.min(vendorBalance.get(coin), userBalance / amount);
             userBalance -= amount * affordableAmount;
             vendorBalance.merge(coin, -affordableAmount, Integer::sum);

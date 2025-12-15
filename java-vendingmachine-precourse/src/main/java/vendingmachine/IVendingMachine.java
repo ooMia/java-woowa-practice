@@ -2,7 +2,7 @@ package vendingmachine;
 
 import vendingmachine.Coin.Pocket;
 
-public interface IVendingMachine{
+public interface IVendingMachine {
     void depositMachineBalance(Pocket pocket);
 
     void addMachineStock(Stock stock);
