@@ -10,7 +10,7 @@ public record Stock(String name, int price, int quantity) {
     private static final Pattern bracketTrimmer = Pattern.compile("\\[(.+)\\]");
     private static final Parser commaParser = new Parser(',');
 
-    static Stock of(String input) {
+    public static Stock of(String input) {
         var matcher = bracketTrimmer.matcher(input);
         GlobalExceptions.INVALID_ARGUMENTS.throwsIf(!matcher.find());
         var found = matcher.group(1);

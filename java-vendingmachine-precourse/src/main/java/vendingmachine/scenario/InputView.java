@@ -7,7 +7,6 @@ import vendingmachine.util.GlobalExceptions;
 import vendingmachine.util.Parser;
 import vendingmachine.util.ValueRules;
 
-@SuppressWarnings({"java:S1144", "ClassCanBeRecord"})
 final class InputView {
 
     private final Parser semicolonParser = new Parser(';');
@@ -35,9 +34,22 @@ final class InputView {
     }
 
     int readVendingMachineBalance() {
+        console.printLine("자판기가 보유하고 있는 금액을 입력해 주세요.");
+        return readNonNegativeInt();
     }
 
     List<Stock> readVendingMachineStocks() {
-return         semicolonParser.parse(readNonBlankString(), Stock::of);
+        console.printLine("상품명과 가격, 수량을 입력해 주세요.");
+        return semicolonParser.parse(readNonBlankString(), Stock::of);
+    }
+
+    String readUserPurchaseName() {
+        console.printLine("구매할 상품명을 입력해 주세요.");
+        return readNonBlankString();
+    }
+
+    int readUserBalance() {
+        console.printLine("투입 금액을 입력해 주세요.");
+        return readNonNegativeInt();
     }
 }
