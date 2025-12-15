@@ -1,1 +1,8 @@
-# java-vendingmachine-precourse
+# java-precourse
+
+starts at 14:55
+
+1. 시나리오로 문제를 표현한다.
+2. 입출력 형식을 정의한다.
+3. 문제를 가장 단순하게 해결할 수 있는 방법을 생각한다.
+4. 요구사항 문서를 읽어보고 점검한다.
