@@ -14,18 +14,21 @@ import vendingmachine.Coin.Pocket;
 
 class VendingMachineTest {
 
-    private VendingMachine vm;
+    private IVendingMachine vm;
 
     // 500, 100, 50, 10 (in order)
     private static Pocket ofPocket(int... coin) {
         var iter = Arrays.stream(coin).iterator();
-        return new Pocket(Map.of(COIN_500, iter.nextInt(), COIN_100, iter.nextInt(), COIN_50, iter.nextInt(), COIN_10,
-                iter.nextInt()));
+        return new Pocket(Map.of(
+                COIN_500, iter.nextInt(),
+                COIN_100, iter.nextInt(),
+                COIN_50, iter.nextInt(),
+                COIN_10, iter.nextInt()));
     }
 
     @BeforeEach
     void setUp() {
-        vm = new VendingMachineImpl();
+        vm = new VendingMachine();
     }
 
     @Test

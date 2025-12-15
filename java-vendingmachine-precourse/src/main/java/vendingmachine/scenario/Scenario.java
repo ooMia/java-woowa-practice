@@ -4,17 +4,16 @@ import java.util.List;
 import vendingmachine.Coin;
 import vendingmachine.Coin.Pocket;
 import vendingmachine.Stock;
+import vendingmachine.IVendingMachine;
 import vendingmachine.VendingMachine;
-import vendingmachine.VendingMachineImpl;
 import vendingmachine.util.Console;
 
 public class Scenario extends AbstractScenario {
-    private final VendingMachine vm;
+    private final IVendingMachine vm;
 
     protected Scenario(Console console) {
         super(console);
-        // TODO impl
-        vm = new VendingMachineImpl();
+        vm = new VendingMachine();
     }
 
     public static Runnable ofDefault() {

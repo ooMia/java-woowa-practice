@@ -27,6 +27,10 @@ public enum Coin {
         return INTEGER_COIN_MAP.get(amount);
     }
 
+    static Coin of(int amount) {
+        return INTEGER_COIN_MAP.get(amount);
+    }
+
     public int getAmount() {
         return amount;
     }
@@ -40,7 +44,7 @@ public enum Coin {
             for (Coin c : Coin.values()) {
                 container.put(c, 0);
             }
-            while (balance >= 10) {
+            while (balance >= MIN_COIN) {
                 int random = Randoms.pickNumberInList(List.of(10, 50, 100, 500));
                 if (balance < random) {
                     continue;
