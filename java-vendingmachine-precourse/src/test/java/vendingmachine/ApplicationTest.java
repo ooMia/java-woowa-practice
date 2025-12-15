@@ -5,7 +5,6 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("NonAsciiCharacters")
@@ -13,7 +12,6 @@ class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
 
     @Test
-    @Disabled("통합 테스트 임시 비활성화")
     void 기능_테스트() {
         assertRandomNumberInListTest(() -> {
             run("450", "[콜라,1500,20];[사이다,1000,10]", "3000", "콜라", "사이다");
@@ -23,7 +21,6 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    @Disabled("통합 테스트 임시 비활성화")
     void 예외_테스트() {
         assertSimpleTest(() -> {
             runException("-1");

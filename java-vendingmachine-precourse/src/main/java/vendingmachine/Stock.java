@@ -9,6 +9,12 @@ public record Stock(String name, int price, int quantity) {
     @SuppressWarnings("RegExpRedundantEscape")
     private static final Pattern bracketTrimmer = Pattern.compile("\\[(.+)\\]");
     private static final Parser commaParser = new Parser(',');
+    private static final int MIN_PRICE = 100;
+
+    public Stock {
+        GlobalExceptions.INVALID_ARGUMENTS.throwsIf(price < MIN_PRICE);
+        GlobalExceptions.INVALID_ARGUMENTS.throwsIf(price % Coin.MIN_COIN != 0);
+    }
 
     public static Stock of(String input) {
         var matcher = bracketTrimmer.matcher(input);

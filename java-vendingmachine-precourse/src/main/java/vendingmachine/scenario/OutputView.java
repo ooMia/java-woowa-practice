@@ -1,5 +1,6 @@
 package vendingmachine.scenario;
 
+import vendingmachine.Coin;
 import vendingmachine.Coin.Pocket;
 import vendingmachine.util.Console;
 
@@ -19,15 +20,15 @@ final class OutputView {
 
     void printUserChange(Pocket pocket) {
         console.printLine("잔돈");
-        pocket.coins().forEach((value, quantity) -> {
+        pocket.coins().forEach((coin, quantity) -> {
             if (quantity >= 1) {
-                printCoinQuantity(value, quantity);
+                printCoinQuantity(coin, quantity);
             }
         });
     }
 
-    private void printCoinQuantity(Integer value, Integer quantity) {
-        console.printLine(String.format("%s원 - %s개", value, quantity));
+    private void printCoinQuantity(Coin coin, int quantity) {
+        console.printLine(String.format("%s원 - %s개", coin.getAmount(), quantity));
     }
 
     void printUserBalance(int balance) {

@@ -5,6 +5,7 @@ import vendingmachine.Coin;
 import vendingmachine.Coin.Pocket;
 import vendingmachine.Stock;
 import vendingmachine.VendingMachine;
+import vendingmachine.VendingMachineImpl;
 import vendingmachine.util.Console;
 
 public class Scenario extends AbstractScenario {
@@ -13,7 +14,7 @@ public class Scenario extends AbstractScenario {
     protected Scenario(Console console) {
         super(console);
         // TODO impl
-        vm = null;
+        vm = new VendingMachineImpl();
     }
 
     public static Runnable ofDefault() {
@@ -25,12 +26,12 @@ public class Scenario extends AbstractScenario {
         exceptionHandler.tryUntilValid(() -> {
             int balance = inputView.readVendingMachineBalance();
             var pocket = Coin.Pocket.ofRandom(balance);
-            vm.addMachineBalance(pocket);
+            vm.depositMachineBalance(pocket);
             outputView.printVendingMachineBalance(pocket);
         });
         exceptionHandler.tryUntilValid(() -> {
             List<Stock> stocks = inputView.readVendingMachineStocks();
-            vm.addMachineStocks(stocks);
+            stocks.forEach(vm::addMachineStock);
         });
         exceptionHandler.tryUntilValid(() -> {
             int balance = inputView.readUserBalance();
