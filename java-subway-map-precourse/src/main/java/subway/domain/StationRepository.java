@@ -1,22 +1,41 @@
 package subway.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import subway.util.GlobalExceptions;
 
 public class StationRepository {
-    private static final List<Station> stations = new ArrayList<>();
+    private static final Set<Station> stations = new HashSet<>();
+
+    private StationRepository() {
+        /* no-op */
+    }
 
     public static List<Station> stations() {
-        return Collections.unmodifiableList(stations);
+        return stations.stream().toList();
     }
 
     public static void addStation(Station station) {
-        stations.add(station);
+        GlobalExceptions.INVALID_ARGUMENTS.throwsIf(!stations.add(station));
     }
 
     public static boolean deleteStation(String name) {
-        return stations.removeIf(station -> Objects.equals(station.getName(), name));
+        var station = new Station(name);
+        GlobalExceptions.INVALID_ARGUMENTS.throwsIf(IntervalRepository.isRegistered(station));
+        return stations.remove(station);
+    }
+
+    public static Optional<Station> findStationByName(String stationName) {
+        try {
+            return stations.stream().filter(station -> station.getName().equals(stationName)).findAny();
+        } catch (NullPointerException e) {
+            throw GlobalExceptions.INVALID_ARGUMENTS.exception(e);
+        }
+    }
+
+    static void clear() {
+        stations.clear();
     }
 }

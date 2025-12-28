@@ -11,6 +11,7 @@ public final class ValueRules {
     public static final CanValidate<Integer> POSITIVE = new OfAny<>(value -> value > 0);
     public static final CanValidate<Integer> NON_NEGATIVE = new OfAny<>(value -> value >= 0);
     public static final CanValidate<String> NON_BLANK = new OfAny<>(value -> !value.isBlank());
+    public static final CanValidate<String> SINGLE_CHAR = new OfAny<>(value -> value.length() == 1);
 
     private ValueRules() {
         /* no-op */
