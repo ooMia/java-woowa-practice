@@ -21,6 +21,10 @@ public class StationRepository {
         GlobalExceptions.INVALID_ARGUMENTS.throwsIf(!stations.add(station));
     }
 
+    public static void addStation(String name) {
+        stations.add(new Station(name));
+    }
+
     public static boolean deleteStation(String name) {
         var station = new Station(name);
         GlobalExceptions.INVALID_ARGUMENTS.throwsIf(IntervalRepository.isRegistered(station));
@@ -35,7 +39,8 @@ public class StationRepository {
         }
     }
 
-    static void clear() {
+    public static void clear() {
         stations.clear();
     }
+
 }

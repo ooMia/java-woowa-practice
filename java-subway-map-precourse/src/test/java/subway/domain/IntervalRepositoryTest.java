@@ -31,7 +31,7 @@ class IntervalRepositoryTest {
 
         @AfterEach
         void tearDown() {
-            RepositoryUtil.resetRepositories();
+            TestUtil.resetRepositories();
         }
 
         private void addInterval(String lineName, String stationName, int oneBasedIndex) {
@@ -100,7 +100,7 @@ class IntervalRepositoryTest {
 
         @AfterEach
         void tearDown() {
-            RepositoryUtil.resetRepositories();
+            TestUtil.resetRepositories();
         }
 
         @SuppressWarnings("SameParameterValue")

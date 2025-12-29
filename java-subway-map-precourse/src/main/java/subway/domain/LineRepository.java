@@ -1,7 +1,7 @@
 package subway.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -9,18 +9,18 @@ import subway.util.GlobalExceptions;
 
 @SuppressWarnings("java:S1118")
 public class LineRepository {
-    private static final List<Line> lines = new ArrayList<>();
+    private static final List<Line> lines = new LinkedList<>();
 
     public static List<Line> lines() {
         return Collections.unmodifiableList(lines);
     }
 
     static void addLine(Line line) {
-        GlobalExceptions.INVALID_ARGUMENTS.throwsIf(lines.stream().anyMatch(line::equals));
+        GlobalExceptions.INVALID_ARGUMENTS.throwsIf(lines.contains(line));
         lines.add(line);
     }
 
-    public static boolean deleteLineByName(String name) {
+    public static boolean deleteLine(String name) {
         var res1 = lines.removeIf(line -> Objects.equals(line.getName(), name));
         var res2 = IntervalRepository.removeLine(name);
         return res1 && res2;
@@ -34,7 +34,7 @@ public class LineRepository {
         }
     }
 
-    static void clear() {
+    public static void clear() {
         lines.clear();
     }
 

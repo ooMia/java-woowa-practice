@@ -146,6 +146,14 @@ public final class ExceptionUtils {
             }
         }
 
+        public void failsafe(Runnable runnable) {
+            try {
+                runnable.run();
+            } catch (IllegalArgumentException e) {
+                console.printLine(e.getMessage());
+            }
+        }
+
         @FunctionalInterface
         public interface TargetSupplier<T> {
             T get() throws IllegalArgumentException;

@@ -1,11 +1,12 @@
 package subway.domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedHashMap;
+import java.util.SequencedMap;
+import subway.dto.IntervalDto;
 import subway.util.GlobalExceptions;
 
 public class IntervalRepository {
-    private static final Map<Line, Interval> intervalMap = new HashMap<>();
+    private static final SequencedMap<Line, Interval> intervalMap = new LinkedHashMap<>();
 
     private IntervalRepository() {
         /* no-op */
@@ -33,18 +34,25 @@ public class IntervalRepository {
         return intervalMap.get(line);
     }
 
-    static void clear() {
+    public static void clear() {
         intervalMap.clear();
     }
 
     static boolean isRegistered(Station station) {
-        return intervalMap.values().stream()
-                .map(Interval::getStations)
+        return intervalMap.values().stream().map(Interval::getStations)
                 .anyMatch(stations -> stations.contains(station));
     }
 
     static boolean removeLine(String lineName) {
         var line = new Line(lineName);
         return intervalMap.remove(line) != null;
+    }
+
+    public static Iterable<IntervalDto> getIntervals() {
+        return intervalMap.entrySet().stream().map(e -> {
+            var lineName = e.getKey().getName();
+            var stationNames = e.getValue().getStations().stream().map(Station::getName).toList();
+            return new IntervalDto(lineName, stationNames);
+        }).toList();
     }
 }

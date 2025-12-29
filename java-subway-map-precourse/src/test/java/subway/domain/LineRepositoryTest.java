@@ -20,7 +20,7 @@ class LineRepositoryTest {
 
     @AfterEach
     void tearDown() {
-        RepositoryUtil.resetRepositories();
+        TestUtil.resetRepositories();
     }
 
     @Test
@@ -45,7 +45,10 @@ class LineRepositoryTest {
 
     @Test
     @DisplayName("지하철 노선을 삭제할 수 있다.")
-    void deleteLineByName() {
+    void deleteLine() {
+        addLine();
+        LineRepository.deleteLine("3호선");
+        TestUtil.assertThatThrownBy(() -> LineRepository.findLineByName("3호선"));
     }
 
     @Test

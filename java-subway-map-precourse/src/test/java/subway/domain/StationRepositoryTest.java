@@ -15,11 +15,6 @@ class StationRepositoryTest {
         Assertions.assertDoesNotThrow(() -> StationRepository.addStation(new Station(stationName)));
     }
 
-    @Test
-    @DisplayName("지하철 역의 목록을 조회할 수 있다.")
-    void stations() {
-    }
-
     @Nested
     class deleteStationTest {
 
@@ -30,7 +25,7 @@ class StationRepositoryTest {
 
         @AfterEach
         void tearDown() {
-            RepositoryUtil.resetRepositories();
+            TestUtil.resetRepositories();
         }
 
         @SuppressWarnings("SameParameterValue")
@@ -65,7 +60,7 @@ class StationRepositoryTest {
 
         @AfterEach
         void tearDown() {
-            RepositoryUtil.resetRepositories();
+            TestUtil.resetRepositories();
         }
 
         @Test
