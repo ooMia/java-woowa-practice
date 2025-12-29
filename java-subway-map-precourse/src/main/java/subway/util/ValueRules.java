@@ -21,6 +21,10 @@ public final class ValueRules {
         return new OfAny<>(assertion);
     }
 
+    public static <T> CanValidate<T> isElementOf(java.util.Collection<T> candidates) {
+        return new OfAny<>(candidates::contains);
+    }
+
     public static CanValidate<String> ofRegexMatched(String regex) {
         return new RegexMatched(regex);
     }

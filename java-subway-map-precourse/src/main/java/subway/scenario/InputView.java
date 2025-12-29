@@ -1,9 +1,7 @@
 package subway.scenario;
 
 import subway.util.Console;
-import subway.util.ExceptionUtils.Problem;
 import subway.util.ValueRules;
-import subway.util.ValueRules.InvalidValueException;
 
 @SuppressWarnings({"ALL", "java:S1068"})
 final class InputView {
@@ -14,57 +12,43 @@ final class InputView {
         this.console = console;
     }
 
-    char readMenuFrom(char... menus) throws IllegalArgumentException {
+    char readMenuFrom(Character... menus) throws IllegalArgumentException {
         console.printLine("## 원하는 기능을 선택하세요.");
-        char menu = readMenu();
-        for (char menuItem : menus) {
-            if (menu == menuItem) {
-                return menu;
-            }
-        }
-        throw InputExceptions.MENU_NOT_AVAILABLE.exception();
+        return readFromList(s -> s.charAt(0), java.util.Arrays.stream(menus).toList());
     }
 
     String readStringWithMessage(String message) {
         console.printLine(message);
-        return readNonBlank();
+        return readWithValidation(ValueRules.NON_BLANK, String::intern);
     }
 
     int readIntWithMessage(String message) {
         console.printLine(message);
-        return readPositiveInt();
+        return readWithValidation(ValueRules.POSITIVE, Integer::parseInt);
     }
 
-    private char readMenu() throws IllegalArgumentException {
+    private <T> T readWithValidation(subway.util.ValueRules.CanValidate<T> validator,
+                                     java.util.function.Function<String, T> converter) {
         try {
-            return ValueRules.SINGLE_CHAR.validate(console.readLine()).charAt(0);
-        } catch (InvalidValueException e) {
-            throw InputExceptions.NON_SINGLE_CHAR.exception(e);
-        }
-    }
-
-    private String readNonBlank() {
-        try {
-            return ValueRules.NON_BLANK.validate(console.readLine());
-        } catch (InvalidValueException e) {
-            throw InputExceptions.BLANK_INPUT.exception(e);
-        }
-    }
-
-    private int readPositiveInt() {
-        try {
-            int number = Integer.parseInt(console.readLine());
-            return ValueRules.POSITIVE.validate(number);
+            String input = console.readLine();
+            T value = converter.apply(input);
+            return validator.validate(value);
+        } catch (subway.util.ValueRules.InvalidValueException e) {
+            throw InputExceptions.VALIDATION_FAILED.exception(e);
         } catch (NumberFormatException e) {
             throw InputExceptions.INVALID_FORMAT.exception(e);
-        } catch (InvalidValueException e) {
-            throw InputExceptions.NON_POSITIVE_INT.exception(e);
         }
     }
 
-    private enum InputExceptions implements Problem {
-        NON_POSITIVE_INT,
-        BLANK_INPUT, MENU_NOT_AVAILABLE, NON_SINGLE_CHAR, INVALID_FORMAT;
+    private <T> T readFromList(java.util.function.Function<String, T> converter, java.util.Collection<T> candidates) {
+        var validator = ValueRules.isElementOf(candidates.stream().toList());
+        return readWithValidation(validator, converter);
+    }
+
+    private enum InputExceptions implements subway.util.ExceptionUtils.Problem {
+        VALIDATION_FAILED,
+        INVALID_FORMAT,
+        ;
 
         @Override
         public String message() {
