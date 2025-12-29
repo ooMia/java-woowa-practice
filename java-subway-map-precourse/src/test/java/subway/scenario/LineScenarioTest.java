@@ -8,7 +8,7 @@ import subway.domain.StationRepository;
 class LineScenarioTest extends AbstractScenarioTest {
 
     protected LineScenarioTest() {
-        super("B", LineScenario::new);
+        super(LineScenario::new);
     }
 
     @BeforeEach

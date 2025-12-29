@@ -9,7 +9,7 @@ import subway.domain.StationRepository;
 class IntervalScenarioTest extends AbstractScenarioTest {
 
     protected IntervalScenarioTest() {
-        super("B", IntervalScenario::new);
+        super(IntervalScenario::new);
     }
 
     @BeforeEach

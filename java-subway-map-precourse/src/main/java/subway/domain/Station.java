@@ -3,6 +3,7 @@ package subway.domain;
 import subway.util.GlobalExceptions;
 
 // 역 (Node)
+@SuppressWarnings("ClassCanBeRecord")
 public class Station {
     private final String name;
 

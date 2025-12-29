@@ -3,6 +3,7 @@ package subway.domain;
 import subway.util.GlobalExceptions;
 
 // 노선 (Graph)
+@SuppressWarnings("ClassCanBeRecord")
 public class Line {
     private final String name;
 

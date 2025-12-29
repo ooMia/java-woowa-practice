@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 class StationScenarioTest extends AbstractScenarioTest {
 
     protected StationScenarioTest() {
-        super("B", StationScenario::new);
+        super(StationScenario::new);
     }
 
     @Test

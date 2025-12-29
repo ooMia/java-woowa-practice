@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 class RootScenarioTest extends AbstractScenarioTest {
 
     protected RootScenarioTest() {
-        super("Q", console -> (AbstractScenario) RootScenario.ofDefault(console));
+        super(console -> (AbstractScenario) RootScenario.ofDefault(console));
     }
 
     @Test

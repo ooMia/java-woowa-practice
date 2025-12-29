@@ -74,8 +74,9 @@ public final class ValueRules {
             return new Validator<>(value);
         }
 
+        @SuppressWarnings("ClassCanBeRecord")
         private static class Validator<T> {
-            T value;
+            final T value;
 
             Validator(T value) {
                 this.value = value;

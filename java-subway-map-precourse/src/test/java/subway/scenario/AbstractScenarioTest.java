@@ -16,15 +16,13 @@ import subway.util.Console;
 
 abstract class AbstractScenarioTest {
 
-    private final String menuExit;
     private final Function<Console, AbstractScenario> scenarioSupplier;
 
     private Queue<String> inputBuffer;
     private List<String> outputBuffer;
     private AbstractScenario scenario;
 
-    protected AbstractScenarioTest(String menuExit, Function<Console, AbstractScenario> scenarioSupplier) {
-        this.menuExit = menuExit;
+    protected AbstractScenarioTest(Function<Console, AbstractScenario> scenarioSupplier) {
         this.scenarioSupplier = scenarioSupplier;
     }
 
@@ -57,7 +55,6 @@ abstract class AbstractScenarioTest {
 
     protected ListAssert<String> runWithInput(String... input) {
         inputBuffer.addAll(Arrays.asList(input));
-        inputBuffer.add(menuExit);
         try {
             scenario.run();
         } catch (EndOfBufferException ignored) {
